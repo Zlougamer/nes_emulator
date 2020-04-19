@@ -15,6 +15,6 @@ func main() {
     //b.Write(0, 0)
     fmt.Println("Hello, nes emulator!")
     // Read about logging in go
-    //olc.Read(1)
-    //olc.Write(1, 1)
+    //cpu.Read(1)
+    //cpu.Write(1, 1)
 }
