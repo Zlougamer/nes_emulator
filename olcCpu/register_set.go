@@ -45,7 +45,7 @@ func CreateRegisterSet(cpu *olc6502) *registerSet {
 	r.a = 0x00
 	r.x = 0x00
 	r.y = 0x00
-	r.stkp = 0x00
+	r.stkp = 0xFF
 	r.pc = 0x00
 	r.status = 0x00
 

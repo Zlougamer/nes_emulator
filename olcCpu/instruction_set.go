@@ -299,12 +299,12 @@ func (i *instructionSet) BRK() uint8 {
 	regSet := i.cpu.regSet
 	cpu := i.cpu
 
-	regSet.pc++
+	//regSet.pc++
 
 	regSet.setFlag(I, true)
 	cpu.Write(BASE_STKP + uint16(regSet.stkp), uint8((regSet.pc >> 8) & 0x00FF))
 	regSet.stkp--
-	cpu.Write(BASE_STKP + uint16(regSet.stkp), uint8((regSet.pc >> 8) & 0x00FF))
+	cpu.Write(BASE_STKP + uint16(regSet.stkp), uint8((regSet.pc) & 0x00FF))
 	regSet.stkp--
 
 	regSet.setFlag(B, true)
@@ -452,7 +452,7 @@ func (i *instructionSet) EOR() uint8 {
 	cpu.fetch()
 	regSet.a = regSet.a ^ cpu.fetched
 	regSet.setFlag(Z, regSet.a == 0x00)
-	regSet.setFlag(N, regSet.a == 0x80)
+	regSet.setFlag(N, regSet.a & 0x80 != 0)
 	return 1
 }
 
