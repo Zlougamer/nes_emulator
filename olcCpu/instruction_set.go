@@ -156,7 +156,7 @@ func (i *instructionSet) AND() uint8 {
 	cpu.fetch()
 	regSet.a = regSet.a & cpu.fetched
 	regSet.setFlag(Z, regSet.a == 0x00)
-	regSet.setFlag(N, regSet.a == 0x80)
+	regSet.setFlag(N, regSet.a & 0x80 != 0)
 	return 1
 }
 
