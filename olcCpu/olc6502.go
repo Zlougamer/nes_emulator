@@ -3,45 +3,23 @@ package olcCpu
 import (
 	"bufio"
 	"fmt"
+	log "github.com/sirupsen/logrus"
 	"os"
+	"path"
+	"runtime"
 	"strconv"
 	"strings"
-	log "github.com/sirupsen/logrus"
 )
-
-const BASE_STKP = 0x0100
-
-type instruction struct {
-	name string
-	addrmodeName string
-	operate  func() uint8
-	addrmode func() uint8
-	cycles   uint8
-}
 
 type olc6502 struct {
 	mBus *bus
 	instrSet *instructionSet
 	addrSet *addressingModes
 	regSet *registerSet
-
-	fetched uint8
-
-	addrAbs uint16
-	addrRel uint16
-
-	opcode uint8
-	cycles uint8
-
-	lookup []instruction
+	manEl *managingElement
 }
 
 type Olc6502 interface {
-	connectBus(b *bus)
-	connectInstructionSet(i *instructionSet)
-	connectAdressingModes(a *addressingModes)
-	connectRegisterSet(r *registerSet)
-
 	Read(addr uint16) uint8
 	Write(addr uint16, data uint8)
 
@@ -49,31 +27,14 @@ type Olc6502 interface {
 	Reset()
 	Irq()
 	Nmi()
-
-	fetch() uint8
-}
-
-func (cpu *olc6502) connectBus(b *bus) {
-	cpu.mBus = b
-}
-
-func (cpu *olc6502) connectInstructionSet(i *instructionSet) {
-	cpu.instrSet = i
-}
-
-func (cpu *olc6502) connectAdressingModes(a *addressingModes) {
-	cpu.addrSet = a
-}
-
-func (cpu *olc6502) connectRegisterSet(r *registerSet) {
-	cpu.regSet = r
 }
 
 func (cpu *olc6502) fillLookup() {
-	file, err := os.Open("./lookup_table")
+	filepath := getLookupTableFilepath()
+	file, err := os.Open(filepath)
 	if err != nil {
-        log.Fatal(err)
-    }
+		log.Fatal(err)
+	}
 	defer closeFile(file)
 
 	scanner := bufio.NewScanner(file)
@@ -89,7 +50,7 @@ func (cpu *olc6502) fillLookup() {
 		}
 		operate := cpu.instrSet.instrByName[name]
 		addrMode := cpu.addrSet.modeByName[addrModeName]
-		cpu.lookup = append(cpu.lookup, instruction{
+		cpu.manEl.lookup = append(cpu.manEl.lookup, instruction{
 			name, addrModeName, operate, addrMode, uint8(cycles),
 		})
 	}
@@ -97,6 +58,14 @@ func (cpu *olc6502) fillLookup() {
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func getLookupTableFilepath() string {
+	_, filename, _, ok := runtime.Caller(1)
+	if ok != true {
+		panic("runtime.Caller failed")
+	}
+	return path.Join(path.Dir(filename), "lookup_table")
 }
 
 func closeFile(f *os.File) {
@@ -109,21 +78,6 @@ func closeFile(f *os.File) {
 	}
 }
 
-func (cpu *olc6502) fetch() uint8 {
-	addrmodeName := cpu.lookup[cpu.opcode].addrmodeName
-	if addrmodeName != "IMP" {
-		log.Debugf(
-			"fetch() fetch from addrAbs, addrAbs: %x",
-			cpu.addrAbs,
-		)
-		cpu.fetched = cpu.Read(cpu.addrAbs)
-	}
-	log.Debugf(
-		"fetch() fetched: %x",
-		cpu.fetched,
-	)
-	return cpu.fetched
-}
 
 func (cpu *olc6502) Read(addr uint16) uint8 {
 	return cpu.mBus.Read(addr, false)
@@ -134,112 +88,153 @@ func (cpu *olc6502) Write(addr uint16, data uint8) {
 }
 
 func (cpu *olc6502) Clock() {
-	if cpu.cycles == 0 {
-		cpu.opcode = cpu.Read(cpu.regSet.pc)
-		cpu.regSet.pc++
+	regSet := cpu.regSet
+	manEl := cpu.manEl
 
-		cpu.cycles = cpu.lookup[cpu.opcode].cycles
+	if manEl.cycles == 0 {
+		manEl.opcode = cpu.Read(cpu.regSet.Pc)
+		regSet.Pc++
 
-		additionalCycleAddr := cpu.lookup[cpu.opcode].addrmode()
-		additionalCycleOp := cpu.lookup[cpu.opcode].operate()
+		manEl.cycles = manEl.lookup[manEl.opcode].cycles
 
-		cpu.cycles += additionalCycleAddr & additionalCycleOp
+		additionalCycleAddr := manEl.lookup[manEl.opcode].addrmode()
+		additionalCycleOp := manEl.lookup[manEl.opcode].operate()
+
+		manEl.cycles += additionalCycleAddr & additionalCycleOp
 		log.Debugf(
 			"Clock() opcode: %x, pc: %x, cycles: %d, " +
 				"cpu.lookup[cpu.opcode]: %v",
-			cpu.opcode,
-			cpu.regSet.pc,
-			cpu.cycles,
-			cpu.lookup[cpu.opcode],
+			manEl.opcode,
+			regSet.Pc,
+			manEl.cycles,
+			manEl.lookup[manEl.opcode],
 		)
 	}
 
-	cpu.cycles--
+	manEl.cycles--
 }
 
 func (cpu *olc6502) Reset() {
-	cpu.regSet.a = 0x00
-	cpu.regSet.x = 0x00
-	cpu.regSet.y = 0x00
-	cpu.regSet.stkp = 0xFD
-	cpu.regSet.status = 0x00 | uint8(U)
+	regSet := cpu.regSet
+	manEl := cpu.manEl
 
-	cpu.addrAbs = 0xFFFC
-	hi := uint16(cpu.Read(cpu.addrAbs + 0))
-	lo := uint16(cpu.Read(cpu.addrAbs + 1))
+	regSet.A = 0x00
+	regSet.X = 0x00
+	regSet.Y = 0x00
+	regSet.Stkp = 0xFD
+	regSet.Status = 0x00 | uint8(U)
 
-	cpu.regSet.pc = (hi << 8) | lo
+	manEl.addrAbs = 0xFFFC
+	hi := uint16(cpu.Read(manEl.addrAbs + 0))
+	lo := uint16(cpu.Read(manEl.addrAbs + 1))
 
-	cpu.addrAbs = 0x0000
-	cpu.addrRel = 0x0000
-	cpu.fetched = 0x00
+	cpu.regSet.Pc = (hi << 8) | lo
 
-	cpu.cycles = 8
+	manEl.addrAbs = 0x0000
+	manEl.addrRel = 0x0000
+	manEl.fetched = 0x00
+
+	manEl.cycles = 8
 }
 
 
 func (cpu *olc6502) Irq() {
 	regSet := cpu.regSet
+	manEl := cpu.manEl
+
 	if regSet.getFlag(I) > 0 {
-		cpu.Write(BASE_STKP + uint16(regSet.stkp), uint8((regSet.pc >> 8) & 0x00FF))
-		regSet.stkp--
-		cpu.Write(BASE_STKP + uint16(regSet.stkp), uint8(regSet.pc & 0x00FF))
-		regSet.stkp--
+		cpu.Write(BASE_STKP + uint16(regSet.Stkp), uint8((regSet.Pc >> 8) & 0x00FF))
+		regSet.Stkp--
+		cpu.Write(BASE_STKP + uint16(regSet.Stkp), uint8(regSet.Pc & 0x00FF))
+		regSet.Stkp--
 
 		regSet.setFlag(B, false)
 		regSet.setFlag(U, true)
 		regSet.setFlag(I, true)
-		cpu.Write(BASE_STKP + uint16(regSet.stkp), regSet.status)
-		regSet.stkp--
+		cpu.Write(BASE_STKP + uint16(regSet.Stkp), regSet.Status)
+		regSet.Stkp--
 
-		cpu.addrAbs = 0xFFFE
-		hi := uint16(cpu.Read(cpu.addrAbs + 0))
-		lo := uint16(cpu.Read(cpu.addrAbs + 1))
-		regSet.pc = (hi << 8) | lo
+		manEl.addrAbs = 0xFFFE
+		hi := uint16(cpu.Read(manEl.addrAbs + 0))
+		lo := uint16(cpu.Read(manEl.addrAbs + 1))
+		regSet.Pc = (hi << 8) | lo
 
-		cpu.cycles = 7
+		manEl.cycles = 7
 	}
 }
 
 
 func (cpu *olc6502) Nmi() {
 	regSet := cpu.regSet
+	manEl := cpu.manEl
 
-	cpu.Write(BASE_STKP + uint16(regSet.stkp), uint8((regSet.pc >> 8) & 0x00FF))
-	regSet.stkp--
-	cpu.Write(BASE_STKP + uint16(regSet.stkp), uint8(regSet.pc & 0x00FF))
-	regSet.stkp--
+	cpu.Write(BASE_STKP + uint16(regSet.Stkp), uint8((regSet.Pc >> 8) & 0x00FF))
+	regSet.Stkp--
+	cpu.Write(BASE_STKP + uint16(regSet.Stkp), uint8(regSet.Pc & 0x00FF))
+	regSet.Stkp--
 
 	regSet.setFlag(B, false)
 	regSet.setFlag(U, true)
 	regSet.setFlag(I, true)
-	cpu.Write(BASE_STKP + uint16(regSet.stkp), regSet.status)
-	regSet.stkp--
+	cpu.Write(BASE_STKP + uint16(regSet.Stkp), regSet.Status)
+	regSet.Stkp--
 
-	cpu.addrAbs = 0xFFFA
-	hi := uint16(cpu.Read(cpu.addrAbs + 0))
-	lo := uint16(cpu.Read(cpu.addrAbs + 1))
-	regSet.pc = (hi << 8) | lo
+	manEl.addrAbs = 0xFFFA
+	hi := uint16(cpu.Read(manEl.addrAbs + 0))
+	lo := uint16(cpu.Read(manEl.addrAbs + 1))
+	regSet.Pc = (hi << 8) | lo
 
-	cpu.cycles = 8
+	manEl.cycles = 8
 }
 
 
 func CreateOlc6502() *olc6502 {
 	cpu := &olc6502{}
 
-	cpu.fetched = 0x00
+	cpu.mBus = CreateBus(cpu)
 
-	cpu.addrAbs = 0x0000
-	cpu.addrRel = 0x0000
+	cpu.regSet = CreateRegisterSet()
+	cpu.manEl = CreateManagingElement(cpu.mBus)
 
-	cpu.opcode = 0x00
-	cpu.cycles = 0x00
+	cpu.addrSet = CreateAdressingModes(cpu.mBus, cpu.regSet, cpu.manEl)
+	cpu.instrSet = CreateInstructionSet(cpu.mBus, cpu.regSet, cpu.manEl)
+
+	cpu.fillLookup()
+
+	return cpu
+}
+
+func CreateOlc6502ByParams(
+	regSet *registerSet,
+	manEl *managingElement,
+	addrSet *addressingModes,
+	instrSet *instructionSet,
+) *olc6502 {
+	cpu := &olc6502{}
 
 	cpu.mBus = CreateBus(cpu)
-	cpu.instrSet = CreateInstructionSet(cpu)
-	cpu.addrSet = CreateAdressingModes(cpu)
-	cpu.regSet = CreateRegisterSet(cpu)
+
+	if regSet != nil {
+		cpu.regSet = regSet
+	} else {
+		cpu.regSet = CreateRegisterSet()
+	}
+	if manEl != nil {
+		cpu.manEl = manEl
+	} else {
+		cpu.manEl = CreateManagingElement(cpu.mBus)
+	}
+
+	if addrSet != nil {
+		cpu.addrSet = addrSet
+	} else {
+		cpu.addrSet = CreateAdressingModes(cpu.mBus, cpu.regSet, cpu.manEl)
+	}
+	if instrSet != nil {
+		cpu.instrSet = instrSet
+	} else {
+		cpu.instrSet = CreateInstructionSet(cpu.mBus, cpu.regSet, cpu.manEl)
+	}
 
 	cpu.fillLookup()
 

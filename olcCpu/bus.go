@@ -26,6 +26,5 @@ func CreateBus(cpu *olc6502) *bus {
 		b.ram[i] = 0x0000
 	}
 
-	b.cpu.connectBus(b)
 	return b
 }
