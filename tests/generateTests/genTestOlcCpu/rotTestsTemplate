@@ -1,0 +1,690 @@
+/*
+package main
+
+import (
+    "flag"
+    "os"
+    "text/template"
+)
+
+type data struct {
+    Type string
+    Name string
+}
+
+func main() {
+    var d data
+    flag.StringVar(&d.Type, "type", "", "The subtype used for the queue being generated")
+    flag.StringVar(&d.Name, "name", "", "The name used for the queue being generated. This should start with a capital letter so that it is exported.")
+    flag.Parse()
+
+    t := template.Must(template.New("queue").Parse(queueTemplate))
+    if err := t.Execute(os.Stdout, d); err != nil {
+        panic(err)
+    }
+}
+
+var queueTemplate = `
+package queue
+
+import (
+  "container/list"
+)
+
+func New{{.Name}}() *{{.Name}} {
+  return &{{.Name}}{list.New()}
+}
+
+type {{.Name}} struct {
+  list *list.List
+}
+
+func (q *{{.Name}}) Len() int {
+  return q.list.Len()
+}
+
+func (q *{{.Name}}) Enqueue(i {{.Type}}) {
+  q.list.PushBack(i)
+}
+
+func (q *{{.Name}}) Dequeue() {{.Type}} {
+  if q.list.Len() == 0 {
+    panic(ErrEmptyQueue)
+  }
+  raw := q.list.Remove(q.list.Front())
+  if typed, ok := raw.({{.Type}}); ok {
+    return typed
+  }
+  panic(ErrInvalidType)
+}
+`
+/*
+
+    # ROL Accumulator
+
+    def test_rol_accumulator_zero_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.a = 0x00
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL A
+        mpu.memory[0x0000] = 0x2A
+        mpu.step()
+        self.assertEqual(0x0001, mpu.pc)
+        self.assertEqual(0x00, mpu.a)
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_accumulator_80_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.a = 0x80
+        mpu.p &= ~(mpu.CARRY)
+        mpu.p &= ~(mpu.ZERO)
+        # $0000 ROL A
+        mpu.memory[0x0000] = 0x2A
+        mpu.step()
+        self.assertEqual(0x0001, mpu.pc)
+        self.assertEqual(0x00, mpu.a)
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_accumulator_zero_and_carry_one_clears_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.a = 0x00
+        mpu.p |= mpu.CARRY
+        # $0000 ROL A
+        mpu.memory[0x0000] = 0x2A
+        mpu.step()
+        self.assertEqual(0x0001, mpu.pc)
+        self.assertEqual(0x01, mpu.a)
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_accumulator_sets_n_flag(self):
+        mpu = self._make_mpu()
+        mpu.a = 0x40
+        mpu.p |= mpu.CARRY
+        # $0000 ROL A
+        mpu.memory[0x0000] = 0x2A
+        mpu.step()
+        self.assertEqual(0x0001, mpu.pc)
+        self.assertEqual(0x81, mpu.a)
+        self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+
+    def test_rol_accumulator_shifts_out_zero(self):
+        mpu = self._make_mpu()
+        mpu.a = 0x7F
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL A
+        mpu.memory[0x0000] = 0x2A
+        mpu.step()
+        self.assertEqual(0x0001, mpu.pc)
+        self.assertEqual(0xFE, mpu.a)
+        self.assertEqual(0, mpu.p & mpu.CARRY)
+
+    def test_rol_accumulator_shifts_out_one(self):
+        mpu = self._make_mpu()
+        mpu.a = 0xFF
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL A
+        mpu.memory[0x0000] = 0x2A
+        mpu.step()
+        self.assertEqual(0x0001, mpu.pc)
+        self.assertEqual(0xFE, mpu.a)
+        self.assertEqual(mpu.CARRY, mpu.p & mpu.CARRY)
+
+    # ROL Absolute
+
+    def test_rol_absolute_zero_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL $ABCD
+        self._write(mpu.memory, 0x0000, (0x2E, 0xCD, 0xAB))
+        mpu.memory[0xABCD] = 0x00
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x00, mpu.memory[0xABCD])
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_absolute_80_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        mpu.p &= ~(mpu.ZERO)
+        # $0000 ROL $ABCD
+        self._write(mpu.memory, 0x0000, (0x2E, 0xCD, 0xAB))
+        mpu.memory[0xABCD] = 0x80
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x00, mpu.memory[0xABCD])
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_absolute_zero_and_carry_one_clears_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.a = 0x00
+        mpu.p |= mpu.CARRY
+        # $0000 ROL $ABCD
+        self._write(mpu.memory, 0x0000, (0x2E, 0xCD, 0xAB))
+        mpu.memory[0xABCD] = 0x00
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x01, mpu.memory[0xABCD])
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_absolute_sets_n_flag(self):
+        mpu = self._make_mpu()
+        mpu.p |= mpu.CARRY
+        # $0000 ROL $ABCD
+        self._write(mpu.memory, 0x0000, (0x2E, 0xCD, 0xAB))
+        mpu.memory[0xABCD] = 0x40
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x81, mpu.memory[0xABCD])
+        self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+
+    def test_rol_absolute_shifts_out_zero(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL $ABCD
+        self._write(mpu.memory, 0x0000, (0x2E, 0xCD, 0xAB))
+        mpu.memory[0xABCD] = 0x7F
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0xFE, mpu.memory[0xABCD])
+        self.assertEqual(0, mpu.p & mpu.CARRY)
+
+    def test_rol_absolute_shifts_out_one(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL $ABCD
+        self._write(mpu.memory, 0x0000, (0x2E, 0xCD, 0xAB))
+        mpu.memory[0xABCD] = 0xFF
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0xFE, mpu.memory[0xABCD])
+        self.assertEqual(mpu.CARRY, mpu.p & mpu.CARRY)
+
+    # ROL Zero Page
+
+    def test_rol_zp_zero_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL $0010
+        self._write(mpu.memory, 0x0000, (0x26, 0x10))
+        mpu.memory[0x0010] = 0x00
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x00, mpu.memory[0x0010])
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_zp_80_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        mpu.p &= ~(mpu.ZERO)
+        # $0000 ROL $0010
+        self._write(mpu.memory, 0x0000, (0x26, 0x10))
+        mpu.memory[0x0010] = 0x80
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x00, mpu.memory[0x0010])
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_zp_zero_and_carry_one_clears_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.a = 0x00
+        mpu.p |= mpu.CARRY
+        # $0000 ROL $0010
+        self._write(mpu.memory, 0x0000, (0x26, 0x10))
+        mpu.memory[0x0010] = 0x00
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x01, mpu.memory[0x0010])
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_zp_sets_n_flag(self):
+        mpu = self._make_mpu()
+        mpu.p |= mpu.CARRY
+        # $0000 ROL $0010
+        self._write(mpu.memory, 0x0000, (0x26, 0x10))
+        mpu.memory[0x0010] = 0x40
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x81, mpu.memory[0x0010])
+        self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+
+    def test_rol_zp_shifts_out_zero(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL $0010
+        self._write(mpu.memory, 0x0000, (0x26, 0x10))
+        mpu.memory[0x0010] = 0x7F
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0xFE, mpu.memory[0x0010])
+        self.assertEqual(0, mpu.p & mpu.CARRY)
+
+    def test_rol_zp_shifts_out_one(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL $0010
+        self._write(mpu.memory, 0x0000, (0x26, 0x10))
+        mpu.memory[0x0010] = 0xFF
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0xFE, mpu.memory[0x0010])
+        self.assertEqual(mpu.CARRY, mpu.p & mpu.CARRY)
+
+    # ROL Absolute, X-Indexed
+
+    def test_rol_abs_x_indexed_zero_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        mpu.x = 0x03
+        # $0000 ROL $ABCD,X
+        self._write(mpu.memory, 0x0000, (0x3E, 0xCD, 0xAB))
+        mpu.memory[0xABCD + mpu.x] = 0x00
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x00, mpu.memory[0xABCD + mpu.x])
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_abs_x_indexed_80_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        mpu.p &= ~(mpu.ZERO)
+        mpu.x = 0x03
+        # $0000 ROL $ABCD,X
+        self._write(mpu.memory, 0x0000, (0x3E, 0xCD, 0xAB))
+        mpu.memory[0xABCD + mpu.x] = 0x80
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x00, mpu.memory[0xABCD + mpu.x])
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_abs_x_indexed_zero_and_carry_one_clears_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p |= mpu.CARRY
+        # $0000 ROL $ABCD,X
+        self._write(mpu.memory, 0x0000, (0x3E, 0xCD, 0xAB))
+        mpu.memory[0xABCD + mpu.x] = 0x00
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x01, mpu.memory[0xABCD + mpu.x])
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_abs_x_indexed_sets_n_flag(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p |= mpu.CARRY
+        # $0000 ROL $ABCD,X
+        self._write(mpu.memory, 0x0000, (0x3E, 0xCD, 0xAB))
+        mpu.memory[0xABCD + mpu.x] = 0x40
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x81, mpu.memory[0xABCD + mpu.x])
+        self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+
+    def test_rol_abs_x_indexed_shifts_out_zero(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL $ABCD,X
+        self._write(mpu.memory, 0x0000, (0x3E, 0xCD, 0xAB))
+        mpu.memory[0xABCD + mpu.x] = 0x7F
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0xFE, mpu.memory[0xABCD + mpu.x])
+        self.assertEqual(0, mpu.p & mpu.CARRY)
+
+    def test_rol_abs_x_indexed_shifts_out_one(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL $ABCD,X
+        self._write(mpu.memory, 0x0000, (0x3E, 0xCD, 0xAB))
+        mpu.memory[0xABCD + mpu.x] = 0xFF
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0xFE, mpu.memory[0xABCD + mpu.x])
+        self.assertEqual(mpu.CARRY, mpu.p & mpu.CARRY)
+
+    # ROL Zero Page, X-Indexed
+
+    def test_rol_zp_x_indexed_zero_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        mpu.x = 0x03
+        self._write(mpu.memory, 0x0000, (0x36, 0x10))
+        # $0000 ROL $0010,X
+        mpu.memory[0x0010 + mpu.x] = 0x00
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x00, mpu.memory[0x0010 + mpu.x])
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_zp_x_indexed_80_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        mpu.p &= ~(mpu.ZERO)
+        mpu.x = 0x03
+        self._write(mpu.memory, 0x0000, (0x36, 0x10))
+        # $0000 ROL $0010,X
+        mpu.memory[0x0010 + mpu.x] = 0x80
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x00, mpu.memory[0x0010 + mpu.x])
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_zp_x_indexed_zero_and_carry_one_clears_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p |= mpu.CARRY
+        self._write(mpu.memory, 0x0000, (0x36, 0x10))
+        # $0000 ROL $0010,X
+        mpu.memory[0x0010 + mpu.x] = 0x00
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x01, mpu.memory[0x0010 + mpu.x])
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_rol_zp_x_indexed_sets_n_flag(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p |= mpu.CARRY
+        # $0000 ROL $0010,X
+        self._write(mpu.memory, 0x0000, (0x36, 0x10))
+        mpu.memory[0x0010 + mpu.x] = 0x40
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x81, mpu.memory[0x0010 + mpu.x])
+        self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+
+    def test_rol_zp_x_indexed_shifts_out_zero(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL $0010,X
+        self._write(mpu.memory, 0x0000, (0x36, 0x10))
+        mpu.memory[0x0010 + mpu.x] = 0x7F
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0xFE, mpu.memory[0x0010 + mpu.x])
+        self.assertEqual(0, mpu.p & mpu.CARRY)
+
+    def test_rol_zp_x_indexed_shifts_out_one(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROL $0010,X
+        self._write(mpu.memory, 0x0000, (0x36, 0x10))
+        mpu.memory[0x0010 + mpu.x] = 0xFF
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0xFE, mpu.memory[0x0010 + mpu.x])
+        self.assertEqual(mpu.CARRY, mpu.p & mpu.CARRY)
+
+    # ROR Accumulator
+
+    def test_ror_accumulator_zero_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.a = 0x00
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROR A
+        mpu.memory[0x0000] = 0x6A
+        mpu.step()
+        self.assertEqual(0x0001, mpu.pc)
+        self.assertEqual(0x00, mpu.a)
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_ror_accumulator_zero_and_carry_one_rotates_in_sets_n_flags(self):
+        mpu = self._make_mpu()
+        mpu.a = 0x00
+        mpu.p |= mpu.CARRY
+        # $0000 ROR A
+        mpu.memory[0x0000] = 0x6A
+        mpu.step()
+        self.assertEqual(0x0001, mpu.pc)
+        self.assertEqual(0x80, mpu.a)
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+        self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+
+    def test_ror_accumulator_shifts_out_zero(self):
+        mpu = self._make_mpu()
+        mpu.a = 0x02
+        mpu.p |= mpu.CARRY
+        # $0000 ROR A
+        mpu.memory[0x0000] = 0x6A
+        mpu.step()
+        self.assertEqual(0x0001, mpu.pc)
+        self.assertEqual(0x81, mpu.a)
+        self.assertEqual(0, mpu.p & mpu.CARRY)
+
+    def test_ror_accumulator_shifts_out_one(self):
+        mpu = self._make_mpu()
+        mpu.a = 0x03
+        mpu.p |= mpu.CARRY
+        # $0000 ROR A
+        mpu.memory[0x0000] = 0x6A
+        mpu.step()
+        self.assertEqual(0x0001, mpu.pc)
+        self.assertEqual(0x81, mpu.a)
+        self.assertEqual(mpu.CARRY, mpu.p & mpu.CARRY)
+
+    # ROR Absolute
+
+    def test_ror_absolute_zero_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROR $ABCD
+        self._write(mpu.memory, 0x0000, (0x6E, 0xCD, 0xAB))
+        mpu.memory[0xABCD] = 0x00
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x00, mpu.memory[0xABCD])
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_ror_absolute_zero_and_carry_one_rotates_in_sets_n_flags(self):
+        mpu = self._make_mpu()
+        mpu.p |= mpu.CARRY
+        # $0000 ROR $ABCD
+        self._write(mpu.memory, 0x0000, (0x6E, 0xCD, 0xAB))
+        mpu.memory[0xABCD] = 0x00
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x80, mpu.memory[0xABCD])
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+        self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+
+    def test_ror_absolute_shifts_out_zero(self):
+        mpu = self._make_mpu()
+        mpu.p |= mpu.CARRY
+        # $0000 ROR $ABCD
+        self._write(mpu.memory, 0x0000, (0x6E, 0xCD, 0xAB))
+        mpu.memory[0xABCD] = 0x02
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x81, mpu.memory[0xABCD])
+        self.assertEqual(0, mpu.p & mpu.CARRY)
+
+    def test_ror_absolute_shifts_out_one(self):
+        mpu = self._make_mpu()
+        mpu.p |= mpu.CARRY
+        # $0000 ROR $ABCD
+        self._write(mpu.memory, 0x0000, (0x6E, 0xCD, 0xAB))
+        mpu.memory[0xABCD] = 0x03
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x81, mpu.memory[0xABCD])
+        self.assertEqual(mpu.CARRY, mpu.p & mpu.CARRY)
+
+    # ROR Zero Page
+
+    def test_ror_zp_zero_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROR $0010
+        self._write(mpu.memory, 0x0000, (0x66, 0x10))
+        mpu.memory[0x0010] = 0x00
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x00, mpu.memory[0x0010])
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_ror_zp_zero_and_carry_one_rotates_in_sets_n_flags(self):
+        mpu = self._make_mpu()
+        mpu.p |= mpu.CARRY
+        # $0000 ROR $0010
+        self._write(mpu.memory, 0x0000, (0x66, 0x10))
+        mpu.memory[0x0010] = 0x00
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x80, mpu.memory[0x0010])
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+        self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+
+    def test_ror_zp_zero_absolute_shifts_out_zero(self):
+        mpu = self._make_mpu()
+        mpu.p |= mpu.CARRY
+        # $0000 ROR $0010
+        self._write(mpu.memory, 0x0000, (0x66, 0x10))
+        mpu.memory[0x0010] = 0x02
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x81, mpu.memory[0x0010])
+        self.assertEqual(0, mpu.p & mpu.CARRY)
+
+    def test_ror_zp_shifts_out_one(self):
+        mpu = self._make_mpu()
+        mpu.p |= mpu.CARRY
+        # $0000 ROR $0010
+        self._write(mpu.memory, 0x0000, (0x66, 0x10))
+        mpu.memory[0x0010] = 0x03
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x81, mpu.memory[0x0010])
+        self.assertEqual(mpu.CARRY, mpu.p & mpu.CARRY)
+
+    # ROR Absolute, X-Indexed
+
+    def test_ror_abs_x_indexed_zero_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROR $ABCD,X
+        self._write(mpu.memory, 0x0000, (0x7E, 0xCD, 0xAB))
+        mpu.memory[0xABCD + mpu.x] = 0x00
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x00, mpu.memory[0xABCD + mpu.x])
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_ror_abs_x_indexed_z_and_c_1_rotates_in_sets_n_flags(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p |= mpu.CARRY
+        # $0000 ROR $ABCD,X
+        self._write(mpu.memory, 0x0000, (0x7E, 0xCD, 0xAB))
+        mpu.memory[0xABCD + mpu.x] = 0x00
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x80, mpu.memory[0xABCD + mpu.x])
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+        self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+
+    def test_ror_abs_x_indexed_shifts_out_zero(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p |= mpu.CARRY
+        # $0000 ROR $ABCD,X
+        self._write(mpu.memory, 0x0000, (0x7E, 0xCD, 0xAB))
+        mpu.memory[0xABCD + mpu.x] = 0x02
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x81, mpu.memory[0xABCD + mpu.x])
+        self.assertEqual(0, mpu.p & mpu.CARRY)
+
+    def test_ror_abs_x_indexed_shifts_out_one(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p |= mpu.CARRY
+        # $0000 ROR $ABCD,X
+        self._write(mpu.memory, 0x0000, (0x7E, 0xCD, 0xAB))
+        mpu.memory[0xABCD + mpu.x] = 0x03
+        mpu.step()
+        self.assertEqual(0x0003, mpu.pc)
+        self.assertEqual(0x81, mpu.memory[0xABCD + mpu.x])
+        self.assertEqual(mpu.CARRY, mpu.p & mpu.CARRY)
+
+    # ROR Zero Page, X-Indexed
+
+    def test_ror_zp_x_indexed_zero_and_carry_zero_sets_z_flag(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p &= ~(mpu.CARRY)
+        # $0000 ROR $0010,X
+        self._write(mpu.memory, 0x0000, (0x76, 0x10))
+        mpu.memory[0x0010 + mpu.x] = 0x00
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x00, mpu.memory[0x0010 + mpu.x])
+        self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+        self.assertEqual(0, mpu.p & mpu.NEGATIVE)
+
+    def test_ror_zp_x_indexed_zero_and_carry_one_rotates_in_sets_n_flags(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p |= mpu.CARRY
+        # $0000 ROR $0010,X
+        self._write(mpu.memory, 0x0000, (0x76, 0x10))
+        mpu.memory[0x0010 + mpu.x] = 0x00
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x80, mpu.memory[0x0010 + mpu.x])
+        self.assertEqual(0, mpu.p & mpu.ZERO)
+        self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+
+    def test_ror_zp_x_indexed_zero_absolute_shifts_out_zero(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p |= mpu.CARRY
+        # $0000 ROR $0010,X
+        self._write(mpu.memory, 0x0000, (0x76, 0x10))
+        mpu.memory[0x0010 + mpu.x] = 0x02
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x81, mpu.memory[0x0010 + mpu.x])
+        self.assertEqual(0, mpu.p & mpu.CARRY)
+
+    def test_ror_zp_x_indexed_shifts_out_one(self):
+        mpu = self._make_mpu()
+        mpu.x = 0x03
+        mpu.p |= mpu.CARRY
+        # $0000 ROR $0010,X
+        self._write(mpu.memory, 0x0000, (0x76, 0x10))
+        mpu.memory[0x0010 + mpu.x] = 0x03
+        mpu.step()
+        self.assertEqual(0x0002, mpu.pc)
+        self.assertEqual(0x81, mpu.memory[0x0010 + mpu.x])
+        self.assertEqual(mpu.CARRY, mpu.p & mpu.CARRY)
+
+ */

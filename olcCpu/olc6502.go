@@ -65,7 +65,8 @@ func getLookupTableFilepath() string {
 	if ok != true {
 		panic("runtime.Caller failed")
 	}
-	return path.Join(path.Dir(filename), "lookup_table")
+	ap := path.Join(path.Dir(filename), "..", "staticInfo", "olcCpu", "lookup_table")
+	return ap
 }
 
 func closeFile(f *os.File) {
@@ -207,8 +208,6 @@ func CreateOlc6502() *olc6502 {
 func CreateOlc6502ByParams(
 	regSet *registerSet,
 	manEl *managingElement,
-	addrSet *addressingModes,
-	instrSet *instructionSet,
 ) *olc6502 {
 	cpu := &olc6502{}
 
@@ -225,16 +224,8 @@ func CreateOlc6502ByParams(
 		cpu.manEl = CreateManagingElement(cpu.mBus)
 	}
 
-	if addrSet != nil {
-		cpu.addrSet = addrSet
-	} else {
-		cpu.addrSet = CreateAdressingModes(cpu.mBus, cpu.regSet, cpu.manEl)
-	}
-	if instrSet != nil {
-		cpu.instrSet = instrSet
-	} else {
-		cpu.instrSet = CreateInstructionSet(cpu.mBus, cpu.regSet, cpu.manEl)
-	}
+	cpu.addrSet = CreateAdressingModes(cpu.mBus, cpu.regSet, cpu.manEl)
+	cpu.instrSet = CreateInstructionSet(cpu.mBus, cpu.regSet, cpu.manEl)
 
 	cpu.fillLookup()
 

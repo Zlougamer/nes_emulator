@@ -1,0 +1,232 @@
+//# ORA Absolute
+//
+//OraAbsoluteZeroesOrZerosSetsZFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.ZERO)
+//mpu.a = 0x00
+//# $0000 ORA $ABCD
+//self.Write(mpu.memory, 0x0000, (0x0D, 0xCD, 0xAB))
+//mpu.memory[0xABCD] = 0x00
+//mpu.step()
+//self.assertEqual(0x0003, mpu.pc)
+//self.assertEqual(0x00, mpu.a)
+//self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+//
+//OraAbsoluteTurnsBitsOnSetsNFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.NEGATIVE)
+//mpu.a = 0x03
+//# $0000 ORA $ABCD
+//self.Write(mpu.memory, 0x0000, (0x0D, 0xCD, 0xAB))
+//mpu.memory[0xABCD] = 0x82
+//mpu.step()
+//self.assertEqual(0x0003, mpu.pc)
+//self.assertEqual(0x83, mpu.a)
+//self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+//self.assertEqual(0, mpu.p & mpu.ZERO)
+//
+//# ORA Zero Page
+//
+//OraZpZeroesOrZerosSetsZFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.ZERO)
+//mpu.a = 0x00
+//# $0000 ORA $0010
+//self.Write(mpu.memory, 0x0000, (0x05, 0x10))
+//mpu.memory[0x0010] = 0x00
+//mpu.step()
+//self.assertEqual(0x0002, mpu.pc)
+//self.assertEqual(0x00, mpu.a)
+//self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+//
+//OraZpTurnsBitsOnSetsNFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.NEGATIVE)
+//mpu.a = 0x03
+//# $0000 ORA $0010
+//self.Write(mpu.memory, 0x0000, (0x05, 0x10))
+//mpu.memory[0x0010] = 0x82
+//mpu.step()
+//self.assertEqual(0x0002, mpu.pc)
+//self.assertEqual(0x83, mpu.a)
+//self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+//self.assertEqual(0, mpu.p & mpu.ZERO)
+//
+//# ORA Immediate
+//
+//OraImmediateZeroesOrZerosSetsZFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.ZERO)
+//mpu.a = 0x00
+//# $0000 ORA #$00
+//self.Write(mpu.memory, 0x0000, (0x09, 0x00))
+//mpu.step()
+//self.assertEqual(0x0002, mpu.pc)
+//self.assertEqual(0x00, mpu.a)
+//self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+//
+//OraImmediateTurnsBitsOnSetsNFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.NEGATIVE)
+//mpu.a = 0x03
+//# $0000 ORA #$82
+//self.Write(mpu.memory, 0x0000, (0x09, 0x82))
+//mpu.step()
+//self.assertEqual(0x0002, mpu.pc)
+//self.assertEqual(0x83, mpu.a)
+//self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+//self.assertEqual(0, mpu.p & mpu.ZERO)
+//
+//# ORA Absolute, X
+//
+//OraAbsXIndexedZeroesOrZerosSetsZFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.ZERO)
+//mpu.a = 0x00
+//mpu.x = 0x03
+//# $0000 ORA $ABCD,X
+//self.Write(mpu.memory, 0x0000, (0x1D, 0xCD, 0xAB))
+//mpu.memory[0xABCD + mpu.x] = 0x00
+//mpu.step()
+//self.assertEqual(0x0003, mpu.pc)
+//self.assertEqual(0x00, mpu.a)
+//self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+//
+//OraAbsXIndexedTurnsBitsOnSetsNFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.NEGATIVE)
+//mpu.a = 0x03
+//mpu.x = 0x03
+//# $0000 ORA $ABCD,X
+//self.Write(mpu.memory, 0x0000, (0x1D, 0xCD, 0xAB))
+//mpu.memory[0xABCD + mpu.x] = 0x82
+//mpu.step()
+//self.assertEqual(0x0003, mpu.pc)
+//self.assertEqual(0x83, mpu.a)
+//self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+//self.assertEqual(0, mpu.p & mpu.ZERO)
+//
+//# ORA Absolute, Y
+//
+//OraAbsYIndexedZeroesOrZerosSetsZFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.ZERO)
+//mpu.a = 0x00
+//mpu.y = 0x03
+//# $0000 ORA $ABCD,Y
+//self.Write(mpu.memory, 0x0000, (0x19, 0xCD, 0xAB))
+//mpu.memory[0xABCD + mpu.y] = 0x00
+//mpu.step()
+//self.assertEqual(0x0003, mpu.pc)
+//self.assertEqual(0x00, mpu.a)
+//self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+//
+//OraAbsYIndexedTurnsBitsOnSetsNFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.NEGATIVE)
+//mpu.a = 0x03
+//mpu.y = 0x03
+//# $0000 ORA $ABCD,Y
+//self.Write(mpu.memory, 0x0000, (0x19, 0xCD, 0xAB))
+//mpu.memory[0xABCD + mpu.y] = 0x82
+//mpu.step()
+//self.assertEqual(0x0003, mpu.pc)
+//self.assertEqual(0x83, mpu.a)
+//self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+//self.assertEqual(0, mpu.p & mpu.ZERO)
+//
+//# ORA Indirect, Indexed (X)
+//
+//OraIndIndexedXZeroesOrZerosSetsZFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.ZERO)
+//mpu.a = 0x00
+//mpu.x = 0x03
+//# $0000 ORA ($0010,X)
+//# $0013 Vector to $ABCD
+//self.Write(mpu.memory, 0x0000, (0x01, 0x10))
+//self.Write(mpu.memory, 0x0013, (0xCD, 0xAB))
+//mpu.memory[0xABCD] = 0x00
+//mpu.step()
+//self.assertEqual(0x0002, mpu.pc)
+//self.assertEqual(0x00, mpu.a)
+//self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+//
+//OraIndIndexedXTurnsBitsOnSetsNFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.NEGATIVE)
+//mpu.a = 0x03
+//mpu.x = 0x03
+//# $0000 ORA ($0010,X)
+//# $0013 Vector to $ABCD
+//self.Write(mpu.memory, 0x0000, (0x01, 0x10))
+//self.Write(mpu.memory, 0x0013, (0xCD, 0xAB))
+//mpu.memory[0xABCD] = 0x82
+//mpu.step()
+//self.assertEqual(0x0002, mpu.pc)
+//self.assertEqual(0x83, mpu.a)
+//self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+//self.assertEqual(0, mpu.p & mpu.ZERO)
+//
+//# ORA Indexed, Indirect (Y)
+//
+//OraIndexedIndYZeroesOrZerosSetsZFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.ZERO)
+//mpu.a = 0x00
+//mpu.y = 0x03
+//# $0000 ORA ($0010),Y
+//# $0010 Vector to $ABCD
+//self.Write(mpu.memory, 0x0000, (0x11, 0x10))
+//self.Write(mpu.memory, 0x0010, (0xCD, 0xAB))
+//mpu.memory[0xABCD + mpu.y] = 0x00
+//mpu.step()
+//self.assertEqual(0x0002, mpu.pc)
+//self.assertEqual(0x00, mpu.a)
+//self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+//
+//OraIndexedIndYTurnsBitsOnSetsNFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.NEGATIVE)
+//mpu.a = 0x03
+//mpu.y = 0x03
+//# $0000 ORA ($0010),Y
+//# $0010 Vector to $ABCD
+//self.Write(mpu.memory, 0x0000, (0x11, 0x10))
+//self.Write(mpu.memory, 0x0010, (0xCD, 0xAB))
+//mpu.memory[0xABCD + mpu.y] = 0x82
+//mpu.step()
+//self.assertEqual(0x0002, mpu.pc)
+//self.assertEqual(0x83, mpu.a)
+//self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+//self.assertEqual(0, mpu.p & mpu.ZERO)
+//
+//# ORA Zero Page, X
+//
+//OraZpXIndexedZeroesOrZerosSetsZFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.ZERO)
+//mpu.a = 0x00
+//mpu.x = 0x03
+//# $0000 ORA $0010,X
+//self.Write(mpu.memory, 0x0000, (0x15, 0x10))
+//mpu.memory[0x0010 + mpu.x] = 0x00
+//mpu.step()
+//self.assertEqual(0x0002, mpu.pc)
+//self.assertEqual(0x00, mpu.a)
+//self.assertEqual(mpu.ZERO, mpu.p & mpu.ZERO)
+//
+//OraZpXIndexedTurnsBitsOnSetsNFlag(self):
+//mpu = self.MakeMpu()
+//mpu.p &= ~(mpu.NEGATIVE)
+//mpu.a = 0x03
+//mpu.x = 0x03
+//# $0000 ORA $0010,X
+//self.Write(mpu.memory, 0x0000, (0x15, 0x10))
+//mpu.memory[0x0010 + mpu.x] = 0x82
+//mpu.step()
+//self.assertEqual(0x0002, mpu.pc)
+//self.assertEqual(0x83, mpu.a)
+//self.assertEqual(mpu.NEGATIVE, mpu.p & mpu.NEGATIVE)
+//self.assertEqual(0, mpu.p & mpu.ZERO)
+//

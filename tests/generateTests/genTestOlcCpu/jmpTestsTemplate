@@ -1,3 +1,4 @@
+/*
 package main
 
 import (
@@ -57,3 +58,40 @@ func (q *{{.Name}}) Dequeue() {{.Type}} {
   panic(ErrInvalidType)
 }
 `
+
+*/
+/*
+
+    # JMP Absolute
+
+    def test_jmp_abs_jumps_to_absolute_address(self):
+        mpu = self._make_mpu()
+        # $0000 JMP $ABCD
+        self._write(mpu.memory, 0x0000, (0x4C, 0xCD, 0xAB))
+        mpu.step()
+        self.assertEqual(0xABCD, mpu.pc)
+
+    # JMP Indirect
+
+    def test_jmp_ind_jumps_to_indirect_address(self):
+        mpu = self._make_mpu()
+        # $0000 JMP ($ABCD)
+        self._write(mpu.memory, 0x0000, (0x6C, 0x00, 0x02))
+        self._write(mpu.memory, 0x0200, (0xCD, 0xAB))
+        mpu.step()
+        self.assertEqual(0xABCD, mpu.pc)
+
+    # JSR
+
+    def test_jsr_pushes_pc_plus_2_and_sets_pc(self):
+        mpu = self._make_mpu()
+        # $C000 JSR $FFD2
+        self._write(mpu.memory, 0xC000, (0x20, 0xD2, 0xFF))
+        mpu.pc = 0xC000
+        mpu.step()
+        self.assertEqual(0xFFD2, mpu.pc)
+        self.assertEqual(0xFD,   mpu.sp)
+        self.assertEqual(0xC0,   mpu.memory[0x01FF])  # PCH
+        self.assertEqual(0x02,   mpu.memory[0x01FE])  # PCL+2
+
+ */

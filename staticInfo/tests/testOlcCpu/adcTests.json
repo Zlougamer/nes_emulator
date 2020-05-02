@@ -1,0 +1,1445 @@
+{
+  "TestCaseArr": [
+    {
+      "TestName": "AdcBcdOffAbsoluteCarryClearInAccumulatorZeroes",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsoluteCarrySetInAccumulatorZero",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x01",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsoluteCarryClearInNoCarryClearOut",
+      "InitAccum": "0x01",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000",
+          "Data": "0xFE"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsoluteCarryClearInCarrySetOut",
+      "InitAccum": "0x02",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x01",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsoluteOverflowSetNoCarry01Plus01",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x02",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsoluteOverflowSetNoCarry01PlusFF",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsoluteOverflowSetNoCarry7fPlus01",
+      "InitAccum": "0x7f",
+      "InitStatus": "^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffAbsoluteOverflowSetNoCarry80PlusFF",
+      "InitAccum": "0x80",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x7F",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffAbsoluteOverflowSetOn40Plus40",
+      "InitAccum": "0x40",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.V)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffZpCarryClearInAccumulatorZeroes",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x65, 0xB0"
+        },
+        {
+          "Addr": "0x00B0",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpCarrySetInAccumulatorZero",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x65, 0xB0"
+        },
+        {
+          "Addr": "0x00B0",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x01",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpCarryClearInNoCarryClearOut",
+      "InitAccum": "0x01",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x65, 0xB0"
+        },
+        {
+          "Addr": "0x00B0",
+          "Data": "0xFE"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpCarryClearInCarrySetOut",
+      "InitAccum": "0x02",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x65, 0xB0"
+        },
+        {
+          "Addr": "0x00B0",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x01",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpOverflowSetNoCarry01Plus01",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x65, 0xB0"
+        },
+        {
+          "Addr": "0x00B0",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x02",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpOverflowSetNoCarry01PlusFF",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x65, 0xB0"
+        },
+        {
+          "Addr": "0x00B0",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpOverflowSetNoCarry7fPlus01",
+      "InitAccum": "0x7f",
+      "InitStatus": "^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x65, 0xB0"
+        },
+        {
+          "Addr": "0x00B0",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffZpOverflowSetNoCarry80PlusFF",
+      "InitAccum": "0x80",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x65, 0xB0"
+        },
+        {
+          "Addr": "0x00B0",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x7F",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffZpOverflowSetOn40Plus40",
+      "InitAccum": "0x40",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.V)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x65, 0xB0"
+        },
+        {
+          "Addr": "0x00B0",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffImmediateCarryClearInAccumulatorZeroes",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x69, 0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffImmediateCarrySetInAccumulatorZero",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x69, 0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x01",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffImmediateCarryClearInNoCarryClearOut",
+      "InitAccum": "0x01",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x69, 0xFE"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffImmediateCarryClearInCarrySetOut",
+      "InitAccum": "0x02",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x69, 0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x01",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffImmediateOverflowSetNoCarry01Plus01",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x69, 0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x02",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffImmediateOverflowSetNoCarry01PlusFF",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x69, 0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffImmediateOverflowSetNoCarry7fPlus01",
+      "InitAccum": "0x7f",
+      "InitStatus": "^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x69, 0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffImmediateOverflowSetNoCarry80PlusFF",
+      "InitAccum": "0x80",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x69, 0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x7F",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffImmediateOverflowSetOn40Plus40",
+      "InitAccum": "0x40",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.V)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x69, 0x40"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffAbsXCarryClearInAccumulatorZeroes",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsXCarrySetInAccumulatorZero",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x01",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsXCarryClearInNoCarryClearOut",
+      "InitAccum": "0x01",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.X",
+          "Data": "0xFE"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsXCarryClearInCarrySetOut",
+      "InitAccum": "0x02",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.X",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x01",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsXOverflowSetNoCarry01Plus01",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.X",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x02",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsXOverflowSetNoCarry01PlusFF",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.X",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsXOverflowSetNoCarry7fPlus01",
+      "InitAccum": "0x7f",
+      "InitStatus": "^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.X",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffAbsXOverflowSetNoCarry80PlusFF",
+      "InitAccum": "0x80",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.X",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x7F",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffAbsXOverflowSetOn40Plus40",
+      "InitAccum": "0x40",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.V)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7D, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.X",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffAbsYCarryClearInAccumulatorZeroes",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x79, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.Y",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsYCarrySetInAccumulatorZero",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x79, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.Y",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x01",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsYCarryClearInNoCarryClearOut",
+      "InitAccum": "0x01",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x79, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.Y",
+          "Data": "0xFE"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsYCarryClearInCarrySetOut",
+      "InitAccum": "0x02",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x79, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.Y",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x01",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsYOverflowSetNoCarry01Plus01",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x79, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.Y",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x02",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsYOverflowSetNoCarry01PlusFF",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x79, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.Y",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffAbsYOverflowSetNoCarry7fPlus01",
+      "InitAccum": "0x7f",
+      "InitStatus": "^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x79, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.Y",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffAbsYOverflowSetNoCarry80PlusFF",
+      "InitAccum": "0x80",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x79, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.Y",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x7F",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffAbsYOverflowSetOn40Plus40",
+      "InitAccum": "0x40",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.V)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x79, 0x00, 0xC0"
+        },
+        {
+          "Addr": "0xC000) + uint16(regSet.Y",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffZpXCarryClearInAccumulatorZeroes",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x75, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpXCarrySetInAccumulatorZero",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x75, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x01",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpXCarryClearInNoCarryClearOut",
+      "InitAccum": "0x01",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x75, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0xFE"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpXCarryClearInCarrySetOut",
+      "InitAccum": "0x02",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x75, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x01",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpXOverflowSetNoCarry01Plus01",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x75, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x02",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpXOverflowSetNoCarry01PlusFF",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x75, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpXOverflowSetNoCarry7fPlus01",
+      "InitAccum": "0x7f",
+      "InitStatus": "^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x75, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffZpXOverflowSetNoCarry80PlusFF",
+      "InitAccum": "0x80",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x75, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x7F",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffZpXOverflowSetOn40Plus40",
+      "InitAccum": "0x40",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.V)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x75, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffZpYCarryClearInAccumulatorZeroes",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x71, 0x10"
+        },
+        {
+          "Addr": "0x0013",
+          "Data": "0xCD, 0xAB"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpYCarrySetInAccumulatorZero",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x71, 0x10"
+        },
+        {
+          "Addr": "0x0013",
+          "Data": "0xCD, 0xAB"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x01",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpYCarryClearInNoCarryClearOut",
+      "InitAccum": "0x01",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x71, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.Y",
+          "Data": "0xFE"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpYCarryClearInCarrySetOut",
+      "InitAccum": "0x02",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x71, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.Y",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x01",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpYOverflowSetNoCarry01Plus01",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x71, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.Y",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x02",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpYOverflowSetNoCarry01PlusFF",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x71, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.Y",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AdcBcdOffZpYOverflowSetNoCarry7fPlus01",
+      "InitAccum": "0x7f",
+      "InitStatus": "^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x71, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.Y",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffZpYOverflowSetNoCarry80PlusFF",
+      "InitAccum": "0x80",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x71, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.Y",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x7F",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "AdcBcdOffZpYOverflowSetOn40Plus40",
+      "InitAccum": "0x40",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.V)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x71, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.Y",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    }
+  ]
+}
