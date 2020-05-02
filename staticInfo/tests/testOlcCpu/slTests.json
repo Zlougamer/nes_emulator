@@ -1,0 +1,23 @@
+{
+  "TestCaseArr": [
+    {
+      "TestName": "AslAccumulatorSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x0A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    }
+  ]
+}

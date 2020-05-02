@@ -376,13 +376,6 @@
       "ExpZ": "false",
       "ExpV": "false"
     },
-
-
-
-
-
-
-
     {
       "TestName": "EorAbsoluteFlipsBitsOverSettingZFlag",
       "InitAccum": "0xFF",
@@ -654,10 +647,6 @@
         }
       ]
     },
-
-
-
-
     {
       "TestName": "EorIndIndexedXFlipsBitsOverSettingZFlag",
       "InitAccum": "0xFF",
@@ -848,7 +837,386 @@
           "Data": "0xFF"
         }
       ]
+    },
 
+
+
+
+    {
+      "TestName": "OraAbsoluteZeroesOrZerosSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x0D, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraAbsoluteTurnsBitsOnSetsNFlag",
+      "InitAccum": "0x03",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.N)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x0D, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x82"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x83",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraZpZeroesOrZerosSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.N)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x05, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraZpTurnsBitsOnSetsNFlag",
+      "InitAccum": "0x03",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.N)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x05, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x82"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x83",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraImmediateZeroesOrZerosSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x09, 0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraImmediateTurnsBitsOnSetsNFlag",
+      "InitAccum": "0x03",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.N)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x09, 0x82"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x83",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraAbsXIndexedZeroesOrZerosSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.Z)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x1D, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraAbsXIndexedTurnsBitsOnSetsNFlag",
+      "InitAccum": "0x03",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.N)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x1D, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x82"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x83",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraAbsYIndexedZeroesOrZerosSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x19, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.Y",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraAbsYIndexedTurnsBitsOnSetsNFlag",
+      "InitAccum": "0x03",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.N)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x19, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.Y",
+          "Data": "0x83"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x83",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraIndIndexedXZeroesOrZerosSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.Z)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x01, 0x10"
+        },
+        {
+          "Addr": "0x0013",
+          "Data": "0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraIndIndexedXTurnsBitsOnSetsNFlag",
+      "InitAccum": "0x03",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.N)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x01, 0x10"
+        },
+        {
+          "Addr": "0x0013",
+          "Data": "0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x82"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x83",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraIndexedIndYZeroesOrZerosSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x11, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.Y",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraIndexedIndYTurnsBitsOnSetsNFlag",
+      "InitAccum": "0x03",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.N)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x11, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.Y",
+          "Data": "0x82"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x83",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraZpXIndexedZeroesOrZerosSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.Z)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x55, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "OraZpXIndexedTurnsBitsOnSetsNFlag",
+      "InitAccum": "0x03",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.N)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x15, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x82"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x83",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
     }
   ]
 }

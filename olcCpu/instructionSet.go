@@ -535,7 +535,7 @@ func (i *instructionSet) ora() uint8 {
 	manEl.fetch()
 	regSet.A = regSet.A | manEl.fetched
 	regSet.setFlag(Z, regSet.A == 0x00)
-	regSet.setFlag(N, regSet.A == 0x80)
+	regSet.setFlag(N, regSet.A & 0x80 != 0)
 	return 1
 }
 
@@ -588,9 +588,9 @@ func (i *instructionSet) rol() uint8 {
 	manEl.fetch()
 	temp := (uint16(manEl.fetched) << 1) | uint16(regSet.getFlag(C))
 
-	regSet.setFlag(C, temp & 0xFF00 > 0)
+	regSet.setFlag(C, temp & 0xFF00 != 0)
 	regSet.setFlag(Z, (temp & 0x00FF) == 0x0000)
-	regSet.setFlag(N, (temp & 0x0080) > 0)
+	regSet.setFlag(N, (temp & 0x0080) != 0)
 
 	addrmodeName := manEl.lookup[manEl.opcode].addrmodeName
 
@@ -611,9 +611,9 @@ func (i *instructionSet) ror() uint8 {
 	manEl.fetch()
 	temp := (uint16(regSet.getFlag(C)) << 7) | (uint16(manEl.fetched) >> 1)
 
-	regSet.setFlag(C, manEl.fetched & 0x01 > 0)
+	regSet.setFlag(C, manEl.fetched & 0x01 != 0)
 	regSet.setFlag(Z, (temp & 0x00FF) == 0x0000)
-	regSet.setFlag(N, (temp & 0x0080) > 0)
+	regSet.setFlag(N, (temp & 0x0080) != 0)
 
 	addrmodeName := manEl.lookup[manEl.opcode].addrmodeName
 

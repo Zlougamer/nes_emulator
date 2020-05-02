@@ -1,0 +1,1370 @@
+{
+  "TestCaseArr": [
+    {
+      "TestName": "RolAccumulatorZeroAndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "RolAccumulator80AndCarryZeroSetsZFlag",
+      "InitAccum": "0x80",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C | olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "RolAccumulatorZeroAndCarryOneClearsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x01",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "RolAccumulatorSetsNFlag",
+      "InitAccum": "0x40",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x81",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "RolAccumulatorShiftsOutZero",
+      "InitAccum": "0x7F",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0xFE",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "RolAccumulatorShiftsOutOne",
+      "InitAccum": "0xFF",
+      "InitStatus": "regSet.Status | ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0xFE",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+
+    {
+      "TestName": "RolAbsoluteZeroAndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "RolAbsolute80AndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C | olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x80"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "RolAbsoluteZeroAndCarryOneClearsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x01",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "RolAbsoluteSetsNFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x81",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "RolAbsoluteShiftsOutZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x7F"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "RolAbsoluteShiftsOutOne",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "RolZpZeroAndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x26, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "RolZp80AndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C | olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x26, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x80"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "RolZpZeroAndCarryOneClearsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x26, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x01",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "RolZpSetsNFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x26, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x81",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "RolZpShiftsOutZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x26, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x7F"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "RolZpShiftsOutOne",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x26, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "RolAbsXIndexedZeroAndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x3E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RolAbsXIndexed80AndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C | olcCpu.Z)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x3E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x80"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RolAbsXIndexedZeroAndCarryOneClearsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x3E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x01",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RolAbsXIndexedSetsNFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x3E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x81",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RolAbsXIndexedShiftsOutZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x3E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x7F"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RolAbsXIndexedShiftsOutOne",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x3E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RolZpXIndexedZeroAndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x36, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RolZpXIndexed80AndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C | olcCpu.Z)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x36, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x80"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RolZpXIndexedZeroAndCarryOneClearsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x36, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x01",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RolZpXIndexedSetsNFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x36, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x81",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RolZpXIndexedShiftsOutZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x36, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x7F"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RolZpXIndexedShiftsOutOne",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x36, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+      "TestName": "RorAccumulatorZeroAndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "RorAccumulatorZeroAndCarryOneRotatesInSetsNFlags",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "RorAccumulatorShiftsOutZero",
+      "InitAccum": "0x02",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x81",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "RorAccumulatorShiftsOutOne",
+      "InitAccum": "0x03",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x81",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "RorAbsoluteZeroAndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "RorAbsoluteZeroAndCarryOneRotatesInSetsNFlags",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x80",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "RorAbsoluteShiftsOutZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x02"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x81",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "RorAbsoluteShiftsOutOne",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x6E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x03"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x81",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "RorZpZeroAndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x66, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "RorZpZeroAndCarryOneRotatesInSetsNFlags",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x66, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x80",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "RorZpZeroAbsoluteShiftsOutZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x66, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x02"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x81",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "RorZpShiftsOutOne",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x66, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x03"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x81",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "RorAbsXIndexedZeroAndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RorAbsXIndexedZAndC1RotatesInSetsNFlags",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x80",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RorAbsXIndexedShiftsOutZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x02"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x81",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RorAbsXIndexedShiftsOutOne",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x7E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x03"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x81",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RorZpXIndexedZeroAndCarryZeroSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x76, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RorZpXIndexedZeroAndCarryOneRotatesInSetsNFlags",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x76, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x80",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RorZpXIndexedZeroAbsoluteShiftsOutZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x76, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x02"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x81",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "RorZpXIndexedShiftsOutOne",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x76, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x03"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x81",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    }
+  ]
+}

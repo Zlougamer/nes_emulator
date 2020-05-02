@@ -808,4 +808,390 @@ func TestEorZpXIndexedFlipsBitsOverSettingNFlag(t *testing.T) {
 }
 
 
+func TestOraAbsoluteZeroesOrZerosSetsZFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    regSet.Status = regSet.Status & ^uint8(olcCpu.Z)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0x0D, 0xCD, 0xAB})
+    write(mpu, uint16(0xABCD), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraAbsoluteTurnsBitsOnSetsNFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x03
+    regSet.Status = regSet.Status & ^uint8(olcCpu.N)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0x0D, 0xCD, 0xAB})
+    write(mpu, uint16(0xABCD), []uint8{0x82})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x83), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraZpZeroesOrZerosSetsZFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    regSet.Status = regSet.Status & ^uint8(olcCpu.N)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0x05, 0x10})
+    write(mpu, uint16(0x0010), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraZpTurnsBitsOnSetsNFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x03
+    regSet.Status = regSet.Status & ^uint8(olcCpu.N)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0x05, 0x10})
+    write(mpu, uint16(0x0010), []uint8{0x82})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x83), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraImmediateZeroesOrZerosSetsZFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    regSet.Status = regSet.Status & ^uint8(olcCpu.Z)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0x09, 0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraImmediateTurnsBitsOnSetsNFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x03
+    regSet.Status = regSet.Status & ^uint8(olcCpu.N)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0x09, 0x82})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x83), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraAbsXIndexedZeroesOrZerosSetsZFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    regSet.Status = regSet.Status & ^uint8(olcCpu.Z)
+    regSet.X = 0x03
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0x1D, 0xCD, 0xAB})
+    write(mpu, uint16(0xABCD) + uint16(regSet.X), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraAbsXIndexedTurnsBitsOnSetsNFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x03
+    regSet.Status = regSet.Status & ^uint8(olcCpu.N)
+    regSet.X = 0x03
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0x1D, 0xCD, 0xAB})
+    write(mpu, uint16(0xABCD) + uint16(regSet.X), []uint8{0x82})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x83), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraAbsYIndexedZeroesOrZerosSetsZFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    regSet.Status = regSet.Status & ^uint8(olcCpu.Z)
+    regSet.X = 0x00
+    regSet.Y = 0x03
+
+    write(mpu, uint16(0x0000), []uint8{0x19, 0xCD, 0xAB})
+    write(mpu, uint16(0xABCD) + uint16(regSet.Y), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraAbsYIndexedTurnsBitsOnSetsNFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x03
+    regSet.Status = regSet.Status & ^uint8(olcCpu.N)
+    regSet.X = 0x00
+    regSet.Y = 0x03
+
+    write(mpu, uint16(0x0000), []uint8{0x19, 0xCD, 0xAB})
+    write(mpu, uint16(0xABCD) + uint16(regSet.Y), []uint8{0x83})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x83), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraIndIndexedXZeroesOrZerosSetsZFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    regSet.Status = regSet.Status & ^uint8(olcCpu.Z)
+    regSet.X = 0x03
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0x01, 0x10})
+    write(mpu, uint16(0x0013), []uint8{0xCD, 0xAB})
+    write(mpu, uint16(0xABCD), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraIndIndexedXTurnsBitsOnSetsNFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x03
+    regSet.Status = regSet.Status & ^uint8(olcCpu.N)
+    regSet.X = 0x03
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0x01, 0x10})
+    write(mpu, uint16(0x0013), []uint8{0xCD, 0xAB})
+    write(mpu, uint16(0xABCD), []uint8{0x82})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x83), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraIndexedIndYZeroesOrZerosSetsZFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    regSet.Status = regSet.Status & ^uint8(olcCpu.Z)
+    regSet.X = 0x00
+    regSet.Y = 0x03
+
+    write(mpu, uint16(0x0000), []uint8{0x11, 0x10})
+    write(mpu, uint16(0x0010), []uint8{0xCD, 0xAB})
+    write(mpu, uint16(0xABCD) + uint16(regSet.Y), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraIndexedIndYTurnsBitsOnSetsNFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x03
+    regSet.Status = regSet.Status & ^uint8(olcCpu.N)
+    regSet.X = 0x00
+    regSet.Y = 0x03
+
+    write(mpu, uint16(0x0000), []uint8{0x11, 0x10})
+    write(mpu, uint16(0x0010), []uint8{0xCD, 0xAB})
+    write(mpu, uint16(0xABCD) + uint16(regSet.Y), []uint8{0x82})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x83), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraZpXIndexedZeroesOrZerosSetsZFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    regSet.Status = regSet.Status & ^uint8(olcCpu.Z)
+    regSet.X = 0x03
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0x55, 0x10})
+    write(mpu, uint16(0x0010) + uint16(regSet.X), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
+func TestOraZpXIndexedTurnsBitsOnSetsNFlag(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x03
+    regSet.Status = regSet.Status & ^uint8(olcCpu.N)
+    regSet.X = 0x03
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0x15, 0x10})
+    write(mpu, uint16(0x0010) + uint16(regSet.X), []uint8{0x82})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x83), regSet.A)
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+}
+
+
 
