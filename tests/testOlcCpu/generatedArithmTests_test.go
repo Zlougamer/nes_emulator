@@ -13,6 +13,8 @@ func TestAdcBcdOffAbsoluteCarryClearInAccumulatorZeroes(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -24,10 +26,16 @@ func TestAdcBcdOffAbsoluteCarryClearInAccumulatorZeroes(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -37,6 +45,8 @@ func TestAdcBcdOffAbsoluteCarrySetInAccumulatorZero(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = olcCpu.C
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -48,10 +58,16 @@ func TestAdcBcdOffAbsoluteCarrySetInAccumulatorZero(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -61,6 +77,8 @@ func TestAdcBcdOffAbsoluteCarryClearInNoCarryClearOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -72,10 +90,16 @@ func TestAdcBcdOffAbsoluteCarryClearInNoCarryClearOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0xFF), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -85,6 +109,8 @@ func TestAdcBcdOffAbsoluteCarryClearInCarrySetOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x02
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -96,10 +122,16 @@ func TestAdcBcdOffAbsoluteCarryClearInCarrySetOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -109,6 +141,8 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry01Plus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -120,10 +154,16 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry01Plus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x02), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -133,6 +173,8 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry01PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -144,10 +186,16 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -157,6 +205,8 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry7fPlus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x7f
+    
+    
     regSet.Status = ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -168,10 +218,16 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -181,6 +237,8 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry80PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x80
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -192,10 +250,16 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x7F), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -205,6 +269,8 @@ func TestAdcBcdOffAbsoluteOverflowSetOn40Plus40(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x40
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.V)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -216,10 +282,16 @@ func TestAdcBcdOffAbsoluteOverflowSetOn40Plus40(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -229,6 +301,8 @@ func TestAdcBcdOffZpCarryClearInAccumulatorZeroes(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -240,10 +314,16 @@ func TestAdcBcdOffZpCarryClearInAccumulatorZeroes(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -253,6 +333,8 @@ func TestAdcBcdOffZpCarrySetInAccumulatorZero(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = olcCpu.C
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -264,10 +346,16 @@ func TestAdcBcdOffZpCarrySetInAccumulatorZero(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -277,6 +365,8 @@ func TestAdcBcdOffZpCarryClearInNoCarryClearOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -288,10 +378,16 @@ func TestAdcBcdOffZpCarryClearInNoCarryClearOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0xFF), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -301,6 +397,8 @@ func TestAdcBcdOffZpCarryClearInCarrySetOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x02
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -312,10 +410,16 @@ func TestAdcBcdOffZpCarryClearInCarrySetOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -325,6 +429,8 @@ func TestAdcBcdOffZpOverflowSetNoCarry01Plus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -336,10 +442,16 @@ func TestAdcBcdOffZpOverflowSetNoCarry01Plus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x02), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -349,6 +461,8 @@ func TestAdcBcdOffZpOverflowSetNoCarry01PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -360,10 +474,16 @@ func TestAdcBcdOffZpOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -373,6 +493,8 @@ func TestAdcBcdOffZpOverflowSetNoCarry7fPlus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x7f
+    
+    
     regSet.Status = ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -384,10 +506,16 @@ func TestAdcBcdOffZpOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -397,6 +525,8 @@ func TestAdcBcdOffZpOverflowSetNoCarry80PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x80
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -408,10 +538,16 @@ func TestAdcBcdOffZpOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x7F), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -421,6 +557,8 @@ func TestAdcBcdOffZpOverflowSetOn40Plus40(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x40
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.V)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -432,10 +570,16 @@ func TestAdcBcdOffZpOverflowSetOn40Plus40(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -445,6 +589,8 @@ func TestAdcBcdOffImmediateCarryClearInAccumulatorZeroes(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -455,10 +601,16 @@ func TestAdcBcdOffImmediateCarryClearInAccumulatorZeroes(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -468,6 +620,8 @@ func TestAdcBcdOffImmediateCarrySetInAccumulatorZero(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = olcCpu.C
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -478,10 +632,16 @@ func TestAdcBcdOffImmediateCarrySetInAccumulatorZero(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -491,6 +651,8 @@ func TestAdcBcdOffImmediateCarryClearInNoCarryClearOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -501,10 +663,16 @@ func TestAdcBcdOffImmediateCarryClearInNoCarryClearOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0xFF), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -514,6 +682,8 @@ func TestAdcBcdOffImmediateCarryClearInCarrySetOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x02
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -524,10 +694,16 @@ func TestAdcBcdOffImmediateCarryClearInCarrySetOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -537,6 +713,8 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry01Plus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -547,10 +725,16 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry01Plus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x02), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -560,6 +744,8 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry01PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -570,10 +756,16 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -583,6 +775,8 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry7fPlus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x7f
+    
+    
     regSet.Status = ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -593,10 +787,16 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -606,6 +806,8 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry80PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x80
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -616,10 +818,16 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x7F), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -629,6 +837,8 @@ func TestAdcBcdOffImmediateOverflowSetOn40Plus40(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x40
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.V)
     regSet.X = 0x00
     regSet.Y = 0x00
@@ -639,10 +849,16 @@ func TestAdcBcdOffImmediateOverflowSetOn40Plus40(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -652,6 +868,8 @@ func TestAdcBcdOffAbsXCarryClearInAccumulatorZeroes(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -663,10 +881,16 @@ func TestAdcBcdOffAbsXCarryClearInAccumulatorZeroes(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -676,6 +900,8 @@ func TestAdcBcdOffAbsXCarrySetInAccumulatorZero(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = olcCpu.C
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -687,10 +913,16 @@ func TestAdcBcdOffAbsXCarrySetInAccumulatorZero(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -700,6 +932,8 @@ func TestAdcBcdOffAbsXCarryClearInNoCarryClearOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -711,10 +945,16 @@ func TestAdcBcdOffAbsXCarryClearInNoCarryClearOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0xFF), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -724,6 +964,8 @@ func TestAdcBcdOffAbsXCarryClearInCarrySetOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x02
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -735,10 +977,16 @@ func TestAdcBcdOffAbsXCarryClearInCarrySetOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -748,6 +996,8 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry01Plus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -759,10 +1009,16 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry01Plus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x02), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -772,6 +1028,8 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry01PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -783,10 +1041,16 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -796,6 +1060,8 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry7fPlus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x7f
+    
+    
     regSet.Status = ^uint8(olcCpu.C)
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -807,10 +1073,16 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -820,6 +1092,8 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry80PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x80
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -831,10 +1105,16 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x7F), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -844,6 +1124,8 @@ func TestAdcBcdOffAbsXOverflowSetOn40Plus40(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x40
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.V)
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -855,10 +1137,16 @@ func TestAdcBcdOffAbsXOverflowSetOn40Plus40(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -868,6 +1156,8 @@ func TestAdcBcdOffAbsYCarryClearInAccumulatorZeroes(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -879,10 +1169,16 @@ func TestAdcBcdOffAbsYCarryClearInAccumulatorZeroes(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -892,6 +1188,8 @@ func TestAdcBcdOffAbsYCarrySetInAccumulatorZero(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = olcCpu.C
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -903,10 +1201,16 @@ func TestAdcBcdOffAbsYCarrySetInAccumulatorZero(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -916,6 +1220,8 @@ func TestAdcBcdOffAbsYCarryClearInNoCarryClearOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -927,10 +1233,16 @@ func TestAdcBcdOffAbsYCarryClearInNoCarryClearOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0xFF), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -940,6 +1252,8 @@ func TestAdcBcdOffAbsYCarryClearInCarrySetOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x02
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -951,10 +1265,16 @@ func TestAdcBcdOffAbsYCarryClearInCarrySetOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -964,6 +1284,8 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry01Plus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -975,10 +1297,16 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry01Plus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x02), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -988,6 +1316,8 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry01PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -999,10 +1329,16 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1012,6 +1348,8 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry7fPlus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x7f
+    
+    
     regSet.Status = ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -1023,10 +1361,16 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1036,6 +1380,8 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry80PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x80
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -1047,10 +1393,16 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x7F), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1060,6 +1412,8 @@ func TestAdcBcdOffAbsYOverflowSetOn40Plus40(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x40
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.V)
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -1071,10 +1425,16 @@ func TestAdcBcdOffAbsYOverflowSetOn40Plus40(t *testing.T) {
 
 	assertEqual(t, uint16(0x0003), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1084,6 +1444,8 @@ func TestAdcBcdOffZpXCarryClearInAccumulatorZeroes(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -1095,10 +1457,16 @@ func TestAdcBcdOffZpXCarryClearInAccumulatorZeroes(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1108,6 +1476,8 @@ func TestAdcBcdOffZpXCarrySetInAccumulatorZero(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = olcCpu.C
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -1119,10 +1489,16 @@ func TestAdcBcdOffZpXCarrySetInAccumulatorZero(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1132,6 +1508,8 @@ func TestAdcBcdOffZpXCarryClearInNoCarryClearOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -1143,10 +1521,16 @@ func TestAdcBcdOffZpXCarryClearInNoCarryClearOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0xFF), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1156,6 +1540,8 @@ func TestAdcBcdOffZpXCarryClearInCarrySetOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x02
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -1167,10 +1553,16 @@ func TestAdcBcdOffZpXCarryClearInCarrySetOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1180,6 +1572,8 @@ func TestAdcBcdOffZpXOverflowSetNoCarry01Plus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -1191,10 +1585,16 @@ func TestAdcBcdOffZpXOverflowSetNoCarry01Plus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x02), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1204,6 +1604,8 @@ func TestAdcBcdOffZpXOverflowSetNoCarry01PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -1215,10 +1617,16 @@ func TestAdcBcdOffZpXOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1228,6 +1636,8 @@ func TestAdcBcdOffZpXOverflowSetNoCarry7fPlus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x7f
+    
+    
     regSet.Status = ^uint8(olcCpu.C)
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -1239,10 +1649,16 @@ func TestAdcBcdOffZpXOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1252,6 +1668,8 @@ func TestAdcBcdOffZpXOverflowSetNoCarry80PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x80
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -1263,10 +1681,16 @@ func TestAdcBcdOffZpXOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x7F), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1276,6 +1700,8 @@ func TestAdcBcdOffZpXOverflowSetOn40Plus40(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x40
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.V)
     regSet.X = 0x03
     regSet.Y = 0x00
@@ -1287,10 +1713,16 @@ func TestAdcBcdOffZpXOverflowSetOn40Plus40(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1300,6 +1732,8 @@ func TestAdcBcdOffZpYCarryClearInAccumulatorZeroes(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -1311,10 +1745,16 @@ func TestAdcBcdOffZpYCarryClearInAccumulatorZeroes(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1324,6 +1764,8 @@ func TestAdcBcdOffZpYCarrySetInAccumulatorZero(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x00
+    
+    
     regSet.Status = olcCpu.C
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -1335,10 +1777,16 @@ func TestAdcBcdOffZpYCarrySetInAccumulatorZero(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1348,6 +1796,8 @@ func TestAdcBcdOffZpYCarryClearInNoCarryClearOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -1360,10 +1810,16 @@ func TestAdcBcdOffZpYCarryClearInNoCarryClearOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0xFF), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1373,6 +1829,8 @@ func TestAdcBcdOffZpYCarryClearInCarrySetOut(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x02
+    
+    
     regSet.Status = 0x00
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -1385,10 +1843,16 @@ func TestAdcBcdOffZpYCarryClearInCarrySetOut(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x01), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1398,6 +1862,8 @@ func TestAdcBcdOffZpYOverflowSetNoCarry01Plus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -1410,10 +1876,16 @@ func TestAdcBcdOffZpYOverflowSetNoCarry01Plus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x02), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1423,6 +1895,8 @@ func TestAdcBcdOffZpYOverflowSetNoCarry01PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x01
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -1435,10 +1909,16 @@ func TestAdcBcdOffZpYOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1448,6 +1928,8 @@ func TestAdcBcdOffZpYOverflowSetNoCarry7fPlus01(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x7f
+    
+    
     regSet.Status = ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -1460,10 +1942,16 @@ func TestAdcBcdOffZpYOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1473,6 +1961,8 @@ func TestAdcBcdOffZpYOverflowSetNoCarry80PlusFF(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x80
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.C)
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -1485,10 +1975,16 @@ func TestAdcBcdOffZpYOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x7F), regSet.A)
+    
+    
+    
 	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 
@@ -1498,6 +1994,8 @@ func TestAdcBcdOffZpYOverflowSetOn40Plus40(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = 0x40
+    
+    
     regSet.Status = regSet.Status & ^uint8(olcCpu.V)
     regSet.X = 0x00
     regSet.Y = 0x03
@@ -1510,10 +2008,1137 @@ func TestAdcBcdOffZpYOverflowSetOn40Plus40(t *testing.T) {
 
 	assertEqual(t, uint16(0x0002), regSet.Pc)
 	assertEqual(t, uint8(0x80), regSet.A)
+    
+    
+    
 	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, true, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcAbsAllZerosAndNoBorrowIsZero(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xED, 0xCD, 0xAB})
+    write(mpu, uint16(0xABCD), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcAbsDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xED, 0xCD, 0xAB})
+    write(mpu, uint16(0xABCD), []uint8{0x01})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcAbsDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xED, 0xCD, 0xAB})
+    write(mpu, uint16(0xABCD), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcAbsDowntoFourWithBorrowClearsZN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x07
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xED, 0xCD, 0xAB})
+    write(mpu, uint16(0xABCD), []uint8{0x02})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x04), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcZpAllZerosAndNoBorrowIsZero(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE5, 0x10})
+    write(mpu, uint16(0xABCD), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcZpDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE5, 0x10})
+    write(mpu, uint16(0x0010), []uint8{0x01})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcZpDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE5, 0x10})
+    write(mpu, uint16(0x0010), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcZpDowntoFourWithBorrowClearsZN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x07
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE5, 0x10})
+    write(mpu, uint16(0x0010), []uint8{0x02})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x04), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcImmAllZerosAndNoBorrowIsZero(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE9, 0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcImmDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE9, 0x01})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcImmDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE9, 0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcBcdOnImmediate0aMinus00CarrySet(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x0a
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE9, 0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x0a), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcBcdOnImmediate9aMinus00CarrySet(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x9a
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE9, 0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x9a), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcBcdOnImmediate00Minus01CarrySet(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    
+    
+    regSet.Status = regSet.Status | ^uint8(0)
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE9, 0x01})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0xFF), regSet.A)
+    
+    
+    
+	assertEqual(t, false, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcBcdOnImmediate_20Minus_0aCarryUnset(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x20
+    
+    
+    regSet.Status = 0x00
+    regSet.X = 0x00
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE9, 0x0a})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x15), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcAbsXAllZerosAndNoBorrowIsZero(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x0D
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xFD, 0xE0, 0xFE})
+    write(mpu, uint16(0xFEED), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcAbsXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x0D
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xFD, 0xE0, 0xFE})
+    write(mpu, uint16(0xFEED), []uint8{0x01})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcAbsXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x0D
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xFD, 0xE0, 0xFE})
+    write(mpu, uint16(0xFEED), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcAbsXDowntoFourWithBorrowClearsZN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x07
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x0D
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xFD, 0xE0, 0xFE})
+    write(mpu, uint16(0xFEED), []uint8{0x02})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x04), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcAbsYAllZerosAndNoBorrowIsZero(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x0D
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xF9, 0xE0, 0xFE})
+    write(mpu, uint16(0xFEED), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcAbsYDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x0D
+
+    write(mpu, uint16(0x0000), []uint8{0xF9, 0xE0, 0xFE})
+    write(mpu, uint16(0xFEED), []uint8{0x01})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcAbsYDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x0D
+
+    write(mpu, uint16(0x0000), []uint8{0xF9, 0xE0, 0xFE})
+    write(mpu, uint16(0xFEED), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcAbsYDowntoFourWithBorrowClearsZN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x07
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x0D
+
+    write(mpu, uint16(0x0000), []uint8{0xF9, 0xE0, 0xFE})
+    write(mpu, uint16(0xFEED), []uint8{0x02})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assertEqual(t, uint8(0x04), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcIndXAllZerosAndNoBorrowIsZero(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x03
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE1, 0x10})
+    write(mpu, uint16(0x0013), []uint8{0xED, 0xFE})
+    write(mpu, uint16(0xFEED), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcIndXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x03
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE1, 0x10})
+    write(mpu, uint16(0x0013), []uint8{0xED, 0xFE})
+    write(mpu, uint16(0xFEED), []uint8{0x01})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcIndXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x03
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE1, 0x10})
+    write(mpu, uint16(0x0013), []uint8{0xED, 0xFE})
+    write(mpu, uint16(0xFEED), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcIndXDowntoFourWithBorrowClearsZN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x07
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x03
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xE1, 0x10})
+    write(mpu, uint16(0x0013), []uint8{0xED, 0xFE})
+    write(mpu, uint16(0xFEED), []uint8{0x02})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x04), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcIndYAllZerosAndNoBorrowIsZero(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x03
+
+    write(mpu, uint16(0x0000), []uint8{0xF1, 0x10})
+    write(mpu, uint16(0x0010), []uint8{0xED, 0xFE})
+    write(mpu, uint16(0xFEED) + uint16(regSet.Y), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcIndYDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x03
+
+    write(mpu, uint16(0x0000), []uint8{0xF1, 0x10})
+    write(mpu, uint16(0x0010), []uint8{0xED, 0xFE})
+    write(mpu, uint16(0xFEED) + uint16(regSet.Y), []uint8{0x01})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcIndYDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x03
+
+    write(mpu, uint16(0x0000), []uint8{0xF1, 0x10})
+    write(mpu, uint16(0x0010), []uint8{0xED, 0xFE})
+    write(mpu, uint16(0xFEED) + uint16(regSet.Y), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcIndYDowntoFourWithBorrowClearsZN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x07
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x00
+    regSet.Y = 0x03
+
+    write(mpu, uint16(0x0000), []uint8{0xF1, 0x10})
+    write(mpu, uint16(0x0010), []uint8{0xED, 0xFE})
+    write(mpu, uint16(0xFEED) + uint16(regSet.Y), []uint8{0x02})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x04), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcZpXAllZerosAndNoBorrowIsZero(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x00
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x0D
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xF5, 0x10})
+    write(mpu, uint16(0x001D), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcZpXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status | uint8(olcCpu.C)
+    regSet.X = 0x0D
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xF5, 0x10})
+    write(mpu, uint16(0x001D), []uint8{0x01})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcZpXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x01
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x0D
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xF5, 0x10})
+    write(mpu, uint16(0x001D), []uint8{0x00})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x00), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, true, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
+    
+}
+
+
+func TestSbcZpXDowntoFourWithBorrowClearsZN(t *testing.T) {
+    regSet := olcCpu.CreateRegisterSet()
+    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+
+    regSet.A = 0x07
+    
+    
+    regSet.Status = regSet.Status & ^uint8(olcCpu.C)
+    regSet.X = 0x0D
+    regSet.Y = 0x00
+
+    write(mpu, uint16(0x0000), []uint8{0xF5, 0x10})
+    write(mpu, uint16(0x001D), []uint8{0x02})
+    
+    mpu.Clock()
+
+	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assertEqual(t, uint8(0x04), regSet.A)
+    
+    
+    
+	assertEqual(t, true, regSet.Status & olcCpu.C != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.N != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.Z != 0)
+	assertEqual(t, false, regSet.Status & olcCpu.V != 0)
+    
+    
+    
     
 }
 

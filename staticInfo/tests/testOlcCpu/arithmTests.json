@@ -1440,6 +1440,821 @@
       "ExpN": "true",
       "ExpZ": "false",
       "ExpV": "true"
+    },
+    {
+      "TestName": "SbcAbsAllZerosAndNoBorrowIsZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xED, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcAbsDowntoZeroNoBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xED, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcAbsDowntoZeroWithBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xED, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcAbsDowntoFourWithBorrowClearsZN",
+      "InitAccum": "0x07",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xED, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x02"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x04",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcZpAllZerosAndNoBorrowIsZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE5, 0x10"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcZpDowntoZeroNoBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE5, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcZpDowntoZeroWithBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE5, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcZpDowntoFourWithBorrowClearsZN",
+      "InitAccum": "0x07",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE5, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x02"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x04",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcImmAllZerosAndNoBorrowIsZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE9, 0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcImmDowntoZeroNoBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE9, 0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcImmDowntoZeroWithBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE9, 0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcBcdOnImmediate0aMinus00CarrySet",
+      "InitAccum": "0x0a",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE9, 0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x0a",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcBcdOnImmediate9aMinus00CarrySet",
+      "InitAccum": "0x9a",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE9, 0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x9a",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcBcdOnImmediate00Minus01CarrySet",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | ^uint8(0)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE9, 0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcBcdOnImmediate_20Minus_0aCarryUnset",
+      "InitAccum": "0x20",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE9, 0x0a"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x15",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcAbsXAllZerosAndNoBorrowIsZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x0D",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xFD, 0xE0, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcAbsXDowntoZeroNoBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x0D",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xFD, 0xE0, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcAbsXDowntoZeroWithBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x0D",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xFD, 0xE0, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcAbsXDowntoFourWithBorrowClearsZN",
+      "InitAccum": "0x07",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x0D",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xFD, 0xE0, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x02"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x04",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcAbsYAllZerosAndNoBorrowIsZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x0D",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF9, 0xE0, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcAbsYDowntoZeroNoBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x0D",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF9, 0xE0, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcAbsYDowntoZeroWithBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x0D",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF9, 0xE0, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcAbsYDowntoFourWithBorrowClearsZN",
+      "InitAccum": "0x07",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x0D",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF9, 0xE0, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x02"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x04",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcIndXAllZerosAndNoBorrowIsZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE1, 0x10"
+        },
+        {
+          "Addr": "0x0013",
+          "Data": "0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcIndXDowntoZeroNoBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE1, 0x10"
+        },
+        {
+          "Addr": "0x0013",
+          "Data": "0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcIndXDowntoZeroWithBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE1, 0x10"
+        },
+        {
+          "Addr": "0x0013",
+          "Data": "0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcIndXDowntoFourWithBorrowClearsZN",
+      "InitAccum": "0x07",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE1, 0x10"
+        },
+        {
+          "Addr": "0x0013",
+          "Data": "0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x02"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x04",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcIndYAllZerosAndNoBorrowIsZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF1, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED) + uint16(regSet.Y",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcIndYDowntoZeroNoBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF1, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED) + uint16(regSet.Y",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcIndYDowntoZeroWithBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF1, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED) + uint16(regSet.Y",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcIndYDowntoFourWithBorrowClearsZN",
+      "InitAccum": "0x07",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x03",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF1, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED) + uint16(regSet.Y",
+          "Data": "0x02"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x04",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+
+
+
+
+
+
+    {
+      "TestName": "SbcZpXAllZerosAndNoBorrowIsZero",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x0D",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF5, 0x10"
+        },
+        {
+          "Addr": "0x001D",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcZpXDowntoZeroNoBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status | uint8(olcCpu.C)",
+      "InitX": "0x0D",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF5, 0x10"
+        },
+        {
+          "Addr": "0x001D",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcZpXDowntoZeroWithBorrowSetsZClearsN",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x0D",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF5, 0x10"
+        },
+        {
+          "Addr": "0x001D",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "SbcZpXDowntoFourWithBorrowClearsZN",
+      "InitAccum": "0x07",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x0D",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF5, 0x10"
+        },
+        {
+          "Addr": "0x001D",
+          "Data": "0x02"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x04",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
     }
   ]
 }

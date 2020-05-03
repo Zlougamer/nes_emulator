@@ -185,11 +185,15 @@ func (a *addressingModes) ind() uint8 {
 
 	ptr := (ptrHi << 8) | ptrLo
 
-	if ptrLo == 0x00FF {  // Simulate page boundary hardware bug
-		manEl.addrAbs = uint16((mBus.Read(ptr & 0xFF00, false) << 8) | (mBus.Read(ptr + 0, false)))
+	loData := uint16(mBus.Read(ptr + 0, false))
+	var hiData uint16
+
+	if ptrLo == uint16(0x00FF) {  // Simulate page boundary hardware bug
+		hiData = uint16(mBus.Read(ptr & 0xFF00, false))
 	} else {  // Behave normally
-		manEl.addrAbs = uint16((mBus.Read(ptr + 1, false) << 8) | (mBus.Read(ptr + 0, false)))
+		hiData = uint16(mBus.Read(ptr + 1, false))
 	}
+	manEl.addrAbs = (hiData << 8) | loData
 	return 0
 }
 

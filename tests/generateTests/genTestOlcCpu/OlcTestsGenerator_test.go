@@ -21,16 +21,24 @@ type MemoryEntry struct {
 type TestCase struct{
     TestName string `json:"TestName"`
     InitAccum string `json:"InitAccum"`
+    InitStkp string `json:"InitStkp"`
+    InitPc string `json:"InitPc"`
     InitStatus string `json:"InitStatus"`
     InitX string `json:"InitX"`
     InitY string `json:"InitY"`
     MemoryWrite []MemoryEntry `json:"MemoryWrite"`
     ExpPc string `json:"ExpPc"`
     ExpAccum string `json:"ExpAccum"`
+    ExpX string `json:"ExpX"`
+    ExpY string `json:"ExpY"`
+    ExpStkp string `json:"ExpStkp"`
     ExpC string `json:"ExpC"`
     ExpN string `json:"ExpN"`
     ExpZ string `json:"ExpZ"`
     ExpV string `json:"ExpV"`
+    ExpI string `json:"ExpI"`
+    ExpB string `json:"ExpB"`
+    ExpU string `json:"ExpU"`
     ExpMemory []MemoryEntry `json:"ExpMemory"`
 }
 
@@ -53,6 +61,10 @@ func Test{{.TestName}}(t *testing.T) {
     mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
 
     regSet.A = {{.InitAccum}}
+    {{if .InitStkp}}regSet.Stkp = {{.InitStkp}}
+    {{end}}
+    {{if .InitPc}}regSet.Pc = {{.InitPc}}
+    {{end}}
     regSet.Status = {{.InitStatus}}
     regSet.X = {{.InitX}}
     regSet.Y = {{.InitY}}
@@ -63,10 +75,22 @@ func Test{{.TestName}}(t *testing.T) {
 
 	assertEqual(t, uint16({{.ExpPc}}), regSet.Pc)
 	assertEqual(t, uint8({{.ExpAccum}}), regSet.A)
+    {{if .ExpX}}assertEqual(t, uint8({{.ExpX}}), regSet.X)
+    {{end}}
+    {{if .ExpY}}assertEqual(t, uint8({{.ExpY}}), regSet.Y)
+    {{end}}
+    {{if .ExpStkp}}assertEqual(t, uint8({{.ExpStkp}}), regSet.Stkp)
+    {{end}}
 	assertEqual(t, {{.ExpC}}, regSet.Status & olcCpu.C != 0)
 	assertEqual(t, {{.ExpN}}, regSet.Status & olcCpu.N != 0)
 	assertEqual(t, {{.ExpZ}}, regSet.Status & olcCpu.Z != 0)
 	assertEqual(t, {{.ExpV}}, regSet.Status & olcCpu.V != 0)
+    {{if .ExpI}}assertEqual(t, {{.ExpI}}, regSet.Status & olcCpu.I != 0)
+    {{end}}
+    {{if .ExpB}}assertEqual(t, {{.ExpB}}, regSet.Status & olcCpu.B != 0)
+    {{end}}
+    {{if .ExpU}}assertEqual(t, {{.ExpU}}, regSet.Status & olcCpu.U != 0)
+    {{end}}
     {{range .ExpMemory}}
 	assertEqual(t, uint8({{.Data}}), mpu.Read(uint16({{.Addr}})))
     {{end}}
@@ -122,7 +146,7 @@ func GenerateTestFromJson(fIn string) {
 
     adcTestsPath := path.Join(testsPath, outputFilename)
 
-    fOut, err := os.OpenFile(adcTestsPath, os.O_RDWR|os.O_CREATE, 0755)
+    fOut, err := os.OpenFile(adcTestsPath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
     check(err)
     defer closeFile(fOut)
 

@@ -109,9 +109,9 @@ func (i *instructionSet) asl() uint8 {
 	manEl.fetch()
 	temp := uint16(manEl.fetched) << 1
 
-	regSet.setFlag(C, temp & 0xFF00 > 0)
+	regSet.setFlag(C, temp & 0xFF00 != 0)
 	regSet.setFlag(Z, temp & 0x00FF == 0x00)
-	regSet.setFlag(N, temp & 0x80 > 0)
+	regSet.setFlag(N, temp & 0x80 != 0)
 
 	addrmodeName := manEl.lookup[manEl.opcode].addrmodeName
 
@@ -181,8 +181,8 @@ func (i *instructionSet) bit() uint8 {
 	manEl.fetch()
 	temp := regSet.A & manEl.fetched
 	regSet.setFlag(Z, (temp & 0x00FF) == 0x00)
-	regSet.setFlag(N, manEl.fetched & (1 << 7) > 0)
-	regSet.setFlag(V, manEl.fetched & (1 << 6) > 0)
+	regSet.setFlag(N, manEl.fetched & (1 << 7) != 0)
+	regSet.setFlag(V, manEl.fetched & (1 << 6) != 0)
 	return 0
 }
 
@@ -329,7 +329,7 @@ func (i *instructionSet) cmp() uint8 {
 	temp := uint16(regSet.A) - uint16(manEl.fetched)
 	regSet.setFlag(C, regSet.A >= manEl.fetched)
 	regSet.setFlag(Z, (temp & 0x00FF) == 0x0000)
-	regSet.setFlag(N, (temp & 0x0080) > 0)
+	regSet.setFlag(N, (temp & 0x0080) != 0)
 	return 1
 }
 
@@ -493,10 +493,10 @@ func (i *instructionSet) lsr() uint8 {
 	mBus := i.mBus
 
 	manEl.fetch()
-	regSet.setFlag(C, manEl.fetched & 0x0001 > 0)
+	regSet.setFlag(C, manEl.fetched & 0x0001 != 0)
 	temp := manEl.fetched >> 1
 	regSet.setFlag(Z, (temp & 0x00FF) == 0x0000)
-	regSet.setFlag(N, (temp & 0x0080) > 0)
+	regSet.setFlag(N, (temp & 0x0080) != 0)
 
 	addrmodeName := manEl.lookup[manEl.opcode].addrmodeName
 
@@ -661,13 +661,13 @@ func (i *instructionSet) sbc() uint8 {
 	manEl := i.manEl
 
 	manEl.fetch()
-	invFetch := uint16(manEl.fetched & 0x00FF)
+	invFetch := uint16(manEl.fetched ^ 0x00FF)
 	val := uint16(regSet.A) + invFetch + uint16(regSet.getFlag(C))
-	regSet.setFlag(C, val & 0xFF00 > 0)
+	regSet.setFlag(C, val & 0xFF00 != 0)
 	regSet.setFlag(Z, (val & 0x00FF) == 0)
-	regSet.setFlag(N, (val & 0x0080) > 0)
+	regSet.setFlag(N, (val & 0x0080) != 0)
 	vFlagVal := (val ^ uint16(regSet.A)) & (val ^ invFetch) & 0x0080
-	regSet.setFlag(V, vFlagVal > 0)
+	regSet.setFlag(V, vFlagVal != 0)
 	regSet.A = uint8(val & 0x00FF)
 	return 1
 }
@@ -725,7 +725,7 @@ func (i *instructionSet) tax() uint8 {
 
 	regSet.X = regSet.A
 	regSet.setFlag(Z, regSet.X == 0x00)
-	regSet.setFlag(N, regSet.X & 0x80 > 0)
+	regSet.setFlag(N, regSet.X & 0x80 != 0)
 	return 0
 }
 
@@ -734,7 +734,7 @@ func (i *instructionSet) tay() uint8 {
 
 	regSet.Y = regSet.A
 	regSet.setFlag(Z, regSet.Y == 0x00)
-	regSet.setFlag(N, regSet.Y & 0x80 > 0)
+	regSet.setFlag(N, regSet.Y & 0x80 != 0)
 	return 0
 }
 
@@ -743,7 +743,7 @@ func (i *instructionSet) tsx() uint8 {
 
 	regSet.X = regSet.Stkp
 	regSet.setFlag(Z, regSet.X == 0x00)
-	regSet.setFlag(N, regSet.X & 0x80 > 0)
+	regSet.setFlag(N, regSet.X & 0x80 != 0)
 	return 0
 }
 
@@ -752,7 +752,7 @@ func (i *instructionSet) txa() uint8 {
 
 	regSet.A = regSet.X
 	regSet.setFlag(Z, regSet.A == 0x00)
-	regSet.setFlag(N, regSet.A & 0x80 > 0)
+	regSet.setFlag(N, regSet.A & 0x80 != 0)
 	return 0
 }
 
@@ -768,7 +768,7 @@ func (i *instructionSet) tya() uint8 {
 
 	regSet.A = regSet.Y
 	regSet.setFlag(Z, regSet.A == 0x00)
-	regSet.setFlag(N, regSet.A & 0x80 > 0)
+	regSet.setFlag(N, regSet.A & 0x80 != 0)
 	return 0
 }
 

@@ -1217,6 +1217,364 @@
       "ExpN": "true",
       "ExpZ": "false",
       "ExpV": "false"
+    },
+    {
+      "TestName": "BitAbsCopiesBit7OfMemoryToNFlagWhen0",
+      "InitAccum": "0xFF",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.N)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2C, 0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "BitAbsCopiesBit7OfMemoryToNFlagWhen1",
+      "InitAccum": "0xFF",
+      "InitStatus": "regSet.Status | uint8(olcCpu.N)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2C, 0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "BitAbsCopiesBit_6OfMemoryToVFlagWhen_0",
+      "InitAccum": "0xFF",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.V)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2C, 0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "BitAbsCopiesBit_6OfMemoryToVFlagWhen_1",
+      "InitAccum": "0xFF",
+      "InitStatus": "regSet.Status | uint8(olcCpu.V)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2C, 0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "BitAbsStoresResultOfAndInZPreservesAWhen_1",
+      "InitAccum": "0xFF",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2C, 0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Addr": "0xFEED",
+          "Data": "0x00"
+        }
+      ]
+    },
+    {
+      "TestName": "BitAbsStoresResultOfAndWhenNonzeroInZPreservesA",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status | uint8(olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2C, 0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x01",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Addr": "0xFEED",
+          "Data": "0x01"
+        }
+      ]
+    },
+    {
+      "TestName": "BitAbsStoresResultOfAndWhenZeroInZPreservesA",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x2C, 0xED, 0xFE"
+        },
+        {
+          "Addr": "0xFEED",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Addr": "0xFEED",
+          "Data": "0x00"
+        }
+      ]
+    },
+    {
+      "TestName": "BitZpCopiesBit_7OfMemoryToNFlagWhen_0",
+      "InitAccum": "0xFF",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.N)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x24, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "BitZpCopiesBit_7OfMemoryToNFlagWhen_1",
+      "InitAccum": "0xFF",
+      "InitStatus": "regSet.Status | uint8(olcCpu.N)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x24, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "BitZpCopiesBit_6OfMemoryToVFlagWhen_0",
+      "InitAccum": "0xFF",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.V)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x24, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "true"
+    },
+    {
+      "TestName": "BitZpCopiesBit_6OfMemoryToVFlagWhen_1",
+      "InitAccum": "0xFF",
+      "InitStatus": "regSet.Status | uint8(olcCpu.V)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x24, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "BitZpStoresResultOfAndInZPreservesAWhen_1",
+      "InitAccum": "0xFF",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x24, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0xFF",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ]
+    },
+    {
+      "TestName": "BitZpStoresResultOfAndWhenNonzeroInZPreservesA",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status | uint8(olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x24, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x01",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Addr": "0x0010",
+          "Data": "0x01"
+        }
+      ]
+    },
+    {
+      "TestName": "BitZpStoresResultOfAndWhenZeroInZPreservesA",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x24, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ]
     }
   ]
 }

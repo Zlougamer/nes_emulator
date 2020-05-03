@@ -1,0 +1,943 @@
+{
+  "TestCaseArr": [
+    {
+      "TestName": "IncAbsIncrementsMemory",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xEE, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x09"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x0A",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "IncAbsIncrementsMemoryRollsOverAndSetsZeroFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xEE, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "IncAbsSetsNegativeFlagWhenIncrementingAbove7F",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xEE, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x7F"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x80",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "IncZpIncrementsMemory",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE6, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x09"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x0A",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "IncZpIncrementsMemoryRollsOverAndSetsZeroFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE6, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "IncZpSetsNegativeFlagWhenIncrementingAbove7F",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE6, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x7F"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x80",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "IncAbsXIncrementsMemory",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xFE, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x09"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x0A",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "IncAbsXIncrementsMemoryRollsOverAndSetsZeroFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xFE, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "IncAbsXSetsNegativeFlagWhenIncrementingAbove7F",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xFE, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x7F"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x80",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "IncZpXIncrementsMemory",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF6, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x09"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x0A",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "IncZpXIncrementsMemoryRollsOverAndSetsZeroFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF6, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "IncZpXSetsNegativeFlagWhenIncrementingAbove7F",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xF6, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x7F"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x80",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "InXIncrementsX",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x09",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE8"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpX": "0x0A",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "InxAboveFFRollsOverAndSetsZeroFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0xFF",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE8"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpX": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "InxSetsNegativeFlagWhenIncrementingAbove7F",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x7F",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xE8"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpX": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+
+
+
+    {
+      "TestName": "InyIncrementsY",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x09",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xC8"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpY": "0x0A",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "InyAboveFFRollsOverAndSetsZeroFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0xFF",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xC8"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpY": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "InySetsNegativeFlagWhenIncrementingAbove7F",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x7F",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xC8"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpY": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "DecAbsDecrementsMemory",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xCE, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x10"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x0F",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "DecAbsBelow00RollsOverAndSetsNegativeFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xCE, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFF",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "DecAbsSetsZeroFlagWhenDecrementingToZero",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xCE, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "DecZpDecrementsMemory",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xC6, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x10"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x0F",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "DecZpBelow00RollsOverAndSetsNegativeFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xC6, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFF",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "DecZpSetsZeroFlagWhenDecrementingToZero",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xC6, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "DecAbsXDecrementsMemory",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xDE, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x10"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x0F",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "DecAbsXBelow00RollsOverAndSetsNegativeFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xDE, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFF",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "DecAbsXSetsZeroFlagWhenDecrementingToZero",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xDE, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "DecZpXDecrementsMemory",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xD6, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x10"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x0F",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "DecZpXBelow00RollsOverAndSetsNegativeFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xD6, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFF",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "DecZpXSetsZeroFlagWhenDecrementingToZero",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xD6, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "DexDecrementsX",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x10",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xCA"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpX": "0x0F",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "DexBelow00RollsOverAndSetsNegativeFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xCA"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpX": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "DexSetsZeroFlagWhenDecrementingToZero",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x01",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0xCA"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpX": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "DeyDecrementsY",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x10",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x88"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpY": "0x0F",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "DeyBelow00RollsOverAndSetsNegativeFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x88"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpY": "0xFF",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "DeySetsZeroFlagWhenDecrementingToZero",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x01",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x88"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpY": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    }
+  ]
+}

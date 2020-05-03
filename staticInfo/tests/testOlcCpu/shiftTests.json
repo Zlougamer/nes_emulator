@@ -1365,6 +1365,978 @@
           "Addr": "0x0010) + uint16(regSet.X"
         }
       ]
+    },
+    {
+      "TestName": "AslAccumulatorSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x0A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AslAccumulatorSetsNFlag",
+      "InitAccum": "0x40",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x0A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x80",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AslAccumulatorShiftsOutZero",
+      "InitAccum": "0x7F",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x0A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0xFE",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AslAccumulatorShiftsOutOne",
+      "InitAccum": "0xFF",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x0A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0xFE",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AslAccumulator80SetsZFlag",
+      "InitAccum": "0x80",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.Z)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x0A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "AslAbsoluteSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x0E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "AslAbsoluteSetsNFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x0E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x80",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "AslAbsoluteShiftsOutZero",
+      "InitAccum": "0xAA",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x0E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x7F"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0xAA",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "AslAbsoluteShiftsOutOne",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x0E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "AslZpSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x06, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "AslZpSetsNFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x06, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x80",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "AslZpShiftsOutZero",
+      "InitAccum": "0xAA",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x06, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x7F"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0xAA",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "AslZpShiftsOutOne",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x06, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "AslAbsXIndexedSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x1E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "AslAbsXIndexedSetsNFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x1E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x80",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "AslAbsXIndexedShiftsOutZero",
+      "InitAccum": "0xAA",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x1E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x7F"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0xAA",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "AslAbsXIndexedShiftsOutOne",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x1E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "AslZpXIndexedSetsZFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x16, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "AslZpXIndexedSetsNFlag",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x16, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x40"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x80",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "AslZpXIndexedShiftsOutZero",
+      "InitAccum": "0xAA",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x16, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x7F"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0xAA",
+      "ExpC": "false",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "AslZpXIndexedShiftsOutOne",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x16, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0xFF"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "true",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0xFE",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+
+
+
+
+
+
+
+
+    {
+      "TestName": "LsrAccumulatorRotatesInZeroNotCarry",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x4A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "LsrAccumulatorSetsCarryAndZeroFlagsAfterRotation",
+      "InitAccum": "0x01",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x4A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "LsrAccumulatorRotatesBitsRight",
+      "InitAccum": "0x04",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x4A"
+        }
+      ],
+      "ExpPc": "0x0001",
+      "ExpAccum": "0x02",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false"
+    },
+    {
+      "TestName": "LsrAbsoluteRotatesInZeroNotCarry",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x4E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "LsrAbsoluteSetsCarryAndZeroFlagsAfterRotation",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x4E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "LsrAbsoluteRotatesBitsRight",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x4E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD",
+          "Data": "0x04"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x02",
+          "Addr": "0xABCD"
+        }
+      ]
+    },
+    {
+      "TestName": "LsrZpRotatesInZeroNotCarry",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x46, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "LsrZpSetsCarryAndZeroFlagsAfterRotation",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x46, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "LsrZpRotatesBitsRight",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x00",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x46, 0x10"
+        },
+        {
+          "Addr": "0x0010",
+          "Data": "0x04"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x02",
+          "Addr": "0x0010"
+        }
+      ]
+    },
+    {
+      "TestName": "LsrAbsXIndexedRotatesInZeroNotCarry",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x5E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "LsrAbsXIndexedSetsCAndZFlagsAfterRotation",
+      "InitAccum": "0x00",
+      "InitStatus": "regSet.Status & ^uint8(olcCpu.C)",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x5E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "LsrAbsXIndexedRotatesBitsRight",
+      "InitAccum": "0x00",
+      "InitStatus": "olcCpu.C",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x5E, 0xCD, 0xAB"
+        },
+        {
+          "Addr": "0xABCD) + uint16(regSet.X",
+          "Data": "0x04"
+        }
+      ],
+      "ExpPc": "0x0003",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x02",
+          "Addr": "0xABCD) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "LsrZpXIndexedRotatesInZeroNotCarry",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x56, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x00"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "LsrZpXIndexedSetsCarryAndZeroFlagsAfterRotation",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x56, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x01"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "true",
+      "ExpN": "false",
+      "ExpZ": "true",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x00",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
+    },
+    {
+      "TestName": "LsrZpXIndexedRotatesBitsRight",
+      "InitAccum": "0x00",
+      "InitStatus": "0x00",
+      "InitX": "0x03",
+      "InitY": "0x00",
+      "MemoryWrite": [
+        {
+          "Addr": "0x0000",
+          "Data": "0x56, 0x10"
+        },
+        {
+          "Addr": "0x0010) + uint16(regSet.X",
+          "Data": "0x04"
+        }
+      ],
+      "ExpPc": "0x0002",
+      "ExpAccum": "0x00",
+      "ExpC": "false",
+      "ExpN": "false",
+      "ExpZ": "false",
+      "ExpV": "false",
+      "ExpMemory": [
+        {
+          "Data": "0x02",
+          "Addr": "0x0010) + uint16(regSet.X"
+        }
+      ]
     }
   ]
 }
