@@ -10,7 +10,7 @@ import (
 
 func TestAdcBcdOffAbsoluteCarryClearInAccumulatorZeroes(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -42,7 +42,7 @@ func TestAdcBcdOffAbsoluteCarryClearInAccumulatorZeroes(t *testing.T) {
 
 func TestAdcBcdOffAbsoluteCarrySetInAccumulatorZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -74,7 +74,7 @@ func TestAdcBcdOffAbsoluteCarrySetInAccumulatorZero(t *testing.T) {
 
 func TestAdcBcdOffAbsoluteCarryClearInNoCarryClearOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -106,7 +106,7 @@ func TestAdcBcdOffAbsoluteCarryClearInNoCarryClearOut(t *testing.T) {
 
 func TestAdcBcdOffAbsoluteCarryClearInCarrySetOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x02
     
@@ -138,7 +138,7 @@ func TestAdcBcdOffAbsoluteCarryClearInCarrySetOut(t *testing.T) {
 
 func TestAdcBcdOffAbsoluteOverflowSetNoCarry01Plus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -170,7 +170,7 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry01Plus01(t *testing.T) {
 
 func TestAdcBcdOffAbsoluteOverflowSetNoCarry01PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -202,7 +202,7 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 func TestAdcBcdOffAbsoluteOverflowSetNoCarry7fPlus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x7f
     
@@ -234,7 +234,7 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 func TestAdcBcdOffAbsoluteOverflowSetNoCarry80PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x80
     
@@ -266,7 +266,7 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 func TestAdcBcdOffAbsoluteOverflowSetOn40Plus40(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x40
     
@@ -298,7 +298,7 @@ func TestAdcBcdOffAbsoluteOverflowSetOn40Plus40(t *testing.T) {
 
 func TestAdcBcdOffZpCarryClearInAccumulatorZeroes(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -330,7 +330,7 @@ func TestAdcBcdOffZpCarryClearInAccumulatorZeroes(t *testing.T) {
 
 func TestAdcBcdOffZpCarrySetInAccumulatorZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -362,7 +362,7 @@ func TestAdcBcdOffZpCarrySetInAccumulatorZero(t *testing.T) {
 
 func TestAdcBcdOffZpCarryClearInNoCarryClearOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -394,7 +394,7 @@ func TestAdcBcdOffZpCarryClearInNoCarryClearOut(t *testing.T) {
 
 func TestAdcBcdOffZpCarryClearInCarrySetOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x02
     
@@ -426,7 +426,7 @@ func TestAdcBcdOffZpCarryClearInCarrySetOut(t *testing.T) {
 
 func TestAdcBcdOffZpOverflowSetNoCarry01Plus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -458,7 +458,7 @@ func TestAdcBcdOffZpOverflowSetNoCarry01Plus01(t *testing.T) {
 
 func TestAdcBcdOffZpOverflowSetNoCarry01PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -490,7 +490,7 @@ func TestAdcBcdOffZpOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 func TestAdcBcdOffZpOverflowSetNoCarry7fPlus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x7f
     
@@ -522,7 +522,7 @@ func TestAdcBcdOffZpOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 func TestAdcBcdOffZpOverflowSetNoCarry80PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x80
     
@@ -554,7 +554,7 @@ func TestAdcBcdOffZpOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 func TestAdcBcdOffZpOverflowSetOn40Plus40(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x40
     
@@ -586,7 +586,7 @@ func TestAdcBcdOffZpOverflowSetOn40Plus40(t *testing.T) {
 
 func TestAdcBcdOffImmediateCarryClearInAccumulatorZeroes(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -617,7 +617,7 @@ func TestAdcBcdOffImmediateCarryClearInAccumulatorZeroes(t *testing.T) {
 
 func TestAdcBcdOffImmediateCarrySetInAccumulatorZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -648,7 +648,7 @@ func TestAdcBcdOffImmediateCarrySetInAccumulatorZero(t *testing.T) {
 
 func TestAdcBcdOffImmediateCarryClearInNoCarryClearOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -679,7 +679,7 @@ func TestAdcBcdOffImmediateCarryClearInNoCarryClearOut(t *testing.T) {
 
 func TestAdcBcdOffImmediateCarryClearInCarrySetOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x02
     
@@ -710,7 +710,7 @@ func TestAdcBcdOffImmediateCarryClearInCarrySetOut(t *testing.T) {
 
 func TestAdcBcdOffImmediateOverflowSetNoCarry01Plus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -741,7 +741,7 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry01Plus01(t *testing.T) {
 
 func TestAdcBcdOffImmediateOverflowSetNoCarry01PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -772,7 +772,7 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 func TestAdcBcdOffImmediateOverflowSetNoCarry7fPlus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x7f
     
@@ -803,7 +803,7 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 func TestAdcBcdOffImmediateOverflowSetNoCarry80PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x80
     
@@ -834,7 +834,7 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 func TestAdcBcdOffImmediateOverflowSetOn40Plus40(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x40
     
@@ -865,7 +865,7 @@ func TestAdcBcdOffImmediateOverflowSetOn40Plus40(t *testing.T) {
 
 func TestAdcBcdOffAbsXCarryClearInAccumulatorZeroes(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -897,7 +897,7 @@ func TestAdcBcdOffAbsXCarryClearInAccumulatorZeroes(t *testing.T) {
 
 func TestAdcBcdOffAbsXCarrySetInAccumulatorZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -929,7 +929,7 @@ func TestAdcBcdOffAbsXCarrySetInAccumulatorZero(t *testing.T) {
 
 func TestAdcBcdOffAbsXCarryClearInNoCarryClearOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -961,7 +961,7 @@ func TestAdcBcdOffAbsXCarryClearInNoCarryClearOut(t *testing.T) {
 
 func TestAdcBcdOffAbsXCarryClearInCarrySetOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x02
     
@@ -993,7 +993,7 @@ func TestAdcBcdOffAbsXCarryClearInCarrySetOut(t *testing.T) {
 
 func TestAdcBcdOffAbsXOverflowSetNoCarry01Plus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1025,7 +1025,7 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry01Plus01(t *testing.T) {
 
 func TestAdcBcdOffAbsXOverflowSetNoCarry01PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1057,7 +1057,7 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 func TestAdcBcdOffAbsXOverflowSetNoCarry7fPlus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x7f
     
@@ -1089,7 +1089,7 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 func TestAdcBcdOffAbsXOverflowSetNoCarry80PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x80
     
@@ -1121,7 +1121,7 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 func TestAdcBcdOffAbsXOverflowSetOn40Plus40(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x40
     
@@ -1153,7 +1153,7 @@ func TestAdcBcdOffAbsXOverflowSetOn40Plus40(t *testing.T) {
 
 func TestAdcBcdOffAbsYCarryClearInAccumulatorZeroes(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1185,7 +1185,7 @@ func TestAdcBcdOffAbsYCarryClearInAccumulatorZeroes(t *testing.T) {
 
 func TestAdcBcdOffAbsYCarrySetInAccumulatorZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1217,7 +1217,7 @@ func TestAdcBcdOffAbsYCarrySetInAccumulatorZero(t *testing.T) {
 
 func TestAdcBcdOffAbsYCarryClearInNoCarryClearOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1249,7 +1249,7 @@ func TestAdcBcdOffAbsYCarryClearInNoCarryClearOut(t *testing.T) {
 
 func TestAdcBcdOffAbsYCarryClearInCarrySetOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x02
     
@@ -1281,7 +1281,7 @@ func TestAdcBcdOffAbsYCarryClearInCarrySetOut(t *testing.T) {
 
 func TestAdcBcdOffAbsYOverflowSetNoCarry01Plus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1313,7 +1313,7 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry01Plus01(t *testing.T) {
 
 func TestAdcBcdOffAbsYOverflowSetNoCarry01PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1345,7 +1345,7 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 func TestAdcBcdOffAbsYOverflowSetNoCarry7fPlus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x7f
     
@@ -1377,7 +1377,7 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 func TestAdcBcdOffAbsYOverflowSetNoCarry80PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x80
     
@@ -1409,7 +1409,7 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 func TestAdcBcdOffAbsYOverflowSetOn40Plus40(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x40
     
@@ -1441,7 +1441,7 @@ func TestAdcBcdOffAbsYOverflowSetOn40Plus40(t *testing.T) {
 
 func TestAdcBcdOffZpXCarryClearInAccumulatorZeroes(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1473,7 +1473,7 @@ func TestAdcBcdOffZpXCarryClearInAccumulatorZeroes(t *testing.T) {
 
 func TestAdcBcdOffZpXCarrySetInAccumulatorZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1505,7 +1505,7 @@ func TestAdcBcdOffZpXCarrySetInAccumulatorZero(t *testing.T) {
 
 func TestAdcBcdOffZpXCarryClearInNoCarryClearOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1537,7 +1537,7 @@ func TestAdcBcdOffZpXCarryClearInNoCarryClearOut(t *testing.T) {
 
 func TestAdcBcdOffZpXCarryClearInCarrySetOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x02
     
@@ -1569,7 +1569,7 @@ func TestAdcBcdOffZpXCarryClearInCarrySetOut(t *testing.T) {
 
 func TestAdcBcdOffZpXOverflowSetNoCarry01Plus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1601,7 +1601,7 @@ func TestAdcBcdOffZpXOverflowSetNoCarry01Plus01(t *testing.T) {
 
 func TestAdcBcdOffZpXOverflowSetNoCarry01PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1633,7 +1633,7 @@ func TestAdcBcdOffZpXOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 func TestAdcBcdOffZpXOverflowSetNoCarry7fPlus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x7f
     
@@ -1665,7 +1665,7 @@ func TestAdcBcdOffZpXOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 func TestAdcBcdOffZpXOverflowSetNoCarry80PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x80
     
@@ -1697,7 +1697,7 @@ func TestAdcBcdOffZpXOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 func TestAdcBcdOffZpXOverflowSetOn40Plus40(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x40
     
@@ -1729,7 +1729,7 @@ func TestAdcBcdOffZpXOverflowSetOn40Plus40(t *testing.T) {
 
 func TestAdcBcdOffZpYCarryClearInAccumulatorZeroes(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1761,7 +1761,7 @@ func TestAdcBcdOffZpYCarryClearInAccumulatorZeroes(t *testing.T) {
 
 func TestAdcBcdOffZpYCarrySetInAccumulatorZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1793,7 +1793,7 @@ func TestAdcBcdOffZpYCarrySetInAccumulatorZero(t *testing.T) {
 
 func TestAdcBcdOffZpYCarryClearInNoCarryClearOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1826,7 +1826,7 @@ func TestAdcBcdOffZpYCarryClearInNoCarryClearOut(t *testing.T) {
 
 func TestAdcBcdOffZpYCarryClearInCarrySetOut(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x02
     
@@ -1859,7 +1859,7 @@ func TestAdcBcdOffZpYCarryClearInCarrySetOut(t *testing.T) {
 
 func TestAdcBcdOffZpYOverflowSetNoCarry01Plus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1892,7 +1892,7 @@ func TestAdcBcdOffZpYOverflowSetNoCarry01Plus01(t *testing.T) {
 
 func TestAdcBcdOffZpYOverflowSetNoCarry01PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1925,7 +1925,7 @@ func TestAdcBcdOffZpYOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 func TestAdcBcdOffZpYOverflowSetNoCarry7fPlus01(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x7f
     
@@ -1958,7 +1958,7 @@ func TestAdcBcdOffZpYOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 func TestAdcBcdOffZpYOverflowSetNoCarry80PlusFF(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x80
     
@@ -1991,7 +1991,7 @@ func TestAdcBcdOffZpYOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 func TestAdcBcdOffZpYOverflowSetOn40Plus40(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x40
     
@@ -2024,7 +2024,7 @@ func TestAdcBcdOffZpYOverflowSetOn40Plus40(t *testing.T) {
 
 func TestSbcAbsAllZerosAndNoBorrowIsZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2056,7 +2056,7 @@ func TestSbcAbsAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 func TestSbcAbsDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2088,7 +2088,7 @@ func TestSbcAbsDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcAbsDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2120,7 +2120,7 @@ func TestSbcAbsDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcAbsDowntoFourWithBorrowClearsZN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x07
     
@@ -2152,7 +2152,7 @@ func TestSbcAbsDowntoFourWithBorrowClearsZN(t *testing.T) {
 
 func TestSbcZpAllZerosAndNoBorrowIsZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2184,7 +2184,7 @@ func TestSbcZpAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 func TestSbcZpDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2216,7 +2216,7 @@ func TestSbcZpDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcZpDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2248,7 +2248,7 @@ func TestSbcZpDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcZpDowntoFourWithBorrowClearsZN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x07
     
@@ -2280,7 +2280,7 @@ func TestSbcZpDowntoFourWithBorrowClearsZN(t *testing.T) {
 
 func TestSbcImmAllZerosAndNoBorrowIsZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2311,7 +2311,7 @@ func TestSbcImmAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 func TestSbcImmDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2342,7 +2342,7 @@ func TestSbcImmDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcImmDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2373,7 +2373,7 @@ func TestSbcImmDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcBcdOnImmediate0aMinus00CarrySet(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x0a
     
@@ -2404,7 +2404,7 @@ func TestSbcBcdOnImmediate0aMinus00CarrySet(t *testing.T) {
 
 func TestSbcBcdOnImmediate9aMinus00CarrySet(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x9a
     
@@ -2435,7 +2435,7 @@ func TestSbcBcdOnImmediate9aMinus00CarrySet(t *testing.T) {
 
 func TestSbcBcdOnImmediate00Minus01CarrySet(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2466,7 +2466,7 @@ func TestSbcBcdOnImmediate00Minus01CarrySet(t *testing.T) {
 
 func TestSbcBcdOnImmediate_20Minus_0aCarryUnset(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x20
     
@@ -2497,7 +2497,7 @@ func TestSbcBcdOnImmediate_20Minus_0aCarryUnset(t *testing.T) {
 
 func TestSbcAbsXAllZerosAndNoBorrowIsZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2529,7 +2529,7 @@ func TestSbcAbsXAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 func TestSbcAbsXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2561,7 +2561,7 @@ func TestSbcAbsXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcAbsXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2593,7 +2593,7 @@ func TestSbcAbsXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcAbsXDowntoFourWithBorrowClearsZN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x07
     
@@ -2625,7 +2625,7 @@ func TestSbcAbsXDowntoFourWithBorrowClearsZN(t *testing.T) {
 
 func TestSbcAbsYAllZerosAndNoBorrowIsZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2657,7 +2657,7 @@ func TestSbcAbsYAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 func TestSbcAbsYDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2689,7 +2689,7 @@ func TestSbcAbsYDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcAbsYDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2721,7 +2721,7 @@ func TestSbcAbsYDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcAbsYDowntoFourWithBorrowClearsZN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x07
     
@@ -2753,7 +2753,7 @@ func TestSbcAbsYDowntoFourWithBorrowClearsZN(t *testing.T) {
 
 func TestSbcIndXAllZerosAndNoBorrowIsZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2786,7 +2786,7 @@ func TestSbcIndXAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 func TestSbcIndXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2819,7 +2819,7 @@ func TestSbcIndXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcIndXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2852,7 +2852,7 @@ func TestSbcIndXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcIndXDowntoFourWithBorrowClearsZN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x07
     
@@ -2885,7 +2885,7 @@ func TestSbcIndXDowntoFourWithBorrowClearsZN(t *testing.T) {
 
 func TestSbcIndYAllZerosAndNoBorrowIsZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2918,7 +2918,7 @@ func TestSbcIndYAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 func TestSbcIndYDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2951,7 +2951,7 @@ func TestSbcIndYDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcIndYDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2984,7 +2984,7 @@ func TestSbcIndYDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcIndYDowntoFourWithBorrowClearsZN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x07
     
@@ -3017,7 +3017,7 @@ func TestSbcIndYDowntoFourWithBorrowClearsZN(t *testing.T) {
 
 func TestSbcZpXAllZerosAndNoBorrowIsZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -3049,7 +3049,7 @@ func TestSbcZpXAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 func TestSbcZpXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -3081,7 +3081,7 @@ func TestSbcZpXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcZpXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -3113,7 +3113,7 @@ func TestSbcZpXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 func TestSbcZpXDowntoFourWithBorrowClearsZN(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x07
     

@@ -10,7 +10,7 @@ import (
 
 func TestRolAccumulatorZeroAndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -41,7 +41,7 @@ func TestRolAccumulatorZeroAndCarryZeroSetsZFlag(t *testing.T) {
 
 func TestRolAccumulator80AndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x80
     
@@ -72,7 +72,7 @@ func TestRolAccumulator80AndCarryZeroSetsZFlag(t *testing.T) {
 
 func TestRolAccumulatorZeroAndCarryOneClearsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -103,7 +103,7 @@ func TestRolAccumulatorZeroAndCarryOneClearsZFlag(t *testing.T) {
 
 func TestRolAccumulatorSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x40
     
@@ -134,7 +134,7 @@ func TestRolAccumulatorSetsNFlag(t *testing.T) {
 
 func TestRolAccumulatorShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x7F
     
@@ -165,7 +165,7 @@ func TestRolAccumulatorShiftsOutZero(t *testing.T) {
 
 func TestRolAccumulatorShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -196,7 +196,7 @@ func TestRolAccumulatorShiftsOutOne(t *testing.T) {
 
 func TestRolAbsoluteZeroAndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -222,15 +222,14 @@ func TestRolAbsoluteZeroAndCarryZeroSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestRolAbsolute80AndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -256,15 +255,14 @@ func TestRolAbsolute80AndCarryZeroSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestRolAbsoluteZeroAndCarryOneClearsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -290,15 +288,14 @@ func TestRolAbsoluteZeroAndCarryOneClearsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x01), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x01), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestRolAbsoluteSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -324,15 +321,14 @@ func TestRolAbsoluteSetsNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x81), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x81), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestRolAbsoluteShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -358,15 +354,14 @@ func TestRolAbsoluteShiftsOutZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestRolAbsoluteShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -392,15 +387,14 @@ func TestRolAbsoluteShiftsOutOne(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestRolZpZeroAndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -426,15 +420,14 @@ func TestRolZpZeroAndCarryZeroSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestRolZp80AndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -460,15 +453,14 @@ func TestRolZp80AndCarryZeroSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestRolZpZeroAndCarryOneClearsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -494,15 +486,14 @@ func TestRolZpZeroAndCarryOneClearsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x01), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x01), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestRolZpSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -528,15 +519,14 @@ func TestRolZpSetsNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x81), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x81), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestRolZpShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -562,15 +552,14 @@ func TestRolZpShiftsOutZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestRolZpShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -596,15 +585,14 @@ func TestRolZpShiftsOutOne(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestRolAbsXIndexedZeroAndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -630,15 +618,14 @@ func TestRolAbsXIndexedZeroAndCarryZeroSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestRolAbsXIndexed80AndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -664,15 +651,14 @@ func TestRolAbsXIndexed80AndCarryZeroSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestRolAbsXIndexedZeroAndCarryOneClearsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -698,15 +684,14 @@ func TestRolAbsXIndexedZeroAndCarryOneClearsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x01), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x01), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestRolAbsXIndexedSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -732,15 +717,14 @@ func TestRolAbsXIndexedSetsNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x81), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x81), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestRolAbsXIndexedShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -766,15 +750,14 @@ func TestRolAbsXIndexedShiftsOutZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestRolAbsXIndexedShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -800,15 +783,14 @@ func TestRolAbsXIndexedShiftsOutOne(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestRolZpXIndexedZeroAndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -834,15 +816,14 @@ func TestRolZpXIndexedZeroAndCarryZeroSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestRolZpXIndexed80AndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -868,15 +849,14 @@ func TestRolZpXIndexed80AndCarryZeroSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestRolZpXIndexedZeroAndCarryOneClearsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -902,15 +882,14 @@ func TestRolZpXIndexedZeroAndCarryOneClearsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x01), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x01), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestRolZpXIndexedSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -936,15 +915,14 @@ func TestRolZpXIndexedSetsNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x81), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x81), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestRolZpXIndexedShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -970,15 +948,14 @@ func TestRolZpXIndexedShiftsOutZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestRolZpXIndexedShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1004,15 +981,14 @@ func TestRolZpXIndexedShiftsOutOne(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestRorAccumulatorZeroAndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1043,7 +1019,7 @@ func TestRorAccumulatorZeroAndCarryZeroSetsZFlag(t *testing.T) {
 
 func TestRorAccumulatorZeroAndCarryOneRotatesInSetsNFlags(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1074,7 +1050,7 @@ func TestRorAccumulatorZeroAndCarryOneRotatesInSetsNFlags(t *testing.T) {
 
 func TestRorAccumulatorShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x02
     
@@ -1105,7 +1081,7 @@ func TestRorAccumulatorShiftsOutZero(t *testing.T) {
 
 func TestRorAccumulatorShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x03
     
@@ -1136,7 +1112,7 @@ func TestRorAccumulatorShiftsOutOne(t *testing.T) {
 
 func TestRorAbsoluteZeroAndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1162,15 +1138,14 @@ func TestRorAbsoluteZeroAndCarryZeroSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestRorAbsoluteZeroAndCarryOneRotatesInSetsNFlags(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1196,15 +1171,14 @@ func TestRorAbsoluteZeroAndCarryOneRotatesInSetsNFlags(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x80), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x80), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestRorAbsoluteShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1230,15 +1204,14 @@ func TestRorAbsoluteShiftsOutZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x81), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x81), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestRorAbsoluteShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1264,15 +1237,14 @@ func TestRorAbsoluteShiftsOutOne(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x81), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x81), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestRorZpZeroAndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1298,15 +1270,14 @@ func TestRorZpZeroAndCarryZeroSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestRorZpZeroAndCarryOneRotatesInSetsNFlags(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1332,15 +1303,14 @@ func TestRorZpZeroAndCarryOneRotatesInSetsNFlags(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x80), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x80), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestRorZpZeroAbsoluteShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1366,15 +1336,14 @@ func TestRorZpZeroAbsoluteShiftsOutZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x81), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x81), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestRorZpShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1400,15 +1369,14 @@ func TestRorZpShiftsOutOne(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x81), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x81), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestRorAbsXIndexedZeroAndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1434,15 +1402,14 @@ func TestRorAbsXIndexedZeroAndCarryZeroSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestRorAbsXIndexedZAndC1RotatesInSetsNFlags(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1468,15 +1435,14 @@ func TestRorAbsXIndexedZAndC1RotatesInSetsNFlags(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x80), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x80), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestRorAbsXIndexedShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1502,15 +1468,14 @@ func TestRorAbsXIndexedShiftsOutZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x81), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x81), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestRorAbsXIndexedShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1536,15 +1501,14 @@ func TestRorAbsXIndexedShiftsOutOne(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x81), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x81), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestRorZpXIndexedZeroAndCarryZeroSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1570,15 +1534,14 @@ func TestRorZpXIndexedZeroAndCarryZeroSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestRorZpXIndexedZeroAndCarryOneRotatesInSetsNFlags(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1604,15 +1567,14 @@ func TestRorZpXIndexedZeroAndCarryOneRotatesInSetsNFlags(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x80), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x80), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestRorZpXIndexedZeroAbsoluteShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1638,15 +1600,14 @@ func TestRorZpXIndexedZeroAbsoluteShiftsOutZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x81), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x81), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestRorZpXIndexedShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1672,15 +1633,14 @@ func TestRorZpXIndexedShiftsOutOne(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x81), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x81), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestAslAccumulatorSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1711,7 +1671,7 @@ func TestAslAccumulatorSetsZFlag(t *testing.T) {
 
 func TestAslAccumulatorSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x40
     
@@ -1742,7 +1702,7 @@ func TestAslAccumulatorSetsNFlag(t *testing.T) {
 
 func TestAslAccumulatorShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x7F
     
@@ -1773,7 +1733,7 @@ func TestAslAccumulatorShiftsOutZero(t *testing.T) {
 
 func TestAslAccumulatorShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -1804,7 +1764,7 @@ func TestAslAccumulatorShiftsOutOne(t *testing.T) {
 
 func TestAslAccumulator80SetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x80
     
@@ -1835,7 +1795,7 @@ func TestAslAccumulator80SetsZFlag(t *testing.T) {
 
 func TestAslAbsoluteSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1861,15 +1821,14 @@ func TestAslAbsoluteSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestAslAbsoluteSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1895,15 +1854,14 @@ func TestAslAbsoluteSetsNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x80), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x80), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestAslAbsoluteShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xAA
     
@@ -1929,15 +1887,14 @@ func TestAslAbsoluteShiftsOutZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestAslAbsoluteShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1963,15 +1920,14 @@ func TestAslAbsoluteShiftsOutOne(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestAslZpSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1997,15 +1953,14 @@ func TestAslZpSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestAslZpSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2031,15 +1986,14 @@ func TestAslZpSetsNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x80), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x80), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestAslZpShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xAA
     
@@ -2065,15 +2019,14 @@ func TestAslZpShiftsOutZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestAslZpShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2099,15 +2052,14 @@ func TestAslZpShiftsOutOne(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestAslAbsXIndexedSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2133,15 +2085,14 @@ func TestAslAbsXIndexedSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestAslAbsXIndexedSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2167,15 +2118,14 @@ func TestAslAbsXIndexedSetsNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x80), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x80), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestAslAbsXIndexedShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xAA
     
@@ -2201,15 +2151,14 @@ func TestAslAbsXIndexedShiftsOutZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestAslAbsXIndexedShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2235,15 +2184,14 @@ func TestAslAbsXIndexedShiftsOutOne(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestAslZpXIndexedSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2269,15 +2217,14 @@ func TestAslZpXIndexedSetsZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestAslZpXIndexedSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2303,15 +2250,14 @@ func TestAslZpXIndexedSetsNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x80), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x80), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestAslZpXIndexedShiftsOutZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xAA
     
@@ -2337,15 +2283,14 @@ func TestAslZpXIndexedShiftsOutZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestAslZpXIndexedShiftsOutOne(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2371,15 +2316,14 @@ func TestAslZpXIndexedShiftsOutOne(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFE), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestLsrAccumulatorRotatesInZeroNotCarry(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2410,7 +2354,7 @@ func TestLsrAccumulatorRotatesInZeroNotCarry(t *testing.T) {
 
 func TestLsrAccumulatorSetsCarryAndZeroFlagsAfterRotation(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -2441,7 +2385,7 @@ func TestLsrAccumulatorSetsCarryAndZeroFlagsAfterRotation(t *testing.T) {
 
 func TestLsrAccumulatorRotatesBitsRight(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x04
     
@@ -2472,7 +2416,7 @@ func TestLsrAccumulatorRotatesBitsRight(t *testing.T) {
 
 func TestLsrAbsoluteRotatesInZeroNotCarry(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2498,15 +2442,14 @@ func TestLsrAbsoluteRotatesInZeroNotCarry(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestLsrAbsoluteSetsCarryAndZeroFlagsAfterRotation(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2532,15 +2475,14 @@ func TestLsrAbsoluteSetsCarryAndZeroFlagsAfterRotation(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestLsrAbsoluteRotatesBitsRight(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2566,15 +2508,14 @@ func TestLsrAbsoluteRotatesBitsRight(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x02), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x02), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestLsrZpRotatesInZeroNotCarry(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2600,15 +2541,14 @@ func TestLsrZpRotatesInZeroNotCarry(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestLsrZpSetsCarryAndZeroFlagsAfterRotation(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2634,15 +2574,14 @@ func TestLsrZpSetsCarryAndZeroFlagsAfterRotation(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestLsrZpRotatesBitsRight(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2668,15 +2607,14 @@ func TestLsrZpRotatesBitsRight(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x02), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x02), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestLsrAbsXIndexedRotatesInZeroNotCarry(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2702,15 +2640,14 @@ func TestLsrAbsXIndexedRotatesInZeroNotCarry(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestLsrAbsXIndexedSetsCAndZFlagsAfterRotation(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2736,15 +2673,14 @@ func TestLsrAbsXIndexedSetsCAndZFlagsAfterRotation(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestLsrAbsXIndexedRotatesBitsRight(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2770,15 +2706,14 @@ func TestLsrAbsXIndexedRotatesBitsRight(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x02), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x02), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestLsrZpXIndexedRotatesInZeroNotCarry(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2804,15 +2739,14 @@ func TestLsrZpXIndexedRotatesInZeroNotCarry(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestLsrZpXIndexedSetsCarryAndZeroFlagsAfterRotation(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2838,15 +2772,14 @@ func TestLsrZpXIndexedSetsCarryAndZeroFlagsAfterRotation(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestLsrZpXIndexedRotatesBitsRight(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2872,8 +2805,7 @@ func TestLsrZpXIndexedRotatesBitsRight(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x02), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x02), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 

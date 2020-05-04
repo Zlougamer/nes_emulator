@@ -10,7 +10,7 @@ import (
 
 func TestIncAbsIncrementsMemory(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -36,15 +36,14 @@ func TestIncAbsIncrementsMemory(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x0A), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x0A), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestIncAbsIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -70,15 +69,14 @@ func TestIncAbsIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestIncAbsSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -104,15 +102,14 @@ func TestIncAbsSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x80), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x80), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestIncZpIncrementsMemory(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -138,15 +135,14 @@ func TestIncZpIncrementsMemory(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x0A), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x0A), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestIncZpIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -172,15 +168,14 @@ func TestIncZpIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestIncZpSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -206,15 +201,14 @@ func TestIncZpSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x80), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x80), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestIncAbsXIncrementsMemory(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -240,15 +234,14 @@ func TestIncAbsXIncrementsMemory(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x0A), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x0A), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestIncAbsXIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -274,15 +267,14 @@ func TestIncAbsXIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestIncAbsXSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -308,15 +300,14 @@ func TestIncAbsXSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x80), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x80), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestIncZpXIncrementsMemory(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -342,15 +333,14 @@ func TestIncZpXIncrementsMemory(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x0A), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x0A), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestIncZpXIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -376,15 +366,14 @@ func TestIncZpXIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestIncZpXSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -410,15 +399,14 @@ func TestIncZpXSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x80), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x80), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestInXIncrementsX(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -450,7 +438,7 @@ func TestInXIncrementsX(t *testing.T) {
 
 func TestInxAboveFFRollsOverAndSetsZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -482,7 +470,7 @@ func TestInxAboveFFRollsOverAndSetsZeroFlag(t *testing.T) {
 
 func TestInxSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -514,7 +502,7 @@ func TestInxSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
 
 func TestInyIncrementsY(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -546,7 +534,7 @@ func TestInyIncrementsY(t *testing.T) {
 
 func TestInyAboveFFRollsOverAndSetsZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -578,7 +566,7 @@ func TestInyAboveFFRollsOverAndSetsZeroFlag(t *testing.T) {
 
 func TestInySetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -610,7 +598,7 @@ func TestInySetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
 
 func TestDecAbsDecrementsMemory(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -636,15 +624,14 @@ func TestDecAbsDecrementsMemory(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x0F), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x0F), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestDecAbsBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -670,15 +657,14 @@ func TestDecAbsBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestDecAbsSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -704,15 +690,14 @@ func TestDecAbsSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestDecZpDecrementsMemory(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -738,15 +723,14 @@ func TestDecZpDecrementsMemory(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x0F), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x0F), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestDecZpBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -772,15 +756,14 @@ func TestDecZpBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestDecZpSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -806,15 +789,14 @@ func TestDecZpSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestDecAbsXDecrementsMemory(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -840,15 +822,14 @@ func TestDecAbsXDecrementsMemory(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x0F), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x0F), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestDecAbsXBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -874,15 +855,14 @@ func TestDecAbsXBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestDecAbsXSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -908,15 +888,14 @@ func TestDecAbsXSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestDecZpXDecrementsMemory(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -942,15 +921,14 @@ func TestDecZpXDecrementsMemory(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x0F), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x0F), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestDecZpXBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -976,15 +954,14 @@ func TestDecZpXBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestDecZpXSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1010,15 +987,14 @@ func TestDecZpXSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestDexDecrementsX(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1050,7 +1026,7 @@ func TestDexDecrementsX(t *testing.T) {
 
 func TestDexBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1082,7 +1058,7 @@ func TestDexBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
 
 func TestDexSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1114,7 +1090,7 @@ func TestDexSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
 
 func TestDeyDecrementsY(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1146,7 +1122,7 @@ func TestDeyDecrementsY(t *testing.T) {
 
 func TestDeyBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1178,7 +1154,7 @@ func TestDeyBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
 
 func TestDeySetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     

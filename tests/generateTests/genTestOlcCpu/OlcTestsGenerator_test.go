@@ -58,7 +58,7 @@ import (
 {{range .TestCaseArr}}
 func Test{{.TestName}}(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = {{.InitAccum}}
     {{if .InitStkp}}regSet.Stkp = {{.InitStkp}}
@@ -91,8 +91,7 @@ func Test{{.TestName}}(t *testing.T) {
     {{end}}
     {{if .ExpU}}assertEqual(t, {{.ExpU}}, regSet.Status & olcCpu.U != 0)
     {{end}}
-    {{range .ExpMemory}}
-	assertEqual(t, uint8({{.Data}}), mpu.Read(uint16({{.Addr}})))
+    {{range .ExpMemory}}assertEqual(t, uint8({{.Data}}), mpu.Read(uint16({{.Addr}})))
     {{end}}
 }
 

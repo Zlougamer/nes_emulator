@@ -10,7 +10,7 @@ import (
 
 func TestAndAbsoluteAllZerosSettingZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -42,7 +42,7 @@ func TestAndAbsoluteAllZerosSettingZeroFlag(t *testing.T) {
 
 func TestAndAbsoluteZerosAndOnesSettingNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -74,7 +74,7 @@ func TestAndAbsoluteZerosAndOnesSettingNegativeFlag(t *testing.T) {
 
 func TestAndZpAllZerosSettingZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -106,7 +106,7 @@ func TestAndZpAllZerosSettingZeroFlag(t *testing.T) {
 
 func TestAndZpZerosAndOnesSettingNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -138,7 +138,7 @@ func TestAndZpZerosAndOnesSettingNegativeFlag(t *testing.T) {
 
 func TestAndImmediateAllZerosSettingZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -169,7 +169,7 @@ func TestAndImmediateAllZerosSettingZeroFlag(t *testing.T) {
 
 func TestAndImmediateZerosAndOnesSettingNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -200,7 +200,7 @@ func TestAndImmediateZerosAndOnesSettingNegativeFlag(t *testing.T) {
 
 func TestAndAbsXAllZerosSettingZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -232,7 +232,7 @@ func TestAndAbsXAllZerosSettingZeroFlag(t *testing.T) {
 
 func TestAndAbsXZerosAndOnesSettingNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -264,7 +264,7 @@ func TestAndAbsXZerosAndOnesSettingNegativeFlag(t *testing.T) {
 
 func TestAndAbsYAllZerosSettingZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -296,7 +296,7 @@ func TestAndAbsYAllZerosSettingZeroFlag(t *testing.T) {
 
 func TestAndAbsYZerosAndOnesSettingNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -328,7 +328,7 @@ func TestAndAbsYZerosAndOnesSettingNegativeFlag(t *testing.T) {
 
 func TestAndIndIndexedXAllZerosSettingZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -361,7 +361,7 @@ func TestAndIndIndexedXAllZerosSettingZeroFlag(t *testing.T) {
 
 func TestAndIndIndexedXZerosAndOnesSettingNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -394,7 +394,7 @@ func TestAndIndIndexedXZerosAndOnesSettingNegativeFlag(t *testing.T) {
 
 func TestAndIndexedIndYAllZerosSettingZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -427,7 +427,7 @@ func TestAndIndexedIndYAllZerosSettingZeroFlag(t *testing.T) {
 
 func TestAndIndexedIndYZerosAndOnesSettingNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -460,7 +460,7 @@ func TestAndIndexedIndYZerosAndOnesSettingNegativeFlag(t *testing.T) {
 
 func TestAndZpXAllZerosSettingZeroFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -492,7 +492,7 @@ func TestAndZpXAllZerosSettingZeroFlag(t *testing.T) {
 
 func TestAndZpXAllZerosAndOnesSettingNegativeFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -524,7 +524,7 @@ func TestAndZpXAllZerosAndOnesSettingNegativeFlag(t *testing.T) {
 
 func TestEorAbsoluteFlipsBitsOverSettingZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -550,15 +550,14 @@ func TestEorAbsoluteFlipsBitsOverSettingZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestEorAbsoluteFlipsBitsOverSettingNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -584,15 +583,14 @@ func TestEorAbsoluteFlipsBitsOverSettingNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestEorZpFlipsBitsOverSettingZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -618,15 +616,14 @@ func TestEorZpFlipsBitsOverSettingZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestEorZpFlipsBitsOverSettingNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -652,15 +649,14 @@ func TestEorZpFlipsBitsOverSettingNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestEorImmediateFlipsBitsOverSettingZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -691,7 +687,7 @@ func TestEorImmediateFlipsBitsOverSettingZFlag(t *testing.T) {
 
 func TestEorImmediateFlipsBitsOverSettingNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -722,7 +718,7 @@ func TestEorImmediateFlipsBitsOverSettingNFlag(t *testing.T) {
 
 func TestEorAbsXIndexedFlipsBitsOverSettingZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -748,15 +744,14 @@ func TestEorAbsXIndexedFlipsBitsOverSettingZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestEorAbsXIndexedFlipsBitsOverSettingNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -782,15 +777,14 @@ func TestEorAbsXIndexedFlipsBitsOverSettingNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.X)))
     
 }
 
 
 func TestEorAbsYIndexedFlipsBitsOverSettingZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -816,15 +810,14 @@ func TestEorAbsYIndexedFlipsBitsOverSettingZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.Y)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.Y)))
     
 }
 
 
 func TestEorAbsYIndexedFlipsBitsOverSettingNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -850,15 +843,14 @@ func TestEorAbsYIndexedFlipsBitsOverSettingNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.Y)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.Y)))
     
 }
 
 
 func TestEorIndIndexedXFlipsBitsOverSettingZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -885,15 +877,14 @@ func TestEorIndIndexedXFlipsBitsOverSettingZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestEorIndIndexedXFlipsBitsOverSettingNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -920,15 +911,14 @@ func TestEorIndIndexedXFlipsBitsOverSettingNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD)))
     
 }
 
 
 func TestEorIndexedIndYFlipsBitsOverSettingZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -955,15 +945,14 @@ func TestEorIndexedIndYFlipsBitsOverSettingZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.Y)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.Y)))
     
 }
 
 
 func TestEorIndexedIndYFlipsBitsOverSettingNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -990,15 +979,14 @@ func TestEorIndexedIndYFlipsBitsOverSettingNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.Y)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0xABCD) + uint16(regSet.Y)))
     
 }
 
 
 func TestEorZpXIndexedFlipsBitsOverSettingZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -1024,15 +1012,14 @@ func TestEorZpXIndexedFlipsBitsOverSettingZFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestEorZpXIndexedFlipsBitsOverSettingNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1058,15 +1045,14 @@ func TestEorZpXIndexedFlipsBitsOverSettingNFlag(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0xFF), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
+    assertEqual(t, uint8(0xFF), mpu.Read(uint16(0x0010) + uint16(regSet.X)))
     
 }
 
 
 func TestOraAbsoluteZeroesOrZerosSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1098,7 +1084,7 @@ func TestOraAbsoluteZeroesOrZerosSetsZFlag(t *testing.T) {
 
 func TestOraAbsoluteTurnsBitsOnSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x03
     
@@ -1130,7 +1116,7 @@ func TestOraAbsoluteTurnsBitsOnSetsNFlag(t *testing.T) {
 
 func TestOraZpZeroesOrZerosSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1162,7 +1148,7 @@ func TestOraZpZeroesOrZerosSetsZFlag(t *testing.T) {
 
 func TestOraZpTurnsBitsOnSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x03
     
@@ -1194,7 +1180,7 @@ func TestOraZpTurnsBitsOnSetsNFlag(t *testing.T) {
 
 func TestOraImmediateZeroesOrZerosSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1225,7 +1211,7 @@ func TestOraImmediateZeroesOrZerosSetsZFlag(t *testing.T) {
 
 func TestOraImmediateTurnsBitsOnSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x03
     
@@ -1256,7 +1242,7 @@ func TestOraImmediateTurnsBitsOnSetsNFlag(t *testing.T) {
 
 func TestOraAbsXIndexedZeroesOrZerosSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1288,7 +1274,7 @@ func TestOraAbsXIndexedZeroesOrZerosSetsZFlag(t *testing.T) {
 
 func TestOraAbsXIndexedTurnsBitsOnSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x03
     
@@ -1320,7 +1306,7 @@ func TestOraAbsXIndexedTurnsBitsOnSetsNFlag(t *testing.T) {
 
 func TestOraAbsYIndexedZeroesOrZerosSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1352,7 +1338,7 @@ func TestOraAbsYIndexedZeroesOrZerosSetsZFlag(t *testing.T) {
 
 func TestOraAbsYIndexedTurnsBitsOnSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x03
     
@@ -1384,7 +1370,7 @@ func TestOraAbsYIndexedTurnsBitsOnSetsNFlag(t *testing.T) {
 
 func TestOraIndIndexedXZeroesOrZerosSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1417,7 +1403,7 @@ func TestOraIndIndexedXZeroesOrZerosSetsZFlag(t *testing.T) {
 
 func TestOraIndIndexedXTurnsBitsOnSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x03
     
@@ -1450,7 +1436,7 @@ func TestOraIndIndexedXTurnsBitsOnSetsNFlag(t *testing.T) {
 
 func TestOraIndexedIndYZeroesOrZerosSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1483,7 +1469,7 @@ func TestOraIndexedIndYZeroesOrZerosSetsZFlag(t *testing.T) {
 
 func TestOraIndexedIndYTurnsBitsOnSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x03
     
@@ -1516,7 +1502,7 @@ func TestOraIndexedIndYTurnsBitsOnSetsNFlag(t *testing.T) {
 
 func TestOraZpXIndexedZeroesOrZerosSetsZFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1548,7 +1534,7 @@ func TestOraZpXIndexedZeroesOrZerosSetsZFlag(t *testing.T) {
 
 func TestOraZpXIndexedTurnsBitsOnSetsNFlag(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x03
     
@@ -1580,7 +1566,7 @@ func TestOraZpXIndexedTurnsBitsOnSetsNFlag(t *testing.T) {
 
 func TestBitAbsCopiesBit7OfMemoryToNFlagWhen0(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -1612,7 +1598,7 @@ func TestBitAbsCopiesBit7OfMemoryToNFlagWhen0(t *testing.T) {
 
 func TestBitAbsCopiesBit7OfMemoryToNFlagWhen1(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -1644,7 +1630,7 @@ func TestBitAbsCopiesBit7OfMemoryToNFlagWhen1(t *testing.T) {
 
 func TestBitAbsCopiesBit_6OfMemoryToVFlagWhen_0(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -1676,7 +1662,7 @@ func TestBitAbsCopiesBit_6OfMemoryToVFlagWhen_0(t *testing.T) {
 
 func TestBitAbsCopiesBit_6OfMemoryToVFlagWhen_1(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -1708,7 +1694,7 @@ func TestBitAbsCopiesBit_6OfMemoryToVFlagWhen_1(t *testing.T) {
 
 func TestBitAbsStoresResultOfAndInZPreservesAWhen_1(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -1734,15 +1720,14 @@ func TestBitAbsStoresResultOfAndInZPreservesAWhen_1(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xFEED)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xFEED)))
     
 }
 
 
 func TestBitAbsStoresResultOfAndWhenNonzeroInZPreservesA(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1768,15 +1753,14 @@ func TestBitAbsStoresResultOfAndWhenNonzeroInZPreservesA(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x01), mpu.Read(uint16(0xFEED)))
+    assertEqual(t, uint8(0x01), mpu.Read(uint16(0xFEED)))
     
 }
 
 
 func TestBitAbsStoresResultOfAndWhenZeroInZPreservesA(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -1802,15 +1786,14 @@ func TestBitAbsStoresResultOfAndWhenZeroInZPreservesA(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0xFEED)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0xFEED)))
     
 }
 
 
 func TestBitZpCopiesBit_7OfMemoryToNFlagWhen_0(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -1842,7 +1825,7 @@ func TestBitZpCopiesBit_7OfMemoryToNFlagWhen_0(t *testing.T) {
 
 func TestBitZpCopiesBit_7OfMemoryToNFlagWhen_1(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -1874,7 +1857,7 @@ func TestBitZpCopiesBit_7OfMemoryToNFlagWhen_1(t *testing.T) {
 
 func TestBitZpCopiesBit_6OfMemoryToVFlagWhen_0(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -1906,7 +1889,7 @@ func TestBitZpCopiesBit_6OfMemoryToVFlagWhen_0(t *testing.T) {
 
 func TestBitZpCopiesBit_6OfMemoryToVFlagWhen_1(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -1938,7 +1921,7 @@ func TestBitZpCopiesBit_6OfMemoryToVFlagWhen_1(t *testing.T) {
 
 func TestBitZpStoresResultOfAndInZPreservesAWhen_1(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0xFF
     
@@ -1964,15 +1947,14 @@ func TestBitZpStoresResultOfAndInZPreservesAWhen_1(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestBitZpStoresResultOfAndWhenNonzeroInZPreservesA(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x01
     
@@ -1998,15 +1980,14 @@ func TestBitZpStoresResultOfAndWhenNonzeroInZPreservesA(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x01), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x01), mpu.Read(uint16(0x0010)))
     
 }
 
 
 func TestBitZpStoresResultOfAndWhenZeroInZPreservesA(t *testing.T) {
     regSet := olcCpu.CreateRegisterSet()
-    mpu := olcCpu.CreateOlc6502ByParams(regSet, nil)
+    mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
     regSet.A = 0x00
     
@@ -2032,8 +2013,7 @@ func TestBitZpStoresResultOfAndWhenZeroInZPreservesA(t *testing.T) {
     
     
     
-    
-	assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
+    assertEqual(t, uint8(0x00), mpu.Read(uint16(0x0010)))
     
 }
 

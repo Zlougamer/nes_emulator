@@ -205,25 +205,14 @@ func CreateOlc6502() *olc6502 {
 	return cpu
 }
 
-func CreateOlc6502ByParams(
-	regSet *registerSet,
-	manEl *managingElement,
-) *olc6502 {
+func CreateOlc6502ByParams(regSet *registerSet) *olc6502 {
 	cpu := &olc6502{}
 
 	cpu.mBus = CreateBus(cpu)
 
-	if regSet != nil {
-		cpu.regSet = regSet
-	} else {
-		cpu.regSet = CreateRegisterSet()
-	}
-	if manEl != nil {
-		cpu.manEl = manEl
-	} else {
-		cpu.manEl = CreateManagingElement(cpu.mBus)
-	}
+	cpu.regSet = regSet
 
+	cpu.manEl = CreateManagingElement(cpu.mBus)
 	cpu.addrSet = CreateAdressingModes(cpu.mBus, cpu.regSet, cpu.manEl)
 	cpu.instrSet = CreateInstructionSet(cpu.mBus, cpu.regSet, cpu.manEl)
 
