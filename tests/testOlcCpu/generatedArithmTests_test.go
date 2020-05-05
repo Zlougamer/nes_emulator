@@ -4,11 +4,13 @@ package testOlcCpu
 import (
 	"testing"
 	"github.com/Zlougamer/nes_emulator/olcCpu"
+    "github.com/stretchr/testify/assert"
 )
 
 
 
 func TestAdcBcdOffAbsoluteCarryClearInAccumulatorZeroes(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -24,7 +26,7 @@ func TestAdcBcdOffAbsoluteCarryClearInAccumulatorZeroes(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -41,6 +43,7 @@ func TestAdcBcdOffAbsoluteCarryClearInAccumulatorZeroes(t *testing.T) {
 
 
 func TestAdcBcdOffAbsoluteCarrySetInAccumulatorZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -56,7 +59,7 @@ func TestAdcBcdOffAbsoluteCarrySetInAccumulatorZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -73,6 +76,7 @@ func TestAdcBcdOffAbsoluteCarrySetInAccumulatorZero(t *testing.T) {
 
 
 func TestAdcBcdOffAbsoluteCarryClearInNoCarryClearOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -88,7 +92,7 @@ func TestAdcBcdOffAbsoluteCarryClearInNoCarryClearOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -105,6 +109,7 @@ func TestAdcBcdOffAbsoluteCarryClearInNoCarryClearOut(t *testing.T) {
 
 
 func TestAdcBcdOffAbsoluteCarryClearInCarrySetOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -120,7 +125,7 @@ func TestAdcBcdOffAbsoluteCarryClearInCarrySetOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -137,6 +142,7 @@ func TestAdcBcdOffAbsoluteCarryClearInCarrySetOut(t *testing.T) {
 
 
 func TestAdcBcdOffAbsoluteOverflowSetNoCarry01Plus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -152,7 +158,7 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry01Plus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x02), regSet.A)
     
     
@@ -169,6 +175,7 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry01Plus01(t *testing.T) {
 
 
 func TestAdcBcdOffAbsoluteOverflowSetNoCarry01PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -184,7 +191,7 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry01PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -201,6 +208,7 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffAbsoluteOverflowSetNoCarry7fPlus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -216,7 +224,7 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry7fPlus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -233,6 +241,7 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 
 func TestAdcBcdOffAbsoluteOverflowSetNoCarry80PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -248,7 +257,7 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry80PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x7F), regSet.A)
     
     
@@ -265,6 +274,7 @@ func TestAdcBcdOffAbsoluteOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffAbsoluteOverflowSetOn40Plus40(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -280,7 +290,7 @@ func TestAdcBcdOffAbsoluteOverflowSetOn40Plus40(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -297,6 +307,7 @@ func TestAdcBcdOffAbsoluteOverflowSetOn40Plus40(t *testing.T) {
 
 
 func TestAdcBcdOffZpCarryClearInAccumulatorZeroes(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -312,7 +323,7 @@ func TestAdcBcdOffZpCarryClearInAccumulatorZeroes(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -329,6 +340,7 @@ func TestAdcBcdOffZpCarryClearInAccumulatorZeroes(t *testing.T) {
 
 
 func TestAdcBcdOffZpCarrySetInAccumulatorZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -344,7 +356,7 @@ func TestAdcBcdOffZpCarrySetInAccumulatorZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -361,6 +373,7 @@ func TestAdcBcdOffZpCarrySetInAccumulatorZero(t *testing.T) {
 
 
 func TestAdcBcdOffZpCarryClearInNoCarryClearOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -376,7 +389,7 @@ func TestAdcBcdOffZpCarryClearInNoCarryClearOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -393,6 +406,7 @@ func TestAdcBcdOffZpCarryClearInNoCarryClearOut(t *testing.T) {
 
 
 func TestAdcBcdOffZpCarryClearInCarrySetOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -408,7 +422,7 @@ func TestAdcBcdOffZpCarryClearInCarrySetOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -425,6 +439,7 @@ func TestAdcBcdOffZpCarryClearInCarrySetOut(t *testing.T) {
 
 
 func TestAdcBcdOffZpOverflowSetNoCarry01Plus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -440,7 +455,7 @@ func TestAdcBcdOffZpOverflowSetNoCarry01Plus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x02), regSet.A)
     
     
@@ -457,6 +472,7 @@ func TestAdcBcdOffZpOverflowSetNoCarry01Plus01(t *testing.T) {
 
 
 func TestAdcBcdOffZpOverflowSetNoCarry01PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -472,7 +488,7 @@ func TestAdcBcdOffZpOverflowSetNoCarry01PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -489,6 +505,7 @@ func TestAdcBcdOffZpOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffZpOverflowSetNoCarry7fPlus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -504,7 +521,7 @@ func TestAdcBcdOffZpOverflowSetNoCarry7fPlus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -521,6 +538,7 @@ func TestAdcBcdOffZpOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 
 func TestAdcBcdOffZpOverflowSetNoCarry80PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -536,7 +554,7 @@ func TestAdcBcdOffZpOverflowSetNoCarry80PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x7F), regSet.A)
     
     
@@ -553,6 +571,7 @@ func TestAdcBcdOffZpOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffZpOverflowSetOn40Plus40(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -568,7 +587,7 @@ func TestAdcBcdOffZpOverflowSetOn40Plus40(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -585,6 +604,7 @@ func TestAdcBcdOffZpOverflowSetOn40Plus40(t *testing.T) {
 
 
 func TestAdcBcdOffImmediateCarryClearInAccumulatorZeroes(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -599,7 +619,7 @@ func TestAdcBcdOffImmediateCarryClearInAccumulatorZeroes(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -616,6 +636,7 @@ func TestAdcBcdOffImmediateCarryClearInAccumulatorZeroes(t *testing.T) {
 
 
 func TestAdcBcdOffImmediateCarrySetInAccumulatorZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -630,7 +651,7 @@ func TestAdcBcdOffImmediateCarrySetInAccumulatorZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -647,6 +668,7 @@ func TestAdcBcdOffImmediateCarrySetInAccumulatorZero(t *testing.T) {
 
 
 func TestAdcBcdOffImmediateCarryClearInNoCarryClearOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -661,7 +683,7 @@ func TestAdcBcdOffImmediateCarryClearInNoCarryClearOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -678,6 +700,7 @@ func TestAdcBcdOffImmediateCarryClearInNoCarryClearOut(t *testing.T) {
 
 
 func TestAdcBcdOffImmediateCarryClearInCarrySetOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -692,7 +715,7 @@ func TestAdcBcdOffImmediateCarryClearInCarrySetOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -709,6 +732,7 @@ func TestAdcBcdOffImmediateCarryClearInCarrySetOut(t *testing.T) {
 
 
 func TestAdcBcdOffImmediateOverflowSetNoCarry01Plus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -723,7 +747,7 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry01Plus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x02), regSet.A)
     
     
@@ -740,6 +764,7 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry01Plus01(t *testing.T) {
 
 
 func TestAdcBcdOffImmediateOverflowSetNoCarry01PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -754,7 +779,7 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry01PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -771,6 +796,7 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffImmediateOverflowSetNoCarry7fPlus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -785,7 +811,7 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry7fPlus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -802,6 +828,7 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 
 func TestAdcBcdOffImmediateOverflowSetNoCarry80PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -816,7 +843,7 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry80PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x7F), regSet.A)
     
     
@@ -833,6 +860,7 @@ func TestAdcBcdOffImmediateOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffImmediateOverflowSetOn40Plus40(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -847,7 +875,7 @@ func TestAdcBcdOffImmediateOverflowSetOn40Plus40(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -864,6 +892,7 @@ func TestAdcBcdOffImmediateOverflowSetOn40Plus40(t *testing.T) {
 
 
 func TestAdcBcdOffAbsXCarryClearInAccumulatorZeroes(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -879,7 +908,7 @@ func TestAdcBcdOffAbsXCarryClearInAccumulatorZeroes(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -896,6 +925,7 @@ func TestAdcBcdOffAbsXCarryClearInAccumulatorZeroes(t *testing.T) {
 
 
 func TestAdcBcdOffAbsXCarrySetInAccumulatorZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -911,7 +941,7 @@ func TestAdcBcdOffAbsXCarrySetInAccumulatorZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -928,6 +958,7 @@ func TestAdcBcdOffAbsXCarrySetInAccumulatorZero(t *testing.T) {
 
 
 func TestAdcBcdOffAbsXCarryClearInNoCarryClearOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -943,7 +974,7 @@ func TestAdcBcdOffAbsXCarryClearInNoCarryClearOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -960,6 +991,7 @@ func TestAdcBcdOffAbsXCarryClearInNoCarryClearOut(t *testing.T) {
 
 
 func TestAdcBcdOffAbsXCarryClearInCarrySetOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -975,7 +1007,7 @@ func TestAdcBcdOffAbsXCarryClearInCarrySetOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -992,6 +1024,7 @@ func TestAdcBcdOffAbsXCarryClearInCarrySetOut(t *testing.T) {
 
 
 func TestAdcBcdOffAbsXOverflowSetNoCarry01Plus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1007,7 +1040,7 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry01Plus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x02), regSet.A)
     
     
@@ -1024,6 +1057,7 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry01Plus01(t *testing.T) {
 
 
 func TestAdcBcdOffAbsXOverflowSetNoCarry01PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1039,7 +1073,7 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry01PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1056,6 +1090,7 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffAbsXOverflowSetNoCarry7fPlus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1071,7 +1106,7 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry7fPlus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1088,6 +1123,7 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 
 func TestAdcBcdOffAbsXOverflowSetNoCarry80PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1103,7 +1139,7 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry80PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x7F), regSet.A)
     
     
@@ -1120,6 +1156,7 @@ func TestAdcBcdOffAbsXOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffAbsXOverflowSetOn40Plus40(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1135,7 +1172,7 @@ func TestAdcBcdOffAbsXOverflowSetOn40Plus40(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1152,6 +1189,7 @@ func TestAdcBcdOffAbsXOverflowSetOn40Plus40(t *testing.T) {
 
 
 func TestAdcBcdOffAbsYCarryClearInAccumulatorZeroes(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1167,7 +1205,7 @@ func TestAdcBcdOffAbsYCarryClearInAccumulatorZeroes(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1184,6 +1222,7 @@ func TestAdcBcdOffAbsYCarryClearInAccumulatorZeroes(t *testing.T) {
 
 
 func TestAdcBcdOffAbsYCarrySetInAccumulatorZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1199,7 +1238,7 @@ func TestAdcBcdOffAbsYCarrySetInAccumulatorZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -1216,6 +1255,7 @@ func TestAdcBcdOffAbsYCarrySetInAccumulatorZero(t *testing.T) {
 
 
 func TestAdcBcdOffAbsYCarryClearInNoCarryClearOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1231,7 +1271,7 @@ func TestAdcBcdOffAbsYCarryClearInNoCarryClearOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -1248,6 +1288,7 @@ func TestAdcBcdOffAbsYCarryClearInNoCarryClearOut(t *testing.T) {
 
 
 func TestAdcBcdOffAbsYCarryClearInCarrySetOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1263,7 +1304,7 @@ func TestAdcBcdOffAbsYCarryClearInCarrySetOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -1280,6 +1321,7 @@ func TestAdcBcdOffAbsYCarryClearInCarrySetOut(t *testing.T) {
 
 
 func TestAdcBcdOffAbsYOverflowSetNoCarry01Plus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1295,7 +1337,7 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry01Plus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x02), regSet.A)
     
     
@@ -1312,6 +1354,7 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry01Plus01(t *testing.T) {
 
 
 func TestAdcBcdOffAbsYOverflowSetNoCarry01PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1327,7 +1370,7 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry01PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1344,6 +1387,7 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffAbsYOverflowSetNoCarry7fPlus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1359,7 +1403,7 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry7fPlus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1376,6 +1420,7 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 
 func TestAdcBcdOffAbsYOverflowSetNoCarry80PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1391,7 +1436,7 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry80PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x7F), regSet.A)
     
     
@@ -1408,6 +1453,7 @@ func TestAdcBcdOffAbsYOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffAbsYOverflowSetOn40Plus40(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1423,7 +1469,7 @@ func TestAdcBcdOffAbsYOverflowSetOn40Plus40(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1440,6 +1486,7 @@ func TestAdcBcdOffAbsYOverflowSetOn40Plus40(t *testing.T) {
 
 
 func TestAdcBcdOffZpXCarryClearInAccumulatorZeroes(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1455,7 +1502,7 @@ func TestAdcBcdOffZpXCarryClearInAccumulatorZeroes(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1472,6 +1519,7 @@ func TestAdcBcdOffZpXCarryClearInAccumulatorZeroes(t *testing.T) {
 
 
 func TestAdcBcdOffZpXCarrySetInAccumulatorZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1487,7 +1535,7 @@ func TestAdcBcdOffZpXCarrySetInAccumulatorZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -1504,6 +1552,7 @@ func TestAdcBcdOffZpXCarrySetInAccumulatorZero(t *testing.T) {
 
 
 func TestAdcBcdOffZpXCarryClearInNoCarryClearOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1519,7 +1568,7 @@ func TestAdcBcdOffZpXCarryClearInNoCarryClearOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -1536,6 +1585,7 @@ func TestAdcBcdOffZpXCarryClearInNoCarryClearOut(t *testing.T) {
 
 
 func TestAdcBcdOffZpXCarryClearInCarrySetOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1551,7 +1601,7 @@ func TestAdcBcdOffZpXCarryClearInCarrySetOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -1568,6 +1618,7 @@ func TestAdcBcdOffZpXCarryClearInCarrySetOut(t *testing.T) {
 
 
 func TestAdcBcdOffZpXOverflowSetNoCarry01Plus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1583,7 +1634,7 @@ func TestAdcBcdOffZpXOverflowSetNoCarry01Plus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x02), regSet.A)
     
     
@@ -1600,6 +1651,7 @@ func TestAdcBcdOffZpXOverflowSetNoCarry01Plus01(t *testing.T) {
 
 
 func TestAdcBcdOffZpXOverflowSetNoCarry01PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1615,7 +1667,7 @@ func TestAdcBcdOffZpXOverflowSetNoCarry01PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1632,6 +1684,7 @@ func TestAdcBcdOffZpXOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffZpXOverflowSetNoCarry7fPlus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1647,7 +1700,7 @@ func TestAdcBcdOffZpXOverflowSetNoCarry7fPlus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1664,6 +1717,7 @@ func TestAdcBcdOffZpXOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 
 func TestAdcBcdOffZpXOverflowSetNoCarry80PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1679,7 +1733,7 @@ func TestAdcBcdOffZpXOverflowSetNoCarry80PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x7F), regSet.A)
     
     
@@ -1696,6 +1750,7 @@ func TestAdcBcdOffZpXOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffZpXOverflowSetOn40Plus40(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1711,7 +1766,7 @@ func TestAdcBcdOffZpXOverflowSetOn40Plus40(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1728,6 +1783,7 @@ func TestAdcBcdOffZpXOverflowSetOn40Plus40(t *testing.T) {
 
 
 func TestAdcBcdOffZpYCarryClearInAccumulatorZeroes(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1743,7 +1799,7 @@ func TestAdcBcdOffZpYCarryClearInAccumulatorZeroes(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1760,6 +1816,7 @@ func TestAdcBcdOffZpYCarryClearInAccumulatorZeroes(t *testing.T) {
 
 
 func TestAdcBcdOffZpYCarrySetInAccumulatorZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1775,7 +1832,7 @@ func TestAdcBcdOffZpYCarrySetInAccumulatorZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -1792,6 +1849,7 @@ func TestAdcBcdOffZpYCarrySetInAccumulatorZero(t *testing.T) {
 
 
 func TestAdcBcdOffZpYCarryClearInNoCarryClearOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1808,7 +1866,7 @@ func TestAdcBcdOffZpYCarryClearInNoCarryClearOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -1825,6 +1883,7 @@ func TestAdcBcdOffZpYCarryClearInNoCarryClearOut(t *testing.T) {
 
 
 func TestAdcBcdOffZpYCarryClearInCarrySetOut(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1841,7 +1900,7 @@ func TestAdcBcdOffZpYCarryClearInCarrySetOut(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x01), regSet.A)
     
     
@@ -1858,6 +1917,7 @@ func TestAdcBcdOffZpYCarryClearInCarrySetOut(t *testing.T) {
 
 
 func TestAdcBcdOffZpYOverflowSetNoCarry01Plus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1874,7 +1934,7 @@ func TestAdcBcdOffZpYOverflowSetNoCarry01Plus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x02), regSet.A)
     
     
@@ -1891,6 +1951,7 @@ func TestAdcBcdOffZpYOverflowSetNoCarry01Plus01(t *testing.T) {
 
 
 func TestAdcBcdOffZpYOverflowSetNoCarry01PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1907,7 +1968,7 @@ func TestAdcBcdOffZpYOverflowSetNoCarry01PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1924,6 +1985,7 @@ func TestAdcBcdOffZpYOverflowSetNoCarry01PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffZpYOverflowSetNoCarry7fPlus01(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1940,7 +2002,7 @@ func TestAdcBcdOffZpYOverflowSetNoCarry7fPlus01(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1957,6 +2019,7 @@ func TestAdcBcdOffZpYOverflowSetNoCarry7fPlus01(t *testing.T) {
 
 
 func TestAdcBcdOffZpYOverflowSetNoCarry80PlusFF(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1973,7 +2036,7 @@ func TestAdcBcdOffZpYOverflowSetNoCarry80PlusFF(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x7F), regSet.A)
     
     
@@ -1990,6 +2053,7 @@ func TestAdcBcdOffZpYOverflowSetNoCarry80PlusFF(t *testing.T) {
 
 
 func TestAdcBcdOffZpYOverflowSetOn40Plus40(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2006,7 +2070,7 @@ func TestAdcBcdOffZpYOverflowSetOn40Plus40(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -2023,6 +2087,7 @@ func TestAdcBcdOffZpYOverflowSetOn40Plus40(t *testing.T) {
 
 
 func TestSbcAbsAllZerosAndNoBorrowIsZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2038,7 +2103,7 @@ func TestSbcAbsAllZerosAndNoBorrowIsZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2055,6 +2120,7 @@ func TestSbcAbsAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 
 func TestSbcAbsDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2070,7 +2136,7 @@ func TestSbcAbsDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2087,6 +2153,7 @@ func TestSbcAbsDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcAbsDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2102,7 +2169,7 @@ func TestSbcAbsDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2119,6 +2186,7 @@ func TestSbcAbsDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcAbsDowntoFourWithBorrowClearsZN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2134,7 +2202,7 @@ func TestSbcAbsDowntoFourWithBorrowClearsZN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x04), regSet.A)
     
     
@@ -2151,6 +2219,7 @@ func TestSbcAbsDowntoFourWithBorrowClearsZN(t *testing.T) {
 
 
 func TestSbcZpAllZerosAndNoBorrowIsZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2166,7 +2235,7 @@ func TestSbcZpAllZerosAndNoBorrowIsZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2183,6 +2252,7 @@ func TestSbcZpAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 
 func TestSbcZpDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2198,7 +2268,7 @@ func TestSbcZpDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2215,6 +2285,7 @@ func TestSbcZpDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcZpDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2230,7 +2301,7 @@ func TestSbcZpDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2247,6 +2318,7 @@ func TestSbcZpDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcZpDowntoFourWithBorrowClearsZN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2262,7 +2334,7 @@ func TestSbcZpDowntoFourWithBorrowClearsZN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x04), regSet.A)
     
     
@@ -2279,6 +2351,7 @@ func TestSbcZpDowntoFourWithBorrowClearsZN(t *testing.T) {
 
 
 func TestSbcImmAllZerosAndNoBorrowIsZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2293,7 +2366,7 @@ func TestSbcImmAllZerosAndNoBorrowIsZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2310,6 +2383,7 @@ func TestSbcImmAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 
 func TestSbcImmDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2324,7 +2398,7 @@ func TestSbcImmDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2341,6 +2415,7 @@ func TestSbcImmDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcImmDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2355,7 +2430,7 @@ func TestSbcImmDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2372,6 +2447,7 @@ func TestSbcImmDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcBcdOnImmediate0aMinus00CarrySet(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2386,7 +2462,7 @@ func TestSbcBcdOnImmediate0aMinus00CarrySet(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x0a), regSet.A)
     
     
@@ -2403,6 +2479,7 @@ func TestSbcBcdOnImmediate0aMinus00CarrySet(t *testing.T) {
 
 
 func TestSbcBcdOnImmediate9aMinus00CarrySet(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2417,7 +2494,7 @@ func TestSbcBcdOnImmediate9aMinus00CarrySet(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x9a), regSet.A)
     
     
@@ -2434,6 +2511,7 @@ func TestSbcBcdOnImmediate9aMinus00CarrySet(t *testing.T) {
 
 
 func TestSbcBcdOnImmediate00Minus01CarrySet(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2448,7 +2526,7 @@ func TestSbcBcdOnImmediate00Minus01CarrySet(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -2465,6 +2543,7 @@ func TestSbcBcdOnImmediate00Minus01CarrySet(t *testing.T) {
 
 
 func TestSbcBcdOnImmediate_20Minus_0aCarryUnset(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2479,7 +2558,7 @@ func TestSbcBcdOnImmediate_20Minus_0aCarryUnset(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x15), regSet.A)
     
     
@@ -2496,6 +2575,7 @@ func TestSbcBcdOnImmediate_20Minus_0aCarryUnset(t *testing.T) {
 
 
 func TestSbcAbsXAllZerosAndNoBorrowIsZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2511,7 +2591,7 @@ func TestSbcAbsXAllZerosAndNoBorrowIsZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2528,6 +2608,7 @@ func TestSbcAbsXAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 
 func TestSbcAbsXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2543,7 +2624,7 @@ func TestSbcAbsXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2560,6 +2641,7 @@ func TestSbcAbsXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcAbsXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2575,7 +2657,7 @@ func TestSbcAbsXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2592,6 +2674,7 @@ func TestSbcAbsXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcAbsXDowntoFourWithBorrowClearsZN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2607,7 +2690,7 @@ func TestSbcAbsXDowntoFourWithBorrowClearsZN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x04), regSet.A)
     
     
@@ -2624,6 +2707,7 @@ func TestSbcAbsXDowntoFourWithBorrowClearsZN(t *testing.T) {
 
 
 func TestSbcAbsYAllZerosAndNoBorrowIsZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2639,7 +2723,7 @@ func TestSbcAbsYAllZerosAndNoBorrowIsZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2656,6 +2740,7 @@ func TestSbcAbsYAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 
 func TestSbcAbsYDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2671,7 +2756,7 @@ func TestSbcAbsYDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2688,6 +2773,7 @@ func TestSbcAbsYDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcAbsYDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2703,7 +2789,7 @@ func TestSbcAbsYDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2720,6 +2806,7 @@ func TestSbcAbsYDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcAbsYDowntoFourWithBorrowClearsZN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2735,7 +2822,7 @@ func TestSbcAbsYDowntoFourWithBorrowClearsZN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x04), regSet.A)
     
     
@@ -2752,6 +2839,7 @@ func TestSbcAbsYDowntoFourWithBorrowClearsZN(t *testing.T) {
 
 
 func TestSbcIndXAllZerosAndNoBorrowIsZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2768,7 +2856,7 @@ func TestSbcIndXAllZerosAndNoBorrowIsZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2785,6 +2873,7 @@ func TestSbcIndXAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 
 func TestSbcIndXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2801,7 +2890,7 @@ func TestSbcIndXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2818,6 +2907,7 @@ func TestSbcIndXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcIndXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2834,7 +2924,7 @@ func TestSbcIndXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2851,6 +2941,7 @@ func TestSbcIndXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcIndXDowntoFourWithBorrowClearsZN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2867,7 +2958,7 @@ func TestSbcIndXDowntoFourWithBorrowClearsZN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x04), regSet.A)
     
     
@@ -2884,6 +2975,7 @@ func TestSbcIndXDowntoFourWithBorrowClearsZN(t *testing.T) {
 
 
 func TestSbcIndYAllZerosAndNoBorrowIsZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2900,7 +2992,7 @@ func TestSbcIndYAllZerosAndNoBorrowIsZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2917,6 +3009,7 @@ func TestSbcIndYAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 
 func TestSbcIndYDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2933,7 +3026,7 @@ func TestSbcIndYDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2950,6 +3043,7 @@ func TestSbcIndYDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcIndYDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2966,7 +3060,7 @@ func TestSbcIndYDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2983,6 +3077,7 @@ func TestSbcIndYDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcIndYDowntoFourWithBorrowClearsZN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2999,7 +3094,7 @@ func TestSbcIndYDowntoFourWithBorrowClearsZN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x04), regSet.A)
     
     
@@ -3016,6 +3111,7 @@ func TestSbcIndYDowntoFourWithBorrowClearsZN(t *testing.T) {
 
 
 func TestSbcZpXAllZerosAndNoBorrowIsZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -3031,7 +3127,7 @@ func TestSbcZpXAllZerosAndNoBorrowIsZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -3048,6 +3144,7 @@ func TestSbcZpXAllZerosAndNoBorrowIsZero(t *testing.T) {
 
 
 func TestSbcZpXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -3063,7 +3160,7 @@ func TestSbcZpXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -3080,6 +3177,7 @@ func TestSbcZpXDowntoZeroNoBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcZpXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -3095,7 +3193,7 @@ func TestSbcZpXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -3112,6 +3210,7 @@ func TestSbcZpXDowntoZeroWithBorrowSetsZClearsN(t *testing.T) {
 
 
 func TestSbcZpXDowntoFourWithBorrowClearsZN(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -3127,7 +3226,7 @@ func TestSbcZpXDowntoFourWithBorrowClearsZN(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x04), regSet.A)
     
     

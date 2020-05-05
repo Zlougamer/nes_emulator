@@ -10,6 +10,7 @@ require (
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/rakyll/gotest v0.0.0-20200206190159-3023d5d6366c // indirect
 	github.com/sirupsen/logrus v1.5.0
+	github.com/stretchr/testify v1.5.1
 	github.com/wacul/ptr v1.0.0 // indirect
 	golang.org/x/sys v0.0.0-20200413165638-669c56c373c4 // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect

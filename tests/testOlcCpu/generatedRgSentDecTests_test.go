@@ -4,11 +4,13 @@ package testOlcCpu
 import (
 	"testing"
 	"github.com/Zlougamer/nes_emulator/olcCpu"
+    "github.com/stretchr/testify/assert"
 )
 
 
 
 func TestStaAbsoluteStoresALeavesAAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -24,7 +26,7 @@ func TestStaAbsoluteStoresALeavesAAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -42,6 +44,7 @@ func TestStaAbsoluteStoresALeavesAAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStaAbsoluteStoresALeavesAAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -57,7 +60,7 @@ func TestStaAbsoluteStoresALeavesAAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -75,6 +78,7 @@ func TestStaAbsoluteStoresALeavesAAndZFlagUnchanged(t *testing.T) {
 
 
 func TestStaZpStoresALeavesAAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -90,7 +94,7 @@ func TestStaZpStoresALeavesAAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -108,6 +112,7 @@ func TestStaZpStoresALeavesAAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStaZpStoresALeavesAAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -123,7 +128,7 @@ func TestStaZpStoresALeavesAAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -141,6 +146,7 @@ func TestStaZpStoresALeavesAAndZFlagUnchanged(t *testing.T) {
 
 
 func TestStaAbsXIndexedStoresALeavesAAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -156,7 +162,7 @@ func TestStaAbsXIndexedStoresALeavesAAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -174,6 +180,7 @@ func TestStaAbsXIndexedStoresALeavesAAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStaAbsXIndexedStoresALeavesAAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -189,7 +196,7 @@ func TestStaAbsXIndexedStoresALeavesAAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -207,6 +214,7 @@ func TestStaAbsXIndexedStoresALeavesAAndZFlagUnchanged(t *testing.T) {
 
 
 func TestStaAbsYIndexedStoresALeavesAAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -222,7 +230,7 @@ func TestStaAbsYIndexedStoresALeavesAAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -240,6 +248,7 @@ func TestStaAbsYIndexedStoresALeavesAAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStaAbsYIndexedStoresALeavesAAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -255,7 +264,7 @@ func TestStaAbsYIndexedStoresALeavesAAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -273,6 +282,7 @@ func TestStaAbsYIndexedStoresALeavesAAndZFlagUnchanged(t *testing.T) {
 
 
 func TestStaIndIndexedXStoresALeavesAAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -289,7 +299,7 @@ func TestStaIndIndexedXStoresALeavesAAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -307,6 +317,7 @@ func TestStaIndIndexedXStoresALeavesAAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStaIndIndexedXStoresALeavesAAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -323,7 +334,7 @@ func TestStaIndIndexedXStoresALeavesAAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -341,6 +352,7 @@ func TestStaIndIndexedXStoresALeavesAAndZFlagUnchanged(t *testing.T) {
 
 
 func TestStaIndexedIndYStoresALeavesAAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -357,7 +369,7 @@ func TestStaIndexedIndYStoresALeavesAAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -375,6 +387,7 @@ func TestStaIndexedIndYStoresALeavesAAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStaIndexedIndYStoresALeavesAAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -391,7 +404,7 @@ func TestStaIndexedIndYStoresALeavesAAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -409,6 +422,7 @@ func TestStaIndexedIndYStoresALeavesAAndZFlagUnchanged(t *testing.T) {
 
 
 func TestStaZpXIndexedStoresALeavesAAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -424,7 +438,7 @@ func TestStaZpXIndexedStoresALeavesAAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xFF), regSet.A)
     
     
@@ -442,6 +456,7 @@ func TestStaZpXIndexedStoresALeavesAAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStaZpXIndexedStoresALeavesAAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -457,7 +472,7 @@ func TestStaZpXIndexedStoresALeavesAAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -475,6 +490,7 @@ func TestStaZpXIndexedStoresALeavesAAndZFlagUnchanged(t *testing.T) {
 
 
 func TestStxAbsoluteStoresXLeavesXAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -490,7 +506,7 @@ func TestStxAbsoluteStoresXLeavesXAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0xFF), regSet.X)
     
@@ -509,6 +525,7 @@ func TestStxAbsoluteStoresXLeavesXAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStxAbsoluteStoresXLeavesXAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -524,7 +541,7 @@ func TestStxAbsoluteStoresXLeavesXAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -543,6 +560,7 @@ func TestStxAbsoluteStoresXLeavesXAndZFlagUnchanged(t *testing.T) {
 
 
 func TestStxZpStoresXLeavesXAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -558,7 +576,7 @@ func TestStxZpStoresXLeavesXAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0xFF), regSet.X)
     
@@ -577,6 +595,7 @@ func TestStxZpStoresXLeavesXAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStxZpStoresXLeavesXAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -592,7 +611,7 @@ func TestStxZpStoresXLeavesXAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -611,6 +630,7 @@ func TestStxZpStoresXLeavesXAndZFlagUnchanged(t *testing.T) {
 
 
 func TestStxZpYIndexedStoresXLeavesXAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -626,7 +646,7 @@ func TestStxZpYIndexedStoresXLeavesXAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0xFF), regSet.X)
     
@@ -645,6 +665,7 @@ func TestStxZpYIndexedStoresXLeavesXAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStxZpYIndexedStoresXLeavesXAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -660,7 +681,7 @@ func TestStxZpYIndexedStoresXLeavesXAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -678,6 +699,7 @@ func TestStxZpYIndexedStoresXLeavesXAndZFlagUnchanged(t *testing.T) {
 
 
 func TestStyAbsoluteStoresYLeavesYAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -693,7 +715,7 @@ func TestStyAbsoluteStoresYLeavesYAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0xFF), regSet.Y)
@@ -712,6 +734,7 @@ func TestStyAbsoluteStoresYLeavesYAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStyAbsoluteStoresYLeavesYAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -727,7 +750,7 @@ func TestStyAbsoluteStoresYLeavesYAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x00), regSet.Y)
@@ -746,6 +769,7 @@ func TestStyAbsoluteStoresYLeavesYAndZFlagUnchanged(t *testing.T) {
 
 
 func TestStyZpStoresYLeavesYAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -761,7 +785,7 @@ func TestStyZpStoresYLeavesYAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0xFF), regSet.Y)
@@ -780,6 +804,7 @@ func TestStyZpStoresYLeavesYAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStyZpStoresYLeavesYAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -795,7 +820,7 @@ func TestStyZpStoresYLeavesYAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x00), regSet.Y)
@@ -814,6 +839,7 @@ func TestStyZpStoresYLeavesYAndZFlagUnchanged(t *testing.T) {
 
 
 func TestStyZpXIndexedStoresYLeavesYAndNFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -829,7 +855,7 @@ func TestStyZpXIndexedStoresYLeavesYAndNFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0xFF), regSet.Y)
@@ -848,6 +874,7 @@ func TestStyZpXIndexedStoresYLeavesYAndNFlagUnchanged(t *testing.T) {
 
 
 func TestStyZpXIndexedStoresYLeavesYAndZFlagUnchanged(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -863,7 +890,7 @@ func TestStyZpXIndexedStoresYLeavesYAndZFlagUnchanged(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -881,6 +908,7 @@ func TestStyZpXIndexedStoresYLeavesYAndZFlagUnchanged(t *testing.T) {
 
 
 func TestLdaAbsoluteLoadsASetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -896,7 +924,7 @@ func TestLdaAbsoluteLoadsASetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -913,6 +941,7 @@ func TestLdaAbsoluteLoadsASetsNFlag(t *testing.T) {
 
 
 func TestLdaAbsoluteLoadsASetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -928,7 +957,7 @@ func TestLdaAbsoluteLoadsASetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -945,6 +974,7 @@ func TestLdaAbsoluteLoadsASetsZFlag(t *testing.T) {
 
 
 func TestLdaZpLoadsASetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -960,7 +990,7 @@ func TestLdaZpLoadsASetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -977,6 +1007,7 @@ func TestLdaZpLoadsASetsNFlag(t *testing.T) {
 
 
 func TestLdaZpLoadsASetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -992,7 +1023,7 @@ func TestLdaZpLoadsASetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1009,6 +1040,7 @@ func TestLdaZpLoadsASetsZFlag(t *testing.T) {
 
 
 func TestLdaImmediateLoadsASetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1023,7 +1055,7 @@ func TestLdaImmediateLoadsASetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1040,6 +1072,7 @@ func TestLdaImmediateLoadsASetsNFlag(t *testing.T) {
 
 
 func TestLdaImmediateLoadsASetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1054,7 +1087,7 @@ func TestLdaImmediateLoadsASetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1071,6 +1104,7 @@ func TestLdaImmediateLoadsASetsZFlag(t *testing.T) {
 
 
 func TestLdaAbsXIndexedLoadsASetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1086,7 +1120,7 @@ func TestLdaAbsXIndexedLoadsASetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1103,6 +1137,7 @@ func TestLdaAbsXIndexedLoadsASetsNFlag(t *testing.T) {
 
 
 func TestLdaAbsXIndexedLoadsASetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1118,7 +1153,7 @@ func TestLdaAbsXIndexedLoadsASetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1135,6 +1170,7 @@ func TestLdaAbsXIndexedLoadsASetsZFlag(t *testing.T) {
 
 
 func TestLdaAbsXIndexedDoesNotPageWrap(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1150,7 +1186,7 @@ func TestLdaAbsXIndexedDoesNotPageWrap(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x42), regSet.A)
     
     
@@ -1167,6 +1203,7 @@ func TestLdaAbsXIndexedDoesNotPageWrap(t *testing.T) {
 
 
 func TestLdaAbsYIndexedLoadsASetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1182,7 +1219,7 @@ func TestLdaAbsYIndexedLoadsASetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1199,6 +1236,7 @@ func TestLdaAbsYIndexedLoadsASetsNFlag(t *testing.T) {
 
 
 func TestLdaAbsYIndexedLoadsASetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1214,7 +1252,7 @@ func TestLdaAbsYIndexedLoadsASetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1231,6 +1269,7 @@ func TestLdaAbsYIndexedLoadsASetsZFlag(t *testing.T) {
 
 
 func TestLdaAbsYIndexedDoesNotPageWrap(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1246,7 +1285,7 @@ func TestLdaAbsYIndexedDoesNotPageWrap(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x42), regSet.A)
     
     
@@ -1263,6 +1302,7 @@ func TestLdaAbsYIndexedDoesNotPageWrap(t *testing.T) {
 
 
 func TestLdaIndIndexedXLoadsASetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1279,7 +1319,7 @@ func TestLdaIndIndexedXLoadsASetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1296,6 +1336,7 @@ func TestLdaIndIndexedXLoadsASetsNFlag(t *testing.T) {
 
 
 func TestLdaIndIndexedXLoadsASetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1312,7 +1353,7 @@ func TestLdaIndIndexedXLoadsASetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1329,6 +1370,7 @@ func TestLdaIndIndexedXLoadsASetsZFlag(t *testing.T) {
 
 
 func TestLdaIndexedIndYLoadsASetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1345,7 +1387,7 @@ func TestLdaIndexedIndYLoadsASetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1362,6 +1404,7 @@ func TestLdaIndexedIndYLoadsASetsNFlag(t *testing.T) {
 
 
 func TestLdaIndexedIndYLoadsASetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1378,7 +1421,7 @@ func TestLdaIndexedIndYLoadsASetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1395,6 +1438,7 @@ func TestLdaIndexedIndYLoadsASetsZFlag(t *testing.T) {
 
 
 func TestLdaZpXIndexedLoadsASetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1410,7 +1454,7 @@ func TestLdaZpXIndexedLoadsASetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     
@@ -1427,6 +1471,7 @@ func TestLdaZpXIndexedLoadsASetsNFlag(t *testing.T) {
 
 
 func TestLdaZpXIndexedLoadsASetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1442,7 +1487,7 @@ func TestLdaZpXIndexedLoadsASetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -1459,6 +1504,7 @@ func TestLdaZpXIndexedLoadsASetsZFlag(t *testing.T) {
 
 
 func TestLdxAbsoluteLoadsXSetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1474,7 +1520,7 @@ func TestLdxAbsoluteLoadsXSetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x80), regSet.X)
     
@@ -1492,6 +1538,7 @@ func TestLdxAbsoluteLoadsXSetsNFlag(t *testing.T) {
 
 
 func TestLdxAbsoluteLoadsXSetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1507,7 +1554,7 @@ func TestLdxAbsoluteLoadsXSetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -1525,6 +1572,7 @@ func TestLdxAbsoluteLoadsXSetsZFlag(t *testing.T) {
 
 
 func TestLdxZpLoadsXSetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1540,7 +1588,7 @@ func TestLdxZpLoadsXSetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x80), regSet.X)
     
@@ -1558,6 +1606,7 @@ func TestLdxZpLoadsXSetsNFlag(t *testing.T) {
 
 
 func TestLdxZpLoadsXSetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1573,7 +1622,7 @@ func TestLdxZpLoadsXSetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -1591,6 +1640,7 @@ func TestLdxZpLoadsXSetsZFlag(t *testing.T) {
 
 
 func TestLdxImmediateLoadsXSetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1605,7 +1655,7 @@ func TestLdxImmediateLoadsXSetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x80), regSet.X)
     
@@ -1623,6 +1673,7 @@ func TestLdxImmediateLoadsXSetsNFlag(t *testing.T) {
 
 
 func TestLdxImmediateLoadsXSetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1637,7 +1688,7 @@ func TestLdxImmediateLoadsXSetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -1655,6 +1706,7 @@ func TestLdxImmediateLoadsXSetsZFlag(t *testing.T) {
 
 
 func TestLdxAbsYIndexedLoadsXSetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1670,7 +1722,7 @@ func TestLdxAbsYIndexedLoadsXSetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x80), regSet.X)
     
@@ -1688,6 +1740,7 @@ func TestLdxAbsYIndexedLoadsXSetsNFlag(t *testing.T) {
 
 
 func TestLdxAbsYIndexedLoadsXSetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1703,7 +1756,7 @@ func TestLdxAbsYIndexedLoadsXSetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -1721,6 +1774,7 @@ func TestLdxAbsYIndexedLoadsXSetsZFlag(t *testing.T) {
 
 
 func TestLdxZpYIndexedLoadsXSetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1736,7 +1790,7 @@ func TestLdxZpYIndexedLoadsXSetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x80), regSet.X)
     
@@ -1754,6 +1808,7 @@ func TestLdxZpYIndexedLoadsXSetsNFlag(t *testing.T) {
 
 
 func TestLdxZpYIndexedLoadsXSetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1769,7 +1824,7 @@ func TestLdxZpYIndexedLoadsXSetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -1787,6 +1842,7 @@ func TestLdxZpYIndexedLoadsXSetsZFlag(t *testing.T) {
 
 
 func TestLdyAbsoluteLoadsYSetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1802,7 +1858,7 @@ func TestLdyAbsoluteLoadsYSetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x80), regSet.Y)
@@ -1820,6 +1876,7 @@ func TestLdyAbsoluteLoadsYSetsNFlag(t *testing.T) {
 
 
 func TestLdyAbsoluteLoadsXSetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1835,7 +1892,7 @@ func TestLdyAbsoluteLoadsXSetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -1853,6 +1910,7 @@ func TestLdyAbsoluteLoadsXSetsZFlag(t *testing.T) {
 
 
 func TestLdyZpLoadsXSetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1868,7 +1926,7 @@ func TestLdyZpLoadsXSetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x80), regSet.Y)
@@ -1886,6 +1944,7 @@ func TestLdyZpLoadsXSetsNFlag(t *testing.T) {
 
 
 func TestLdyZpLoadsXSetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1901,7 +1960,7 @@ func TestLdyZpLoadsXSetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x00), regSet.Y)
@@ -1919,6 +1978,7 @@ func TestLdyZpLoadsXSetsZFlag(t *testing.T) {
 
 
 func TestLdyImmediateLoadsXSetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1933,7 +1993,7 @@ func TestLdyImmediateLoadsXSetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x80), regSet.Y)
@@ -1951,6 +2011,7 @@ func TestLdyImmediateLoadsXSetsNFlag(t *testing.T) {
 
 
 func TestLdyImmediateLoadsXSetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1965,7 +2026,7 @@ func TestLdyImmediateLoadsXSetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -1983,6 +2044,7 @@ func TestLdyImmediateLoadsXSetsZFlag(t *testing.T) {
 
 
 func TestLdyAbsXIndexedLoadsXSetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1998,7 +2060,7 @@ func TestLdyAbsXIndexedLoadsXSetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x80), regSet.Y)
@@ -2016,6 +2078,7 @@ func TestLdyAbsXIndexedLoadsXSetsNFlag(t *testing.T) {
 
 
 func TestLdyAbsXIndexedLoadsXSetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2031,7 +2094,7 @@ func TestLdyAbsXIndexedLoadsXSetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x00), regSet.Y)
@@ -2049,6 +2112,7 @@ func TestLdyAbsXIndexedLoadsXSetsZFlag(t *testing.T) {
 
 
 func TestLdyZpXIndexedLoadsXSetsNFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2064,7 +2128,7 @@ func TestLdyZpXIndexedLoadsXSetsNFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x80), regSet.Y)
@@ -2082,6 +2146,7 @@ func TestLdyZpXIndexedLoadsXSetsNFlag(t *testing.T) {
 
 
 func TestLdyZpXIndexedLoadsXSetsZFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2097,7 +2162,7 @@ func TestLdyZpXIndexedLoadsXSetsZFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x00), regSet.Y)
@@ -2115,6 +2180,7 @@ func TestLdyZpXIndexedLoadsXSetsZFlag(t *testing.T) {
 
 
 func TestTaxTransfersAccumulatorIntoX(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2129,7 +2195,7 @@ func TestTaxTransfersAccumulatorIntoX(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xAB), regSet.A)
     assertEqual(t, uint8(0xAB), regSet.X)
     
@@ -2147,6 +2213,7 @@ func TestTaxTransfersAccumulatorIntoX(t *testing.T) {
 
 
 func TestTaxSetsNegativeFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2161,7 +2228,7 @@ func TestTaxSetsNegativeFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     assertEqual(t, uint8(0x80), regSet.X)
     
@@ -2179,6 +2246,7 @@ func TestTaxSetsNegativeFlag(t *testing.T) {
 
 
 func TestTaxSetsZeroFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2193,7 +2261,7 @@ func TestTaxSetsZeroFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -2211,6 +2279,7 @@ func TestTaxSetsZeroFlag(t *testing.T) {
 
 
 func TestTayTransfersAccumulatorIntoY(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2225,7 +2294,7 @@ func TestTayTransfersAccumulatorIntoY(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xAB), regSet.A)
     
     assertEqual(t, uint8(0xAB), regSet.Y)
@@ -2243,6 +2312,7 @@ func TestTayTransfersAccumulatorIntoY(t *testing.T) {
 
 
 func TestTaySetsNegativeFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2257,7 +2327,7 @@ func TestTaySetsNegativeFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     
     assertEqual(t, uint8(0x80), regSet.Y)
@@ -2275,6 +2345,7 @@ func TestTaySetsNegativeFlag(t *testing.T) {
 
 
 func TestTaySetsZeroFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2289,7 +2360,7 @@ func TestTaySetsZeroFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x00), regSet.Y)
@@ -2307,6 +2378,7 @@ func TestTaySetsZeroFlag(t *testing.T) {
 
 
 func TestTsxTransfersStackPointerIntoX(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2322,7 +2394,7 @@ func TestTsxTransfersStackPointerIntoX(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xAB), regSet.A)
     assertEqual(t, uint8(0xAB), regSet.X)
     
@@ -2341,6 +2413,7 @@ func TestTsxTransfersStackPointerIntoX(t *testing.T) {
 
 
 func TestTsxSetsNegativeFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2356,7 +2429,7 @@ func TestTsxSetsNegativeFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     assertEqual(t, uint8(0x80), regSet.X)
     
@@ -2375,6 +2448,7 @@ func TestTsxSetsNegativeFlag(t *testing.T) {
 
 
 func TestTsxSetsZeroFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2390,7 +2464,7 @@ func TestTsxSetsZeroFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -2409,6 +2483,7 @@ func TestTsxSetsZeroFlag(t *testing.T) {
 
 
 func TestTxaTransfersXIntoA(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2423,7 +2498,7 @@ func TestTxaTransfersXIntoA(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xAB), regSet.A)
     assertEqual(t, uint8(0xAB), regSet.X)
     
@@ -2441,6 +2516,7 @@ func TestTxaTransfersXIntoA(t *testing.T) {
 
 
 func TestTxaSetsNegativeFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2456,7 +2532,7 @@ func TestTxaSetsNegativeFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x80), regSet.A)
     assertEqual(t, uint8(0x80), regSet.X)
     
@@ -2474,6 +2550,7 @@ func TestTxaSetsNegativeFlag(t *testing.T) {
 
 
 func TestTxaSetsZeroFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2488,7 +2565,7 @@ func TestTxaSetsZeroFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -2506,6 +2583,7 @@ func TestTxaSetsZeroFlag(t *testing.T) {
 
 
 func TestTxsTransfersXIntoStackPointer(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2520,7 +2598,7 @@ func TestTxsTransfersXIntoStackPointer(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0xAB), regSet.X)
     
@@ -2539,6 +2617,7 @@ func TestTxsTransfersXIntoStackPointer(t *testing.T) {
 
 
 func TestTxsDoesNotSetNegativeFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2553,7 +2632,7 @@ func TestTxsDoesNotSetNegativeFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x80), regSet.X)
     
@@ -2572,6 +2651,7 @@ func TestTxsDoesNotSetNegativeFlag(t *testing.T) {
 
 
 func TestTxsDoesNotSetZeroFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2586,7 +2666,7 @@ func TestTxsDoesNotSetZeroFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -2605,6 +2685,7 @@ func TestTxsDoesNotSetZeroFlag(t *testing.T) {
 
 
 func TestPhaPushesAAndUpdatesSp(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2619,7 +2700,7 @@ func TestPhaPushesAAndUpdatesSp(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xAB), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -2639,6 +2720,7 @@ func TestPhaPushesAAndUpdatesSp(t *testing.T) {
 
 
 func TestPlaPullsTopByteFromStackIntoAAndUpdatesSp(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2655,7 +2737,7 @@ func TestPlaPullsTopByteFromStackIntoAAndUpdatesSp(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0xAB), regSet.A)
     
     
@@ -2675,6 +2757,7 @@ func TestPlaPullsTopByteFromStackIntoAAndUpdatesSp(t *testing.T) {
 
 
 func TestPlpPullsTopByteFromStackIntoFlagsAndUpdatesSp(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2691,7 +2774,7 @@ func TestPlpPullsTopByteFromStackIntoFlagsAndUpdatesSp(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2712,6 +2795,7 @@ func TestPlpPullsTopByteFromStackIntoFlagsAndUpdatesSp(t *testing.T) {
 
 
 func TestRtiRestoresStatusAndPcAndUpdatesSp(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2728,7 +2812,7 @@ func TestRtiRestoresStatusAndPcAndUpdatesSp(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0xC003), regSet.Pc)
+	assert.Equal(uint16(0xC003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2749,6 +2833,7 @@ func TestRtiRestoresStatusAndPcAndUpdatesSp(t *testing.T) {
 
 
 func TestRtiForcesBreakAndUnusedFlagsHigh(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2765,7 +2850,7 @@ func TestRtiForcesBreakAndUnusedFlagsHigh(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0xC003), regSet.Pc)
+	assert.Equal(uint16(0xC003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2786,6 +2871,7 @@ func TestRtiForcesBreakAndUnusedFlagsHigh(t *testing.T) {
 
 
 func TestRtsRestoresPcAndIncrementsThenUpdatesSp(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2802,7 +2888,7 @@ func TestRtsRestoresPcAndIncrementsThenUpdatesSp(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0xC004), regSet.Pc)
+	assert.Equal(uint16(0xC004), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -2823,6 +2909,7 @@ func TestRtsRestoresPcAndIncrementsThenUpdatesSp(t *testing.T) {
 
 
 func TestRtsWrapsAroundTopOfMemory(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -2840,7 +2927,7 @@ func TestRtsWrapsAroundTopOfMemory(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0000), regSet.Pc)
+	assert.Equal(uint16(0x0000), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     

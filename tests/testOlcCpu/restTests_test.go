@@ -2,6 +2,7 @@ package testOlcCpu
 
 import (
 	"github.com/Zlougamer/nes_emulator/olcCpu"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
@@ -170,7 +171,8 @@ func TestBrkInterrupt(t *testing.T) {
 }
 
 
-func BrkPreservesDecimalFlagWhenItIsSet(t *testing.T) {
+func TestBrkPreservesDecimalFlagWhenItIsSet(t *testing.T) {
+	asrt := assert.New(t)
 	regSet := olcCpu.CreateRegisterSet()
 	mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -181,12 +183,13 @@ func BrkPreservesDecimalFlagWhenItIsSet(t *testing.T) {
 
 	mpu.Clock()
 
-	assertEqual(t, uint8(olcCpu.B), regSet.Status)
+	asrt.Equal(uint8(0x00), regSet.Status & olcCpu.B, "")
+	asrt.Equal(uint8(olcCpu.I), regSet.Status & olcCpu.I, "")
 }
 
 // LDA ZP, X-Indexed
 
-func LdaZpXIndexedPageWraps(t *testing.T) {
+func TestLdaZpXIndexedPageWraps(t *testing.T) {
 	regSet := olcCpu.CreateRegisterSet()
 	mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -205,7 +208,7 @@ func LdaZpXIndexedPageWraps(t *testing.T) {
 
 // AND Indexed, Indirect (Y)
 
-func AndIndexedIndYHasPageWrapBug(t *testing.T) {
+func TestAndIndexedIndYHasPageWrapBug(t *testing.T) {
 	regSet := olcCpu.CreateRegisterSet()
 	mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -229,7 +232,7 @@ func AndIndexedIndYHasPageWrapBug(t *testing.T) {
 
 // JMP
 
-func JmpJumpsToAddressWithPageWrapBug(t *testing.T) {
+func TestJmpJumpsToAddressWithPageWrapBug(t *testing.T) {
 	regSet := olcCpu.CreateRegisterSet()
 	mpu := olcCpu.CreateOlc6502ByParams(regSet)
 

@@ -4,11 +4,13 @@ package testOlcCpu
 import (
 	"testing"
 	"github.com/Zlougamer/nes_emulator/olcCpu"
+    "github.com/stretchr/testify/assert"
 )
 
 
 
 func TestIncAbsIncrementsMemory(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -24,7 +26,7 @@ func TestIncAbsIncrementsMemory(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -42,6 +44,7 @@ func TestIncAbsIncrementsMemory(t *testing.T) {
 
 
 func TestIncAbsIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -57,7 +60,7 @@ func TestIncAbsIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -75,6 +78,7 @@ func TestIncAbsIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
 
 
 func TestIncAbsSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -90,7 +94,7 @@ func TestIncAbsSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -108,6 +112,7 @@ func TestIncAbsSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
 
 
 func TestIncZpIncrementsMemory(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -123,7 +128,7 @@ func TestIncZpIncrementsMemory(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -141,6 +146,7 @@ func TestIncZpIncrementsMemory(t *testing.T) {
 
 
 func TestIncZpIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -156,7 +162,7 @@ func TestIncZpIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -174,6 +180,7 @@ func TestIncZpIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
 
 
 func TestIncZpSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -189,7 +196,7 @@ func TestIncZpSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -207,6 +214,7 @@ func TestIncZpSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
 
 
 func TestIncAbsXIncrementsMemory(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -222,7 +230,7 @@ func TestIncAbsXIncrementsMemory(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -240,6 +248,7 @@ func TestIncAbsXIncrementsMemory(t *testing.T) {
 
 
 func TestIncAbsXIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -255,7 +264,7 @@ func TestIncAbsXIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -273,6 +282,7 @@ func TestIncAbsXIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
 
 
 func TestIncAbsXSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -288,7 +298,7 @@ func TestIncAbsXSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -306,6 +316,7 @@ func TestIncAbsXSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
 
 
 func TestIncZpXIncrementsMemory(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -321,7 +332,7 @@ func TestIncZpXIncrementsMemory(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -339,6 +350,7 @@ func TestIncZpXIncrementsMemory(t *testing.T) {
 
 
 func TestIncZpXIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -354,7 +366,7 @@ func TestIncZpXIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -372,6 +384,7 @@ func TestIncZpXIncrementsMemoryRollsOverAndSetsZeroFlag(t *testing.T) {
 
 
 func TestIncZpXSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -387,7 +400,7 @@ func TestIncZpXSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -405,6 +418,7 @@ func TestIncZpXSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
 
 
 func TestInXIncrementsX(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -419,7 +433,7 @@ func TestInXIncrementsX(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x0A), regSet.X)
     
@@ -437,6 +451,7 @@ func TestInXIncrementsX(t *testing.T) {
 
 
 func TestInxAboveFFRollsOverAndSetsZeroFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -451,7 +466,7 @@ func TestInxAboveFFRollsOverAndSetsZeroFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -469,6 +484,7 @@ func TestInxAboveFFRollsOverAndSetsZeroFlag(t *testing.T) {
 
 
 func TestInxSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -483,7 +499,7 @@ func TestInxSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x80), regSet.X)
     
@@ -501,6 +517,7 @@ func TestInxSetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
 
 
 func TestInyIncrementsY(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -515,7 +532,7 @@ func TestInyIncrementsY(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x0A), regSet.Y)
@@ -533,6 +550,7 @@ func TestInyIncrementsY(t *testing.T) {
 
 
 func TestInyAboveFFRollsOverAndSetsZeroFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -547,7 +565,7 @@ func TestInyAboveFFRollsOverAndSetsZeroFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x00), regSet.Y)
@@ -565,6 +583,7 @@ func TestInyAboveFFRollsOverAndSetsZeroFlag(t *testing.T) {
 
 
 func TestInySetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -579,7 +598,7 @@ func TestInySetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x80), regSet.Y)
@@ -597,6 +616,7 @@ func TestInySetsNegativeFlagWhenIncrementingAbove7F(t *testing.T) {
 
 
 func TestDecAbsDecrementsMemory(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -612,7 +632,7 @@ func TestDecAbsDecrementsMemory(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -630,6 +650,7 @@ func TestDecAbsDecrementsMemory(t *testing.T) {
 
 
 func TestDecAbsBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -645,7 +666,7 @@ func TestDecAbsBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -663,6 +684,7 @@ func TestDecAbsBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
 
 
 func TestDecAbsSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -678,7 +700,7 @@ func TestDecAbsSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -696,6 +718,7 @@ func TestDecAbsSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
 
 
 func TestDecZpDecrementsMemory(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -711,7 +734,7 @@ func TestDecZpDecrementsMemory(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -729,6 +752,7 @@ func TestDecZpDecrementsMemory(t *testing.T) {
 
 
 func TestDecZpBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -744,7 +768,7 @@ func TestDecZpBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -762,6 +786,7 @@ func TestDecZpBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
 
 
 func TestDecZpSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -777,7 +802,7 @@ func TestDecZpSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -795,6 +820,7 @@ func TestDecZpSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
 
 
 func TestDecAbsXDecrementsMemory(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -810,7 +836,7 @@ func TestDecAbsXDecrementsMemory(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -828,6 +854,7 @@ func TestDecAbsXDecrementsMemory(t *testing.T) {
 
 
 func TestDecAbsXBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -843,7 +870,7 @@ func TestDecAbsXBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -861,6 +888,7 @@ func TestDecAbsXBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
 
 
 func TestDecAbsXSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -876,7 +904,7 @@ func TestDecAbsXSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0003), regSet.Pc)
+	assert.Equal(uint16(0x0003), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -894,6 +922,7 @@ func TestDecAbsXSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
 
 
 func TestDecZpXDecrementsMemory(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -909,7 +938,7 @@ func TestDecZpXDecrementsMemory(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -927,6 +956,7 @@ func TestDecZpXDecrementsMemory(t *testing.T) {
 
 
 func TestDecZpXBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -942,7 +972,7 @@ func TestDecZpXBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -960,6 +990,7 @@ func TestDecZpXBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
 
 
 func TestDecZpXSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -975,7 +1006,7 @@ func TestDecZpXSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0002), regSet.Pc)
+	assert.Equal(uint16(0x0002), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     
@@ -993,6 +1024,7 @@ func TestDecZpXSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
 
 
 func TestDexDecrementsX(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1007,7 +1039,7 @@ func TestDexDecrementsX(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x0F), regSet.X)
     
@@ -1025,6 +1057,7 @@ func TestDexDecrementsX(t *testing.T) {
 
 
 func TestDexBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1039,7 +1072,7 @@ func TestDexBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0xFF), regSet.X)
     
@@ -1057,6 +1090,7 @@ func TestDexBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
 
 
 func TestDexSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1071,7 +1105,7 @@ func TestDexSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     assertEqual(t, uint8(0x00), regSet.X)
     
@@ -1089,6 +1123,7 @@ func TestDexSetsZeroFlagWhenDecrementingToZero(t *testing.T) {
 
 
 func TestDeyDecrementsY(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1103,7 +1138,7 @@ func TestDeyDecrementsY(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x0F), regSet.Y)
@@ -1121,6 +1156,7 @@ func TestDeyDecrementsY(t *testing.T) {
 
 
 func TestDeyBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1135,7 +1171,7 @@ func TestDeyBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0xFF), regSet.Y)
@@ -1153,6 +1189,7 @@ func TestDeyBelow00RollsOverAndSetsNegativeFlag(t *testing.T) {
 
 
 func TestDeySetsZeroFlagWhenDecrementingToZero(t *testing.T) {
+    assert := assert.New(t)
     regSet := olcCpu.CreateRegisterSet()
     mpu := olcCpu.CreateOlc6502ByParams(regSet)
 
@@ -1167,7 +1204,7 @@ func TestDeySetsZeroFlagWhenDecrementingToZero(t *testing.T) {
     
     mpu.Clock()
 
-	assertEqual(t, uint16(0x0001), regSet.Pc)
+	assert.Equal(uint16(0x0001), regSet.Pc, "should be equal")
 	assertEqual(t, uint8(0x00), regSet.A)
     
     assertEqual(t, uint8(0x00), regSet.Y)
